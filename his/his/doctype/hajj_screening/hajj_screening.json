@@ -23,17 +23,28 @@
   "posting_date",
   "vital_signs_section",
   "vital_sign",
-  "medical_history_section",
-  "known_ch",
-  "current_medications",
+  "physical_examination_section",
   "height",
   "weight",
   "blood_pressure",
   "pulse_rate",
   "respiratory_rate",
-  "temperature",
   "oxygen_saturation",
   "general_examination_findings",
+  "temperature",
+  "medical_history_section",
+  "known_ch",
+  "current_medications",
+  "history_of_surgery",
+  "hospitalization",
+  "items",
+  "fitness_for_hajj_section",
+  "medically_fit_to_perform_hajj",
+  "medically_fit_with_conditions_specify",
+  "column_break_t9o3q",
+  "not_medically_fit_to_perform_hajj",
+  "section_break_fw1je",
+  "medical_recomendation",
   "section_break_rtwmv",
   "q1",
   "column_break_fgbw1",
@@ -95,7 +106,7 @@
   "column_break_wuzur",
   "txt",
   "section_break_ul0lf",
-  "items",
+  "qualification",
   "ref_invoice",
   "amended_from"
  ],
@@ -162,6 +173,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "passport",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -565,12 +577,13 @@
    "allow_on_submit": 1,
    "fieldname": "vital_signs_section",
    "fieldtype": "Section Break",
-   "label": "Vital Signs"
+   "label": "PHYSICAL EXAMINATION"
   },
   {
    "allow_on_submit": 1,
    "fieldname": "vital_sign",
    "fieldtype": "Table",
+   "in_standard_filter": 1,
    "label": "Vital Sign",
    "options": "VITAL SIGN"
   },
@@ -582,6 +595,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "weight",
    "fieldtype": "Data",
    "hidden": 1,
@@ -589,6 +603,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "blood_pressure",
    "fieldtype": "Data",
    "hidden": 1,
@@ -596,6 +611,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "pulse_rate",
    "fieldtype": "Data",
    "hidden": 1,
@@ -603,6 +619,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "respiratory_rate",
    "fieldtype": "Data",
    "hidden": 1,
@@ -617,6 +634,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "oxygen_saturation",
    "fieldtype": "Data",
    "hidden": 1,
@@ -624,6 +642,7 @@
    "print_hide": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "general_examination_findings",
    "fieldtype": "Data",
    "hidden": 1,
@@ -645,20 +664,86 @@
    "label": "MEDICAL HISTORY"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "current_medications",
    "fieldtype": "Data",
    "label": "Current Medications"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "known_ch",
    "fieldtype": "Data",
    "label": "Known Chronic Diseases "
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "history_of_surgery",
+   "fieldtype": "Data",
+   "label": "History of Surgery"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "hospitalization",
+   "fieldtype": "Data",
+   "label": "Hospitalization"
+  },
+  {
+   "fieldname": "fitness_for_hajj_section",
+   "fieldtype": "Section Break",
+   "label": "FITNESS FOR HAJJ"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "medically_fit_to_perform_hajj",
+   "fieldtype": "Select",
+   "label": "Medically Fit to Perform Hajj",
+   "options": "\nYes\nNo"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "medically_fit_with_conditions_specify",
+   "fieldtype": "Small Text",
+   "label": "Medically Fit with Conditions (Specify)"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "not_medically_fit_to_perform_hajj",
+   "fieldtype": "Select",
+   "label": "Not Medically Fit to Perform Hajj",
+   "options": "\nYes\nNo"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "medical_recomendation",
+   "fieldtype": "Small Text",
+   "label": "Medical Recomendation"
+  },
+  {
+   "fieldname": "physical_examination_section",
+   "fieldtype": "Section Break",
+   "label": "PHYSICAL EXAMINATION"
+  },
+  {
+   "fieldname": "column_break_t9o3q",
+   "fieldtype": "Column Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "section_break_fw1je",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "qualification",
+   "fieldtype": "Data",
+   "label": "Qualification"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-11 15:05:16.370252",
+ "modified": "2026-01-12 14:51:31.871129",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Hajj Screening",

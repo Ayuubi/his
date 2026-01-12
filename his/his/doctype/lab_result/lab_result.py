@@ -583,3 +583,107 @@ def create_normals(template, lab_test):
     normal.allow_blank = 0
     normal.template = template.name
 
+# def get_lab_tests_of_hajj_screening_for_all(self):
+#         out = {}
+#         # Sets to track which "Parent" templates we have already processed
+#         # to avoid repeating the Header (e.g. "Liver Function Test") multiple times.
+#         processed_grouped = set()   
+#         processed_compound = set()  
+
+#         def add_row(dept, rowdict):
+#             # Helper to append to dictionary
+#             if dept not in out:
+#                 out[dept] = []
+#             out[dept].append(rowdict)
+
+#         def get_template(name):
+#             if not name: return None
+#             name = name.strip()
+#             if frappe.db.exists("Lab Test Template", name):
+#                 return frappe.get_cached_doc("Lab Test Template", name)
+#             return None
+
+#         # 1. Get all rows from the child table (safely)
+#         rows = list(self.normal_test_items or [])
+
+#         for r in rows:
+#             # Try to find the template based on 'template' field, then 'test', then 'lab_test_name'
+#             tpl_name = r.template or r.test or r.lab_test_name
+#             tpl = get_template(tpl_name)
+
+#             # --- CASE 1: No Template Found (Ad-hoc test) ---
+#             if not tpl:
+#                 add_row("Other", {
+#                     "is_header": False,
+#                     "name": r.lab_test_name or r.lab_test_event or "Unknown",
+#                     "result": r.result_value,
+#                     "uom": r.lab_test_uom or "",
+#                     "range": r.normal_range or ""
+#                 })
+#                 continue
+
+#             dept = (tpl.department or "Lab").strip()
+#             tpl_type = (tpl.lab_test_template_type or "Single").strip()
+
+#             # --- CASE 2: GROUPED (e.g., Electrolytes) ---
+#             if tpl_type == "Grouped":
+#                 parent_group_name = (r.test or tpl.name).strip()
+                
+#                 # Add Header Only Once
+#                 if parent_group_name not in processed_grouped:
+#                     add_row(dept, {
+#                         "is_header": True,
+#                         "name": parent_group_name,
+#                         "result": "", "uom": "", "range": ""
+#                     })
+#                     processed_grouped.add(parent_group_name)
+
+#                 # Add the Sub-item
+#                 add_row(dept, {
+#                     "is_header": False,
+#                     "name": r.lab_test_name or r.lab_test_event,
+#                     "result": r.result_value,
+#                     "uom": r.lab_test_uom or "",
+#                     "range": r.normal_range or ""
+#                 })
+
+#             # --- CASE 3: COMPOUND (e.g., CBC, LFT) ---
+#             elif tpl_type == "Compound":
+#                 # If we already processed this Compound template, skip this loop iteration
+#                 if tpl.name in processed_compound:
+#                     continue
+
+#                 # Add Header
+#                 add_row(dept, {
+#                     "is_header": True,
+#                     "name": tpl.lab_test_name or tpl.name,
+#                     "result": "", "uom": "", "range": ""
+#                 })
+
+#                 # Find all rows in the document belonging to this specific Template
+#                 # This gathers all children (e.g., Bilirubin, SGOT) at once
+#                 compound_rows = [x for x in rows if (x.template == tpl.name or x.test == tpl.name)]
+
+#                 for x in compound_rows:
+#                     add_row(dept, {
+#                         "is_header": False,
+#                         "name": x.lab_test_event or x.lab_test_name,
+#                         "result": x.result_value,
+#                         "uom": x.lab_test_uom or "",
+#                         "range": x.normal_range or ""
+#                     })
+                
+#                 # Mark as processed so we don't repeat for every child row
+#                 processed_compound.add(tpl.name)
+
+#             # --- CASE 4: SINGLE TEST ---
+#             else:
+#                 add_row(dept, {
+#                     "is_header": False,
+#                     "name": r.lab_test_name or tpl.lab_test_name,
+#                     "result": r.result_value,
+#                     "uom": r.lab_test_uom or tpl.lab_test_uom or "",
+#                     "range": r.normal_range or tpl.lab_test_normal_range or ""
+#                 })
+
+#         return out

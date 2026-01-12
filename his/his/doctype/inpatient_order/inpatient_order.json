@@ -86,6 +86,7 @@
    "fetch_from": "patient.first_name",
    "fieldname": "patient_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Patient Name",
    "read_only": 1
@@ -328,7 +329,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-11 08:59:20.012917",
+ "modified": "2026-01-12 13:50:22.357356",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Inpatient Order",
