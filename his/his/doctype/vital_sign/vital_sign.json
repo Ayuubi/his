@@ -8,12 +8,14 @@
  "engine": "InnoDB",
  "field_order": [
   "time",
+  "height",
+  "weight",
   "bp",
-  "hr",
+  "pr",
   "resps",
-  "t_\u00bac",
-  "spo2",
-  "pulse"
+  "temp",
+  "spo",
+  "general"
  ],
  "fields": [
   {
@@ -25,39 +27,11 @@
    "width": "1"
   },
   {
+   "columns": 1,
    "fieldname": "bp",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "BP"
-  },
-  {
-   "fieldname": "pulse",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "PULSE"
-  },
-  {
-   "fieldname": "spo2",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "SPO2"
-  },
-  {
-   "fieldname": "t_\u00bac",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "t \u00baC"
-  },
-  {
-   "columns": 1,
-   "fieldname": "hr",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Pulse"
+   "label": "Blood Pressure"
   },
   {
    "columns": 1,
@@ -65,13 +39,59 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Resps"
+   "label": "Respirotory Rate"
+  },
+  {
+   "columns": 1,
+   "fieldname": "height",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Height"
+  },
+  {
+   "columns": 1,
+   "fieldname": "weight",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Weight"
+  },
+  {
+   "columns": 1,
+   "fieldname": "temp",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Temprature"
+  },
+  {
+   "columns": 1,
+   "fieldname": "pr",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Pulse Rate"
+  },
+  {
+   "columns": 1,
+   "fieldname": "spo",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Oxegen Saturation"
+  },
+  {
+   "columns": 1,
+   "fieldname": "general",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "General Examination Findings"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-19 11:29:31.278053",
+ "modified": "2026-01-10 16:44:49.431084",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "VITAL SIGN",

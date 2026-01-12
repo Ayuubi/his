@@ -6,19 +6,15 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "name1",
+  "ucva",
   "sph",
   "cyl",
   "axis",
+  "add",
+  "prisma",
   "s_va"
  ],
  "fields": [
-  {
-   "columns": 2,
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "in_list_view": 1
-  },
   {
    "columns": 1,
    "fieldname": "sph",
@@ -45,13 +41,32 @@
    "fieldname": "s_va",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "S V/A"
+   "label": "C V/A"
+  },
+  {
+   "columns": 2,
+   "fieldname": "ucva",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "UCVA"
+  },
+  {
+   "fieldname": "add",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "ADD"
+  },
+  {
+   "fieldname": "prisma",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "PRISMA"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-09-12 09:03:55.544893",
+ "modified": "2026-01-10 10:25:44.872720",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Lefteye",

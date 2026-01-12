@@ -85,10 +85,10 @@ def add_anaesthesia_package_items_expanded(so, doc, package_summaries):
                 continue
 
             # unique reference per anaesthesia-row + package-line
-            ref = f"{doc.name}:{row.name}:{line.name}"
+            ref = line.name
 
             so_item = find_or_create_so_item(so, ref)
-            so_item.reference_dt = doc.doctype
+            so_item.reference_dt = row.doctype
             so_item.reference_dn = ref
 
             so_item.item_code = line.item

@@ -241,9 +241,9 @@ d.show();
         // frm.add_custom_button('Today ', () => {
         //     consoleerp_hi(frm.doc.patient , frm.doc.patient_name , true)
         //   }, 'History');
-          frm.add_custom_button('History', () => {
-            consoleerp_hi(frm.doc.patient , frm.doc.patient_name )
-          }, 'History');
+        //   frm.add_custom_button('History', () => {
+        //     consoleerp_hi(frm.doc.patient , frm.doc.patient_name )
+        //   }, 'History');
  
 
 
@@ -393,43 +393,43 @@ d.show();
 	       
 
 // 	   })
-	   var next=  frm.add_custom_button(__("Next"), function(){
+// 	   var next=  frm.add_custom_button(__("Next"), function(){
 	       
 	       
-	       //frappe.msgprint(frm.doc.practitioner);
-	       frappe.call({
-                    method: "his.api.steps.steps", //dotted path to server method
-                    args: {
-                        "doc":frm.doc.que,
-                        "doctor":frm.doc.practitioner
+// 	       //frappe.msgprint(frm.doc.practitioner);
+// 	       frappe.call({
+//                     method: "his.api.steps.steps", //dotted path to server method
+//                     args: {
+//                         "doc":frm.doc.que,
+//                         "doctor":frm.doc.practitioner
 
                         
                         
                      
-                    },
-                    callback: function(r) {
-                        let count=r.message[0].min;
-                        console.log(r)
-                 if(count){  
-                    frappe.db.set_value("Que" ,r.message[0].name , "que_steps" , "Called" )      // frappe.msgprint(count);
-                if(r.message[0].patient_encounter){
-                frappe.set_route('Form', 'Patient Encounter', r.message[0].patient_encounter);
-            }else{
-                frappe.new_doc("Patient Encounter",{"que": r.message[0].name, "patient": r.message[0].patient,"practitioner" : r.message[0].practitioner})
-                // count+1
+//                     },
+//                     callback: function(r) {
+//                         let count=r.message[0].min;
+//                         console.log(r)
+//                  if(count){  
+//                     frappe.db.set_value("Que" ,r.message[0].name , "que_steps" , "Called" )      // frappe.msgprint(count);
+//                 if(r.message[0].patient_encounter){
+//                 frappe.set_route('Form', 'Patient Encounter', r.message[0].patient_encounter);
+//             }else{
+//                 frappe.new_doc("Patient Encounter",{"que": r.message[0].name, "patient": r.message[0].patient,"practitioner" : r.message[0].practitioner})
+//                 // count+1
 
-            }
-        }
-        else{
-            frappe.msgprint(__('There is no patient in your que '));
-        }
+//             }
+//         }
+//         else{
+//             frappe.msgprint(__('There is no patient in your que '));
+//         }
                        
                         
-                    }
+//                     }
                     
-});
+// });
 	       
-	   })
+// 	   })
 			
     //    frappe.db.get_single_value('Patient Encounter', 'token')
 
@@ -442,45 +442,45 @@ d.show();
 		// your code here
      }
     
-        var missed=  frm.add_custom_button(__("Missed"), function(){
+//         var missed=  frm.add_custom_button(__("Missed"), function(){
 	       
 	       
-            //frappe.msgprint(frm.doc.practitioner);
-            frappe.call({
-                     method: "his.api.steps.missed", //dotted path to server method
-                     args: {
-                         "doc":frm.doc.que,
-                         "doctor":frm.doc.practitioner
+//             //frappe.msgprint(frm.doc.practitioner);
+//             frappe.call({
+//                      method: "his.api.steps.missed", //dotted path to server method
+//                      args: {
+//                          "doc":frm.doc.que,
+//                          "doctor":frm.doc.practitioner
                          
  
                          
                          
                       
-                     },
-                     callback: function(r) {
-                         let count=r.message[0].min;
-                         console.log(r)
-                  if(count){
-                    frappe.db.set_value("Que" ,r.message[0].name , "que_steps" , "Called" )       // frappe.msgprint(count);
-                 if(frm.doc.patient_encounter){
-                 frappe.set_route('Form', 'Patient Encounter', frm.doc.patient_encounter);
-             }else{
-                 frappe.new_doc("Patient Encounter",{"que": r.message[0].name, "patient": r.message[0].patient,"practitioner" : r.message[0].practitioner})
-                 // count+1
+//                      },
+//                      callback: function(r) {
+//                          let count=r.message[0].min;
+//                          console.log(r)
+//                   if(count){
+//                     frappe.db.set_value("Que" ,r.message[0].name , "que_steps" , "Called" )       // frappe.msgprint(count);
+//                  if(frm.doc.patient_encounter){
+//                  frappe.set_route('Form', 'Patient Encounter', frm.doc.patient_encounter);
+//              }else{
+//                  frappe.new_doc("Patient Encounter",{"que": r.message[0].name, "patient": r.message[0].patient,"practitioner" : r.message[0].practitioner})
+//                  // count+1
                
  
-             }
-         }
-         else{
-             frappe.msgprint(__('There is no patient in your que '));
-         }
+//              }
+//          }
+//          else{
+//              frappe.msgprint(__('There is no patient in your que '));
+//          }
                         
                          
-                     }
+//                      }
                      
- });
+//  });
             
-        })
+//         })
      
 	},
        onload(frm) {

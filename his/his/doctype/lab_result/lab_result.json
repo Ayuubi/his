@@ -66,7 +66,9 @@
   "amended_from",
   "journal_entry",
   "commission_posted",
-  "commission_posting_date"
+  "commission_posting_date",
+  "hajj_screening",
+  "note"
  ],
  "fields": [
   {
@@ -382,14 +384,17 @@
    "label": "Date"
   },
   {
-   "allow_on_submit": 1,
    "fieldname": "lab_ref",
    "fieldtype": "Data",
-   "label": "Lab Ref"
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Lab Ref",
+   "read_only": 1
   },
   {
    "fieldname": "template",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Template",
    "options": "Lab Test Template"
@@ -499,12 +504,26 @@
    "label": "Sales Invoice",
    "options": "Sales Invoice",
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "reff_collection.hajj_screening",
+   "fieldname": "hajj_screening",
+   "fieldtype": "Link",
+   "label": "Hajj Screening",
+   "options": "Hajj Screening"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "note",
+   "fieldtype": "Data",
+   "label": "Note"
   }
  ],
  "in_create": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-14 10:43:48.630001",
+ "modified": "2026-01-12 08:35:54.223032",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Lab Result",
@@ -549,8 +568,6 @@
    "share": 1
   },
   {
-   "amend": 1,
-   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -565,6 +582,8 @@
    "write": 1
   },
   {
+   "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -572,7 +591,8 @@
    "report": 1,
    "role": "All",
    "select": 1,
-   "share": 1
+   "share": 1,
+   "write": 1
   }
  ],
  "restrict_to_domain": "Healthcare",

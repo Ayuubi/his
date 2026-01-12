@@ -85,7 +85,6 @@
    "in_standard_filter": 1,
    "label": "Patient",
    "options": "Patient",
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -425,8 +424,7 @@
    "fieldname": "practitioner",
    "fieldtype": "Link",
    "label": "Practitioner",
-   "options": "Healthcare Practitioner",
-   "read_only": 1
+   "options": "Healthcare Practitioner"
   },
   {
    "fieldname": "sales_order",
@@ -438,36 +436,31 @@
    "fieldname": "fit_to_surgery",
    "fieldtype": "Select",
    "label": "Fit To Surgery",
-   "options": "\nYes\nNo",
-   "reqd": 1
+   "options": "\nYes\nNo"
   },
   {
    "fieldname": "procedure_template",
    "fieldtype": "Link",
    "label": "Surgery",
-   "options": "Clinical Procedure Template",
-   "read_only": 1
+   "options": "Clinical Procedure Template"
   },
   {
    "fieldname": "anesthesia_type",
    "fieldtype": "Select",
    "label": "Anesthesia Type",
-   "options": "\nGA\nLocal\nSpinal\nEpidural\nPeripheral Nerve Block",
-   "reqd": 1
+   "options": "\nGA\nLocal\nSpinal\nEpidural\nPeripheral Nerve Block"
   },
   {
    "fieldname": "consent_form",
    "fieldtype": "Select",
    "label": "Consent Form",
-   "options": "\nYes\nNo",
-   "reqd": 1
+   "options": "\nYes\nNo"
   },
   {
    "fieldname": "investigations",
    "fieldtype": "Select",
    "label": "Investigations",
-   "options": "\nYes\nNo",
-   "reqd": 1
+   "options": "\nYes\nNo"
   },
   {
    "fieldname": "patient_encounter",
@@ -479,7 +472,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-29 15:41:34.786541",
+ "modified": "2026-01-05 18:30:47.650450",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Anesthesia",
@@ -487,6 +480,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -496,10 +491,12 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
    "cancel": 1,
+   "create": 1,
    "delete": 1,
    "email": 1,
    "export": 1,

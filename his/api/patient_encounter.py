@@ -106,15 +106,27 @@ def create_sales_orders(doc):
 
 
 def add_drug_items(so, doc):
-    for child in ("drug_prescription"):
-        for row in doc.get("drug_prescription"):
-            so_item = find_or_create_item(row, so, doc)
-            so_item.item_code = row.drug_code
-            so_item.item_name = row.drug_name
-            so_item.qty = row.qty
-            so_item.dosage = row.period
-            if row.dosage:
-                so_item.time = row.dosage
+    for row in doc.get("drug_prescription"):
+        so_item = find_or_create_item(row, so, doc)
+        so_item.item_code = row.drug_code
+        so_item.item_name = row.drug_name
+        so_item.qty = row.qty
+        so_item.dosage = row.period
+
+        so_item.rate = frappe.db.get_value(
+            "Item Price",
+            {"item_code": row.drug_code, "price_list": "Standard Selling"},
+            "price_list_rate"
+        ) or 0
+
+        if row.dosage:
+            so_item.time = row.dosage
+
+        so_item.medical_department = doc.medical_department or ""
+
+
+
+
 def add_optical_items(so, doc):
     for child in ("optical_prescription"):
         for row in doc.get("optical_prescription"):
@@ -168,6 +180,7 @@ def add_service_items(so, doc):
                     so_item.item_code = i.aneasthesia
                     so_item.rate=i.amount
                     so_item.qty = 1
+                    so_item.medical_department = doc.medical_department or ""
 
                 for i in child.lab_prescription:
                     so_item = find_or_create_item(i, so, doc , from_templae=True)
@@ -181,6 +194,7 @@ def add_service_items(so, doc):
                     so_item.item_code = i.item
                     so_item.rate = i.rate
                     so_item.qty = row.qty or 1
+                    so_item.medical_department = doc.medical_department or ""
                     
             if child_table!="packages_prescription":
                 so_item = find_or_create_item(row, so, doc)
@@ -188,6 +202,7 @@ def add_service_items(so, doc):
                 so_item.qty = 1
                 so_item.rate = row.custom_rate
                 so_item.comments= row.lab_test_comment
+                so_item.medical_department = doc.medical_department or ""
 
 
 def get_item_and_is_billable(row):

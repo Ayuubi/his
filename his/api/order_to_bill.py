@@ -8,7 +8,13 @@ def create_que_order_bill(doc):
     company_doc= frappe.get_doc("Company",company)
     cost_center = company_doc.cost_center
     pos_profile = get_pos_profile(company)
-    mode_of_payment = frappe.db.get_value('POS Payment Method', {"parent": pos_profile.name},  'mode_of_payment')
+    medical_department = doc.medical_department
+    mode_of_payment = doc.mode_of_payment
+    
+    if not mode_of_payment:
+
+        mode_of_payment = frappe.db.get_value('POS Payment Method', {"parent": pos_profile.name},  'mode_of_payment')
+     
     default_account = frappe.db.get_value('Mode of Payment Account', {"parent": mode_of_payment},  'default_account')
     # mode_of_payment = "Cash"
     

@@ -20,7 +20,9 @@
   "comment",
   "user",
   "remain",
-  "nurse"
+  "nurse",
+  "medical_department",
+  "item_group"
  ],
  "fields": [
   {
@@ -117,11 +119,23 @@
    "fieldname": "nurse",
    "fieldtype": "Data",
    "label": "Nurse"
+  },
+  {
+   "fieldname": "medical_department",
+   "fieldtype": "Link",
+   "label": "Medical Department",
+   "options": "Medical Department"
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group",
+   "options": "Item Group"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2024-02-27 13:07:34.095181",
+ "modified": "2025-12-30 21:19:25.005353",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Nurse Drug Prescription",

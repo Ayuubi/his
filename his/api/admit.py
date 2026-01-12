@@ -1,7 +1,7 @@
 # from healthcare.healthcare.doctype.inpatient_record.inpatient_record import admit_patient
 import frappe
 import json 
-
+from his.api.ipd_bed_guard import lock_and_validate_bed_is_vacant
 
 
 def admit_patient(inpatient_record, service_unit, check_in, inpatient_type, expected_discharge=None):
@@ -147,6 +147,51 @@ def  admit_p(inp_doc, service_unit,patient, type, practitioner, is_insurance = "
 	# for row in customer.credit_limits:
 	# 	row.credit_limit = 25000
 	# customer.save()
+
+@frappe.whitelist()
+def admit_p_bed(inp_doc, service_unit, patient, type, practitioner, is_insurance="", expected_discharge=None):
+    ip_doc = frappe.get_doc("Inpatient Record", inp_doc)
+
+    frappe.db.begin()
+    try:
+        # ✅ NEW: validate bed server-side (prevents manual typing / double booking)
+        lock_and_validate_bed_is_vacant(service_unit, exclude_ip=ip_doc.name)
+
+        frappe.db.set_value("Healthcare Service Unit", service_unit, "patient", patient)
+
+        ip_doc.bed = service_unit
+        ip_doc.room = frappe.db.get_value("Healthcare Service Unit", service_unit, "service_unit_type")
+        ip_doc.inpatient_status = "Admitted"
+        ip_doc.type = type
+        ip_doc.floor = frappe.db.get_value("Healthcare Service Unit Type", ip_doc.room, "floor")
+        if practitioner:
+            ip_doc.primary_practitioner = practitioner
+            ip_doc.secondary_practitioner = practitioner
+
+        if is_insurance:
+            ip_doc.insurance = is_insurance
+
+        ip_doc.save(ignore_permissions=True)
+
+        check_in = frappe.utils.now()
+        admit_patient(ip_doc, service_unit, check_in, type, expected_discharge)
+
+        doc_plan = frappe.get_doc({
+            "doctype": "Doctor Plan",
+            "patient": ip_doc.patient,
+            "ref_practitioner": ip_doc.admission_practitioner,
+            "date": frappe.utils.getdate(),
+            "room": frappe.db.get_value("Healthcare Service Unit", service_unit, "service_unit_type"),
+            "bed": service_unit
+        })
+        doc_plan.insert(ignore_permissions=True)
+
+        frappe.db.commit()
+        return {"ok": 1}
+
+    except Exception:
+        frappe.db.rollback()
+        raise
 
 
 @frappe.whitelist()

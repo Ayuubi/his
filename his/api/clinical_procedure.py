@@ -18,6 +18,7 @@ class CustomClinicalProcedure(ClinicalProcedure):
                         items.append({
                             "item_code" : item.item_code,
                             "qty" : item.qty,
+                            "medical_departmetn":item.medical_department
                             
                         })
                 frappe.errprint(items)
@@ -35,11 +36,13 @@ class CustomClinicalProcedure(ClinicalProcedure):
                 # return stock_ent
             
             if self.procedure_items:
+                frappe.msgprint(self.practitioner)
                 pro_items = []
                 for item in self.procedure_items:
                         pro_items.append({
                             "item_code" : item.item_code,
-                            "qty" : item.qty
+                            "qty" : item.qty,
+                            "medical_departmetn":item.medical_department
                         })
                 customer_to = frappe.db.get_value("Patient", self.patient, "customer")
                 sales_doc = frappe.get_doc({
@@ -48,6 +51,8 @@ class CustomClinicalProcedure(ClinicalProcedure):
                     "customer": customer_to,
                     "patient" : self.patient,
                     "is_pos" : 0,
+                    "ref_practitioner" :self.practitioner,
+                    "so_type" : "Pharmacy",
                     "items" : pro_items,
                     })
                 sales_doc.insert(ignore_permissions = True)

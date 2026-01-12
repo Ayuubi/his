@@ -27,6 +27,7 @@
    "fieldname": "patient",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Patient",
    "options": "Patient",
    "reqd": 1
@@ -85,7 +86,6 @@
    "options": "Patient Clearance"
   },
   {
-   "fetch_from": "patient.inpatient_record",
    "fieldname": "inpatient_record",
    "fieldtype": "Link",
    "label": "Inpatient Order",
@@ -113,7 +113,7 @@
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-19 14:30:20.629605",
+ "modified": "2026-01-08 12:02:07.314901",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Discharge And Clearance",
@@ -135,5 +135,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "patient_name"
 }

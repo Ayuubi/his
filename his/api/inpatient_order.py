@@ -100,6 +100,7 @@ def add_drug_items(so, doc):
         so_item.item_code = row.drug_code
         so_item.item_name = row.drug_code
         so_item.qty = row.qty
+        so_item.medical_department = doc.medical_department
             # if 'dosage' in row:
             #     if row.dosage:
             #         so_item.time = row.dosage
@@ -127,6 +128,7 @@ def add_service_items(so, doc):
             so_item = find_or_create_item(row, so, doc)
             so_item.item_code = item
             so_item.qty = 1
+            so_item.medical_department = doc.medical_department
 
 
 def get_item_and_is_billable(row):

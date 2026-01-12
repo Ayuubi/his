@@ -4,7 +4,7 @@
 frappe.ui.form.on('Customer Statements Sender', {
   refresh: function (frm) {
     // setTimeout(() => {
-    //   frm.set_value("recieable_account", "1310 - Debtors - JSH")
+    //   frm.set_value("recieable_account", "1310 - Debtors - SH")
     // }, 500);
     // Default values in From and To Dates
     var today = frappe.datetime.nowdate();

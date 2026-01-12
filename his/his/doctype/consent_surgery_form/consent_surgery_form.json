@@ -11,6 +11,7 @@
   "patient",
   "patient_name",
   "surgery_type",
+  "item_group",
   "column_break_pixsd",
   "date",
   "sex",
@@ -63,8 +64,10 @@
   },
   {
    "fieldname": "surgery_type",
-   "fieldtype": "Data",
-   "label": "Surgery Type"
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Item"
   },
   {
    "fieldname": "section_break_06v3q",
@@ -105,12 +108,21 @@
    "fieldtype": "Link",
    "label": "Consultant",
    "options": "Healthcare Practitioner"
+  },
+  {
+   "fetch_from": "surgery_type.item_group",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Item Group",
+   "options": "Item Group"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-16 10:29:18.916035",
+ "modified": "2026-01-10 12:06:56.719033",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Consent Surgery Form",
@@ -119,6 +131,8 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -127,7 +141,9 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {

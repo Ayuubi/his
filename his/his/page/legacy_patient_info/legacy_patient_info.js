@@ -121,6 +121,7 @@ frappe.pages["legacy-patient-info"].on_page_load = function (wrapper) {
               <th>${__("Age")}</th>
               <th>${__("Registration Date")}</th>
               <th>${__("Last Visited")}</th>
+              <th style="width:140px">${__("Action")}</th>
             </tr>
           </thead>
           <tbody>
@@ -133,6 +134,13 @@ frappe.pages["legacy-patient-info"].on_page_load = function (wrapper) {
                 <td>${frappe.utils.escape_html((r.Age ?? "") + "")}</td>
                 <td>${frappe.utils.escape_html(r.RegistrationDate || "")}</td>
                 <td>${frappe.utils.escape_html(r.LastVisited || "")}</td>
+                <td>
+                  <button
+                    class="btn btn-xs btn-primary legacy-open-history"
+                    data-legacy="${frappe.utils.escape_html(r.PatientNumber || "")}">
+                    ${__("History")}
+                  </button>
+                </td>
               </tr>
             `).join("")}
           </tbody>
@@ -146,6 +154,46 @@ frappe.pages["legacy-patient-info"].on_page_load = function (wrapper) {
       frappe.utils.copy_to_clipboard(pn);
       frappe.show_alert({ message: __("Copied: {0}", [pn]), indicator: "green" });
     });
+    $results.find(".legacy-open-history").on("click", async function (e) {
+      e.preventDefault();
+      e.stopPropagation(); // don’t trigger row-copy
+
+      const legacy_no = ($(this).data("legacy") || "").toString().trim();
+      if (!legacy_no) return;
+
+      try {
+        frappe.dom.freeze(__("Opening history..."));
+
+        const r = await frappe.call({
+          method: "his.legacy.legacy_patient_info.resolve_patient_from_legacy",
+          args: { legacy_patient_number: legacy_no },
+        });
+
+        const msg = r.message || {};
+        if (!msg.ok) {
+          frappe.msgprint({
+            title: __("Patient not linked"),
+            message: __(
+              "Legacy patient <b>{0}</b> is not linked to a Patient record in this system.<br><br>" +
+              "Tip: Create/Update Patient and set <b>legacy_patient_number</b> to <b>{0}</b>.",
+              [frappe.utils.escape_html(legacy_no)]
+            ),
+            indicator: "orange",
+          });
+          return;
+        }
+
+        const url =
+          `/app/legacy-history` +
+          `?patient=${encodeURIComponent(msg.patient)}` +
+          `&tab=vitals`;
+
+        window.open(url, "_blank");
+      } finally {
+        frappe.dom.unfreeze();
+      }
+    });
+
   }
 
   function updatePager() {

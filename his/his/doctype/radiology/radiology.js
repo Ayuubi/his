@@ -16,6 +16,17 @@ frappe.ui.form.on('Radiology', {
         frm.set_df_property("att","options",img);
         // console.log(records);
 
+
+if (!frm.is_new() && frm.doc.section === "Endoscopy Unit") {
+    frm.add_custom_button(__('Consent Form'), function() {
+        frappe.new_doc('Consent Surgery Form', {
+            'patient': frm.doc.patient,
+            'practitioner': frm.doc.practitioner,
+            'surgery_type': frm.doc.eximination,
+        });
+    });
+}
+
     
     
         

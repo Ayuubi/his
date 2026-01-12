@@ -1,4 +1,4 @@
-frappe.pages['admission-scheduled'].on_page_load = function(wrapper) {
+	frappe.pages['admission-scheduled'].on_page_load = function(wrapper) {
 	new IPD(wrapper)
 }
 
@@ -487,7 +487,7 @@ function admit(inpatient_record, patient, practitioner, type){
 function admit_p(inpatient_record, bed,patient_name, practitioner, type){
 	frappe.call({
 			
-		method: 'his.api.admit.admit_p',
+		method: 'his.api.admit.admit_p_bed',
 		args:{
 			
 			"inp_doc" :inpatient_record,

@@ -4,7 +4,7 @@
 frappe.ui.form.on('Employee Statements', {
 	refresh: function (frm) {
 		// setTimeout(() => {
-		// 	frm.set_value("payable_account", "2110 - Creditors - JSH")
+		// 	frm.set_value("payable_account", "2110 - Creditors - SH")
 		//   }, 500);
 	  // Default values in From and To Dates
 	  var today = frappe.datetime.nowdate();

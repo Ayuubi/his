@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "DR-JSH-.#####",
+ "autoname": "DR-SH-.#####",
  "creation": "2025-01-11 12:15:11.171792",
  "default_view": "List",
  "doctype": "DocType",
@@ -75,7 +75,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-29 13:31:33.914474",
+ "modified": "2026-01-08 10:10:48.006577",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Dental Registration",

@@ -614,6 +614,7 @@ frappe.pages["legacy-history"].on_page_load = function (wrapper) {
           const doctor = r.DoctorName || r.DoctorID || "";
           const type = r.ConsultDescription || "";
           const diag = r.Diagnosis || "";
+          const cc = r.ChiefComplaint || "";
           const notes = r.ClinicalNotes || r.ClinicalHpi || "";
           const preview = (diag || notes || "").toString().trim();
 
@@ -627,6 +628,9 @@ frappe.pages["legacy-history"].on_page_load = function (wrapper) {
               <td>
                 <div>${safe(preview.slice(0, 200))}${preview.length > 200 ? "..." : ""}</div>
                 ${r.DiagnosisCategory ? `<div class="legacy-muted">${__("Category")}: ${safe(r.DiagnosisCategory)}</div>` : ``}
+              </td>
+              <td>
+                <div>${safe(cc)}</div>
               </td>
               <td style="white-space:nowrap">
                 <button class="btn btn-xs btn-primary legacy-dx-view" data-row='${safe(JSON.stringify(r))}'>
@@ -656,6 +660,7 @@ frappe.pages["legacy-history"].on_page_load = function (wrapper) {
                     <th style="width:190px">${__("Date/Time")}</th>
                     <th style="width:260px">${__("Doctor / Type")}</th>
                     <th>${__("Diagnosis / Notes")}</th>
+                    <th style="width:260px">${__("Chief Complaint")}</th>
                     <th style="width:110px">${__("Action")}</th>
                   </tr>
                 </thead>
@@ -709,7 +714,7 @@ frappe.pages["legacy-history"].on_page_load = function (wrapper) {
 			: state.activeTab === "diagnostics"
 			? [
 				r.ServiceDate, r.DateTimeIn, r.DateTimeOut, r.ServiceReference,
-				r.ConsultDescription, r.DoctorID, r.DoctorName,
+				r.ConsultDescription, r.DoctorID, r.DoctorName, r.ChiefComplaint,
 				r.DiagnosisCategory, r.Diagnosis, r.ClinicalHpi, r.ClinicalNotes,
 				r.Investigation, r.InvestigationRemarks, r.Treatment, r.TreatmentRemarks,
 				r.Medication, r.Management,
@@ -973,6 +978,11 @@ frappe.pages["legacy-history"].on_page_load = function (wrapper) {
       <hr>
       <div><b>${__("Diagnosis Category")}:</b> ${safe(row.DiagnosisCategory || "")}</div>
       <div class="mt-2"><b>${__("Diagnosis")}:</b><div class="mt-1">${fmt(row.Diagnosis)}</div></div>
+      <hr>
+      <div>
+        <b>${__("Chief Complaint")}:</b>
+        <div class="mt-1">${fmt(row.ChiefComplaint)}</div>
+      </div>
       <hr>
       <div><b>${__("HPI")}:</b><div class="mt-1">${fmt(row.ClinicalHpi)}</div></div>
       <div class="mt-2"><b>${__("Clinical Notes")}:</b><div class="mt-1">${fmt(row.ClinicalNotes)}</div></div>

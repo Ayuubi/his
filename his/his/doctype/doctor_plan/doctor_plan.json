@@ -295,7 +295,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-09-05 17:11:25.580745",
+ "modified": "2026-01-03 15:20:57.005971",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Doctor Plan",
@@ -303,6 +303,7 @@
  "owner": "Administrator",
  "permissions": [
   {
+   "create": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -339,6 +340,7 @@
    "write": 1
   },
   {
+   "create": 1,
    "email": 1,
    "export": 1,
    "print": 1,

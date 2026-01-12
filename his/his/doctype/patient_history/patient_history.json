@@ -6,7 +6,6 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "inpatient_record",
   "patient",
   "patient_name",
   "sex",
@@ -19,6 +18,7 @@
   "diagnosis",
   "date_of_admission",
   "column_break_jguyf",
+  "inpatient_record",
   "type",
   "floor",
   "room",
@@ -414,22 +414,26 @@
   {
    "fieldname": "blood_transfusion_form",
    "fieldtype": "HTML",
+   "hidden": 1,
    "label": "Blood Transfusion Form",
    "options": "<div id=\"blood_transfusion_form\">  </div>"
   },
   {
    "fieldname": "blood_transfusion_form_tab",
    "fieldtype": "Tab Break",
+   "hidden": 1,
    "label": "Blood Transfusion Form"
   },
   {
    "fieldname": "add_new_blood_t_f",
    "fieldtype": "Button",
+   "hidden": 1,
    "label": "Add New"
   },
   {
    "fieldname": "section_break_z8coc",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "fieldname": "date_of_admission",
@@ -442,8 +446,7 @@
    "fieldtype": "Link",
    "hidden": 1,
    "label": "Inpatient Record",
-   "options": "Inpatient Record",
-   "read_only": 1
+   "options": "Inpatient Record"
   },
   {
    "fetch_from": "patient.dob",
@@ -463,7 +466,7 @@
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-08-31 10:50:49.949063",
+ "modified": "2026-01-11 10:37:13.207823",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Patient History",

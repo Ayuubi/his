@@ -16,10 +16,10 @@
   "inpatient_record",
   "column_break_urecj",
   "consultant",
-  "ipd_doctor",
   "department",
   "date",
   "time",
+  "note",
   "vitals_tab",
   "section_break_qcxnm",
   "view_as_chart",
@@ -257,12 +257,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "ipd_doctor",
-   "fieldtype": "Link",
-   "label": "Prepared Doctor",
-   "options": "Healthcare Practitioner"
-  },
-  {
    "fieldname": "consent_form",
    "fieldtype": "Link",
    "label": "Consent Form",
@@ -295,10 +289,15 @@
   {
    "fieldname": "section_break_36nkz",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note"
   }
  ],
  "links": [],
- "modified": "2024-09-14 11:24:39.342602",
+ "modified": "2026-01-02 20:13:46.184808",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Surgery Preparation",

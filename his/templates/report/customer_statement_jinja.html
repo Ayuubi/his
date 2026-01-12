@@ -9,6 +9,7 @@
     <!-- <link rel="stylesheet" href="style.css" /> -->
   </head>
   <style>
+  
     @media screen {
      .print-format-gutter {
          background-color: #d1d8dd;
@@ -51,6 +52,7 @@
          margin-left: 1px;
          margin-right: 1px;
     }
+  
 }
  .disabled-check {
      color: #eee;
@@ -187,7 +189,8 @@
   justify-content: end;
   margin-right: 20px;
 }
-.heading h2 {
+.heading h3 {
+  padding-top: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,6 +201,7 @@
   display: flex;
   gap: 20px;
   width: 100%;
+  margin-top: 0px;
   /* justify-content: space-between; */
   /* margin-left: 300px; */
 }
@@ -241,7 +245,7 @@ margin-left: 370px; */
   width: 110px;
 }
 .right_side td {
-  height: 30px;
+  height: 20px;
   width: 110px;
 }
 
@@ -259,13 +263,22 @@ margin-left: 370px; */
 .tr_td_wid td {
   height: 20px;
 }
+ 
 
 /* ............................... responsitive mobile  */
 </style>
   <body>
     <section class="print-format-gutter">
       <div class="print-format" class="hidden-pdf">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+        <div id="header-html">
+          {% if letter_head %}
+          <div class="letter-head" style = "height: 70px;">
+            {{ letter_head }}
+          </div>
+          {% endif %}
+        </div>
+        <div style="display: flex; justify-content: space-between; padding-top: 40px;">
 
           <div class="date">
             <h3>Printed Date: {{ _("{0}").format(date_time) }}</h3>
@@ -274,16 +287,9 @@ margin-left: 370px; */
             <h3>Printed By: {{ frappe.db.get_value ("User" ,frappe.session.user, "full_name") }}</h3>
           </div>
         </div>
-      <div id="header-html">
-        {% if letter_head %}
-        <div class="letter-head">
-          {{ letter_head }}
-        </div>
-        {% endif %}
-      </div>
 
       <div class="heading">
-        <h2>CUSTOMER STATEMENT</h2>
+        <h3>CUSTOMER STATEMENT</h3>
       </div>
       <!-- ................ table one containin two table  -->
       <div class="divided_two">
@@ -324,7 +330,7 @@ margin-left: 370px; */
         </div>
       </div>
       <!-- .................... table three  -->
-      <div style="width: 100%; margin-top: -2%;">
+      <div style="width: 100%; margin-top: 0px">
         <table style="width: 100%;" class="table table-bordered">
           <tr>
             <th style="text-align: left;">Begining</th>
@@ -340,10 +346,10 @@ margin-left: 370px; */
           </tr>
         </table>
       </div>
-      <div  class="" style="width: 100%;">
+      <div  class="" style="width: 100%; margin-top: 0px;">
         <table style="width: 100%;" class="table table-bordered">
           <tr>
-            <th style="text-align: left;">Date</th>
+            <th style="text-align: left; width: 10px !important;">Date</th>
             <!-- <th style="text-align: left;">Time</th> -->
             <th style="text-align: left;">User</th>
 
@@ -386,7 +392,7 @@ margin-left: 370px; */
             {% endif %}
             
             
-            <td style="width: 25%;">
+            <td style="width: 25%; padding-top: -2%;">
               {% if row.voucher_type == "Sales Invoice" %} {% set sales_doc =
                 frappe.get_doc("Sales Invoice" , row.voucher_no) %}<br />
                 {% set item_group = [] %} 
@@ -396,7 +402,7 @@ margin-left: 370px; */
                 set item_group = item_group.append(item.item_group) %}
   
                 <span 
-                style="font-size: 14px">{{item.item_group }} <br>
+                style="font-size: 14px; padding-top: -2%;">{{item.item_group }} <br>
                 
                 {% endif %} {% endif %} {% endfor %}
                 <span style="font-size: 12px ; font-style: italic;">  Total :</span> {{ frappe.utils.fmt_money(frappe.db.get_value(row.voucher_type, row.voucher_no, "total")  ,currency=currency)}} <br>

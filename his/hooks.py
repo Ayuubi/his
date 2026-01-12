@@ -193,14 +193,17 @@ doc_events = {
     # },
     "Sample Collection": {
         "before_insert": [
-            "his.api.make_sample_collection.token_numebr"
+            "his.api.make_sample_collection.token_numebr",
+            # "his.api.create_lab_test.create_lab_tests",
             ],
         "on_submit": [
-            "his.api.create_lab_test.create_lab_tests",
+            # "his.api.create_lab_test.create_lab_tests",
+            "his.api.create_lab_test.create_lab_result_doc",
             "his.commission.work_handlers.on_submit_sample_collection"
             ],
         "on_cancel": [
-            "his.commission.work_handlers.on_cancel_sample_collection"
+            "his.commission.work_handlers.on_cancel_sample_collection",
+            "his.api.create_lab_test.on_cancel_samples",
             ],
         
     },
@@ -212,9 +215,9 @@ doc_events = {
     # "Journal Entry" : {
     #   "before_cancel" : "his.api.journal_entry.cancell_sales_invoice"
     # },
-   # "Customer" : {
-    #"before_insert" : "his.api.credit_limit.credit_limit"
-	#},
+   "Customer" : {
+        "before_insert" : "his.api.credit_limit.credit_limit"
+	},
     "Clinical Procedure":{
     #     "after_insert": "his.api.clinical_procedure.ot_schedule",
         "on_submit": [

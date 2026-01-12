@@ -28,7 +28,7 @@
  ],
  "is_published_field": "type",
  "links": [],
- "modified": "2025-10-20 08:40:00.623781",
+ "modified": "2026-01-11 10:30:09.624078",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Inpatient Type",
@@ -48,7 +48,6 @@
    "write": 1
   },
   {
-   "create": 1,
    "delete": 1,
    "email": 1,
    "export": 1,
@@ -60,14 +59,12 @@
    "write": 1
   },
   {
-   "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
-   "print": 1,
+   "permlevel": 1,
    "read": 1,
    "report": 1,
-   "role": "Guest",
+   "role": "All",
    "share": 1,
    "write": 1
   }

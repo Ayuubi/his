@@ -32,7 +32,7 @@ frappe.ui.form.on('Doctor Statements', {
 			    set_employee_from_doctor(frm);
 
 		// setTimeout(() => {
-		// 	frm.set_value("payable_account", "2110 - Creditors - JSH")
+		// 	frm.set_value("payable_account", "2110 - Creditors - SH")
 		//   }, 500);
 	  // Default values in From and To Dates
 	  var today = frappe.datetime.nowdate();

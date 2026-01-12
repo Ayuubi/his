@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "HPR-JSH-.#####",
+ "autoname": "HPR-SH-.#####",
  "creation": "2025-01-11 12:29:37.710445",
  "default_view": "List",
  "doctype": "DocType",
@@ -81,7 +81,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-29 10:40:05.279342",
+ "modified": "2026-01-08 10:11:04.030320",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Hospital and Polyclinics Registration",

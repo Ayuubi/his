@@ -107,10 +107,11 @@
    "read_only": 1
   }
  ],
+ "in_create": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-05-19 11:59:30.167285",
+ "modified": "2026-01-07 14:29:29.670790",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Inpatient Medication",
@@ -120,19 +121,20 @@
   {
    "cancel": 1,
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1
   },
   {
    "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -145,6 +147,7 @@
    "write": 1
   },
   {
+   "create": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -153,18 +156,20 @@
    "role": "Doctor",
    "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   },
   {
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Maternity",
+   "select": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],

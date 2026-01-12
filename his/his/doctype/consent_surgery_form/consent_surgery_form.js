@@ -149,9 +149,15 @@ async function attach_to_child(opts) {
 }
 
 frappe.ui.form.on('Consent Surgery Form', {
-	// refresh: function(frm) {
-
-	// }
+    refresh: function(frm) {
+        if (!frm.is_new()) {
+            frm.add_custom_button(__('Print Consent Form'), function() {
+    // This sets the default print format for this session and opens the dialog
+    frm.meta.default_print_format = "Consent Form Endoscopy";
+    frm.print_doc();
+});
+        }
+    }
 });
 frappe.ui.form.on('Representors', {
   // Button fieldname: capture_signature

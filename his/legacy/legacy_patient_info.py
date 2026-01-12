@@ -35,3 +35,19 @@ def search_legacy_patients_paged(
         sort_order=sort_order,
     )
     return {"ok": True, **data}
+    
+@frappe.whitelist()
+def resolve_patient_from_legacy(legacy_patient_number: str):
+    legacy_no = (legacy_patient_number or "").strip()
+    if not legacy_no:
+        return {"ok": False, "message": "Missing legacy patient number."}
+
+    patient = frappe.db.get_value("Patient", {"legacy_patient_number": legacy_no}, "name")
+    if not patient:
+        return {
+            "ok": False,
+            "message": f"No Patient found with legacy_patient_number = {legacy_no}",
+            "legacy_patient_number": legacy_no,
+        }
+
+    return {"ok": True, "patient": patient, "legacy_patient_number": legacy_no}

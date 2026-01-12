@@ -17,6 +17,7 @@ def make_invoice(doc, method=None):
 		if not doc.is_free and  not doc.follow_up and   doc.que_type !="Renew" and doc.que_type !="Revisit":
 			is_insurance = doc.is_insurance
 			paid_amount = doc.paid_amount
+			
 			# frappe.errprint(type(paid_amount))
 			if is_insurance:
 				doc.is_free = 0
@@ -55,7 +56,7 @@ def make_invoice(doc, method=None):
 							"doctype": "Sales Invoice Item"
 				}],
 				"payments" : [{
-					"mode_of_payment" : mode_of_payment,
+					"mode_of_payment" : doc.mode_of_payment,
 					"amount" :paid_amount
 				}]
 			

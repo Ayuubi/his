@@ -36,6 +36,7 @@
   "sb_test_prescription",
   "section_break_gpfct",
   "select_lab_tests",
+  "new_select_lab_test",
   "lab_test_prescription",
   "imaging_tab",
   "section_break_u3mpg",
@@ -298,6 +299,7 @@
   {
    "fieldname": "select_lab_tests",
    "fieldtype": "Button",
+   "hidden": 1,
    "label": "Select Lab Test"
   },
   {
@@ -317,11 +319,16 @@
    "fieldname": "full_name",
    "fieldtype": "Data",
    "label": "Full Name"
+  },
+  {
+   "fieldname": "new_select_lab_test",
+   "fieldtype": "Button",
+   "label": "Select Lab Test"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2025-09-07 11:23:01.073170",
+ "modified": "2026-01-11 08:59:20.012917",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Inpatient Order",
@@ -406,7 +413,6 @@
   }
  ],
  "restrict_to_domain": "Healthcare",
- "row_format": "Dynamic",
  "search_fields": "patient, practitioner, medical_department, encounter_date, encounter_time",
  "show_name_in_global_search": 1,
  "sort_field": "modified",

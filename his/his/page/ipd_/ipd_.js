@@ -88,16 +88,34 @@ IPD = Class.extend(
 			{title:"No", field:"id", formatter:"rownum"},
 			{title:"PID", field:"patient" ,  headerFilter:"input"},
 			{title:"Patient Name", field:"patient_name" ,  headerFilter:"input"},
-			{title:"Age", field:"age" ,  headerFilter:"input"},
+			{ 
+				title: "Age", 
+				field: "age",  
+				headerFilter: "input", 
+				formatter: function(cell, formatterParams, onRendered) {
+					// Assuming the age value is stored as a string like "6 Year(s) 0 Month(s) 2 Day(s)"
+					let ageString = cell.getValue();
+					let shortenedAge = ageString
+					.replace("Year(s)", "Y")
+					.replace("Month(s)", "m")
+					.replace("Day(s)", "d");
+					return shortenedAge; // This will display "6Y 0m 2d" in the column
+				}
+				},
 			{title:"Type", field:"type" ,  headerFilter:"input"},
-			{title:"Date", field:"admitted_datetime" ,  headerFilter:"input"},
+			{title:"Date", field:"admitted_datetime" ,formatter:function(cell){
+                        let v=cell.getValue(); if(!v) return ""; let dt=new Date(v);
+                        let m=dt.toLocaleString("default",{month:"short"}); let d=dt.getDate();
+                        let h=dt.getHours(); let min=dt.getMinutes().toString().padStart(2,"0");
+                        let am=h>=12?"PM":"AM"; h=h%12||12; return `${m} ${d} ${h}:${min} ${am}`;
+                    }},
 			{title:"Duration", field:"duration" ,  headerFilter:"input" , formatter:durationformatter},
 			{title:"Doctor Name", field:"admission_practitioner" ,  headerFilter:"input",},
-			{title:"Medical Department", field:"medical_department" ,  headerFilter:"input",},
+		
 			{title:"Floor", field:"floor" ,  headerFilter:"input",},
 			
 
-			{title:"Room", field:"room" ,  headerFilter:"input",},
+			
 			
 			{title:"Bed", field:"bed" ,  headerFilter:"input",},
 			// {title:"Status", field:"inpatient_status" ,  headerFilter:"input",},

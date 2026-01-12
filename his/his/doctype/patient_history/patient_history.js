@@ -62,7 +62,7 @@ frappe.ui.form.on('Patient History', {
         }
 
 
-		if (frappe.user_roles.includes('Cashier')) {
+		if (frappe.user_roles.includes('Cashier') || frappe.user_roles.includes('Nurse')) {
 			frm.add_custom_button(__("Transfer"), function(){
 				transfer_patient_dialog(frm);
 			
@@ -73,9 +73,16 @@ frappe.ui.form.on('Patient History', {
 		} 
 
 		if (frappe.user_roles.includes('Doctor') || frappe.user_roles.includes('Nurse')) {
-			var btn = frm.add_custom_button('Discharge', () => {
-				frappe.new_doc("Discharge Summery", { "patient": frm.doc.patient, "ref_practitioner": frm.doc.consultant, "doctor_plan": frm.doc.name })
 			
+			var btn = frm.add_custom_button('Discharge', () => {
+				if (frm.doc.type !== "Day Care") {
+					frappe.new_doc("Discharge Summery", { "patient": frm.doc.patient, "ref_practitioner": frm.doc.consultant, "doctor_plan": frm.doc.name })
+				} else {
+					let inpatient_record = frappe.get_doc("Patient", frm.doc.patient)
+					if (inpatient_record.inpatient_record){
+						discharge(inpatient_record.inpatient_record)
+					}
+				}
 			})
 			btn.addClass('btn-danger');
 		}
@@ -1175,7 +1182,7 @@ let transfer_patient_dialog = function(frm) {
 					
 					frappe.call({
 						// doc: frm.doc,
-						method: 'his.api.transfer_ip.transfer_ip',
+						method: 'his.api.transfer_ip.transfer_ip_bed',
 						args:{
 							'self' : ip.name,
 							'service_unit': service_unit,
@@ -1539,3 +1546,40 @@ let calculate_age = function(birth) {
 
     return `${years} Year(s) ${months} Month(s) ${days} Day(s)`;
 };
+
+
+function discharge(name){
+
+// alert(name)
+	frappe.confirm('Are you sure you want to proceed?',
+    () => {
+        // action to perform if Yes is selected
+
+		frappe.call({
+			method: "his.api.inpatient_record.check_out_inpatient", //dotted path to server method
+			args: {
+				'inpatient_record' : name
+			},
+			callback: function(r) {
+				// code snippet
+				// console.log(r)
+			// frm.set_value("status" , "Refered")
+			const baseUrl = `${window.location.protocol}//${window.location.host}`;
+			let url = baseUrl + "/printview?doctype=Inpatient%20Record&name="+name+"&trigger_print=1&format=Exit%Gate&no_letterhead=0&letterhead=logo&settings=%7B%7D&_lang=en-US"
+			window.open(url, '_blank');
+			// frappe.utils.print("Inpatient Record",name,"Exit Gate","logo")
+			frappe.utils.play_sound("submit")
+			window.location.reload();
+			frappe.show_alert({
+			message:__('You have Discharged Patient Succesfully'),
+			indicator:'green',
+			
+		}, 5);
+			}
+		});
+    }, () => {
+        // action to perform if No is selected
+    })
+
+
+}

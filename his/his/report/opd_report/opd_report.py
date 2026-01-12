@@ -32,6 +32,7 @@ def get_data(filters):
         from `tabQue`  
 
         WHERE date BETWEEN "{_from}" AND "{to}" 
+        AND status != 'Canceled'
         group by practitioner
         ;""", as_dict=1)
 

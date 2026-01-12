@@ -294,6 +294,10 @@ frappe.ui.form.on('OT Schedule', {
 		} 
 
 		if (!frm.is_new()){
+			var btn1 = frm.add_custom_button('Requests', () => {
+				frappe.new_doc("Inpatient Order", { "patient": frm.doc.patient, "practitioner": frm.doc.consultant, "source_order": "IPD" })
+		
+			})
 			frm.add_custom_button('Print Consent Form', () => {
 				// let url= `${frappe.urllib.get_base_url()}/printview?doctype=Surgery%20Preparation&name=${frm.doc.name}&trigger_print=1&format=Surgery%20Preparation%20Consent&no_letterhead=0&letterhead=logo&settings=%7B%7D&_lang=en`;
 				//      window.open(url, '_blank');
@@ -302,7 +306,7 @@ frappe.ui.form.on('OT Schedule', {
 					frappe.set_route('Form', 'Consent Surgery Form', frm.doc.consent_form);
 				}
 				else{
-					frappe.new_doc("Consent Surgery Form" , {"patient" : frm.doc.patient , "surgery_type" : frm.doc.procedure , "surgery_preparation" : frm.doc.name})
+					frappe.new_doc("Consent Surgery Form" , {"patient" : frm.doc.patient , "surgery_type" : frm.doc.procedure_template , "surgery_preparation" : frm.doc.name, "practitioner": frm.doc.practitioner})
 		
 				}
 			
@@ -413,7 +417,7 @@ frappe.ui.form.on('OT Schedule', {
 					frm.toggle_reqd('paid_amount', 0);
 					frm.toggle_reqd('billing_item', 0);
 				} else if (data.message) {
-					frm.toggle_display('mode_of_payment', 1);
+					frm.toggle_display('mode_of_payment', 0);
 					frm.toggle_display('paid_amount', 1);
 					frm.toggle_display('billing_item', 1);
 					frm.toggle_reqd('mode_of_payment', 1);
@@ -421,7 +425,7 @@ frappe.ui.form.on('OT Schedule', {
 					frm.toggle_reqd('billing_item', 1);
 				} else {
 					// if automated appointment invoicing is disabled, hide fields
-					frm.toggle_display('mode_of_payment', data.message ? 1 : 0);
+					frm.toggle_display('mode_of_payment', data.message ? 0 : 0);
 					frm.toggle_display('paid_amount', data.message ? 1 : 0);
 					frm.toggle_display('billing_item', data.message ? 1 : 0);
 					frm.toggle_reqd('mode_of_payment', data.message ? 1 : 0);

@@ -380,10 +380,10 @@ def fetch_patient_vitals(patient_number: str, limit: int = 200):
         FROM (
             SELECT
                 CompanyID, BranchID, DepartmentID, ServiceReference,
-                ServiceDate, PatientNumber, PatientName, SortDateTime
+                ServiceDate, PatientNumber, PatientName
             FROM consultationheader
             WHERE PatientNumber = %s
-            ORDER BY SortDateTime DESC
+            ORDER BY ServiceDate DESC
             LIMIT 2000
         ) ch
         JOIN consultationstatistics cs
@@ -431,7 +431,8 @@ def fetch_patient_diagnostics(patient_no: str, limit: int = 300):
                     H.Room,
                     H.DoctorID,
                     D.DoctorName,
-
+                    -- ✅ Canonical Chief Complaint
+                    NULLIF(H.Symptoms, '') AS ChiefComplaint,
                     H.DiagnosisCategory,
                     H.Diagnosis,
                     H.ClinicalHpi,
@@ -451,7 +452,7 @@ def fetch_patient_diagnostics(patient_no: str, limit: int = 300):
                 LEFT JOIN DoctorInformation D
                   ON D.DoctorID = H.DoctorID
                 WHERE H.PatientNumber = %s
-                ORDER BY H.SortDateTime DESC
+                ORDER BY H.ServiceDate DESC
                 LIMIT %s
             """
             cur.execute(sql, (patient_no, int(limit)))

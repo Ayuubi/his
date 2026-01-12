@@ -99,7 +99,7 @@ frappe.query_reports["Employee Payable Summary"] = {
 			"label": __("Payable Account"),
 			"fieldtype": "Link",
 			"options": "Account",
-			// "default":"2110 - Creditors - JSH",
+			// "default":"2110 - Creditors - SH",
 			get_query: () => {
 				var company = frappe.query_report.get_filter_value('company');
 				return {

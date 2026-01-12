@@ -15,6 +15,7 @@
   "allow_split_on_requesting_percentage",
   "allow_commission_on_sc",
   "allow_commission_on_si",
+  "credit_limit",
   "section_break_ezhz1",
   "invoice_commission_item_groups",
   "section_break_bwptp",
@@ -174,12 +175,19 @@
    "fieldname": "allow_commission_on_si",
    "fieldtype": "Check",
    "label": "Allow Commission on SI"
+  },
+  {
+   "default": "0",
+   "description": "If checked system will not allow credit to customers",
+   "fieldname": "credit_limit",
+   "fieldtype": "Check",
+   "label": "Credit Limit"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-12-21 14:59:48.762586",
+ "modified": "2026-01-02 18:36:01.840200",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HIS Settings",

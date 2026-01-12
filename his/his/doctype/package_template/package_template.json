@@ -9,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "template",
+  "package_type",
   "item",
   "template_code",
   "item_group",
@@ -78,17 +79,16 @@
    "fieldname": "is_billable",
    "fieldtype": "Check",
    "label": "Is Billable",
-   "read_only": 1,
    "search_index": 1
   },
   {
    "depends_on": "eval:doc.is_billable == 1",
    "description": "This value is updated in the Default Sales Price List.",
+   "fetch_from": "item.standard_rate",
    "fieldname": "rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Rate",
-   "read_only": 1
+   "label": "Rate"
   },
   {
    "fieldname": "result_legend_section",
@@ -119,10 +119,18 @@
    "label": "Medical Department",
    "options": "Medical Department",
    "set_only_once": 1
+  },
+  {
+   "fieldname": "package_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Package Type",
+   "options": "\nAnesthesia\nHajj"
   }
  ],
  "links": [],
- "modified": "2025-12-29 13:14:35.904587",
+ "modified": "2026-01-09 23:41:44.023957",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Package Template",
@@ -172,6 +180,18 @@
    "report": 1,
    "role": "Full Admin",
    "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "OT",
    "share": 1,
    "write": 1
   }

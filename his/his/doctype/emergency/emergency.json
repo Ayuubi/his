@@ -66,24 +66,24 @@
   "distension",
   "urinary_symptoms",
   "section_break_qlond",
-  "investigation_tab",
-  "section_break_sdrs1",
-  "select_lab_tests",
-  "lab_test_prescription",
-  "sb_procedures",
-  "section_break_j8acn",
-  "procedure_prescription",
-  "imaging_tab",
-  "section_break_7igtk",
-  "select_imaging",
-  "radiology_prescription",
   "sb_drug_prescription",
   "section_break_n9sry",
   "drug_prescription",
   "medication_so",
   "services_so",
+  "investigation_tab",
+  "section_break_sdrs1",
+  "select_lab_tests",
+  "lab_test_prescription",
+  "imaging_tab",
+  "section_break_7igtk",
+  "select_imaging",
+  "radiology_prescription",
   "amended_from",
   "status",
+  "sb_procedures",
+  "section_break_j8acn",
+  "procedure_prescription",
   "other_service_tab",
   "section_break_svbuh",
   "services_prescription",
@@ -120,6 +120,7 @@
   {
    "fieldname": "patient",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Patient",
    "options": "Patient",
@@ -130,6 +131,7 @@
    "fetch_from": "patient.first_name",
    "fieldname": "patient_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Patient Name",
    "read_only": 1
   },
@@ -194,7 +196,8 @@
    "fieldtype": "Link",
    "in_standard_filter": 1,
    "label": "Healthcare Practitioner",
-   "options": "Healthcare Practitioner"
+   "options": "Healthcare Practitioner",
+   "reqd": 1
   },
   {
    "fetch_from": "practitioner.practitioner_name",
@@ -401,7 +404,7 @@
   {
    "fieldname": "sb_procedures",
    "fieldtype": "Tab Break",
-   "label": "Procedures Request"
+   "label": "Surgery Request"
   },
   {
    "fieldname": "section_break_j8acn",
@@ -485,7 +488,7 @@
   {
    "fieldname": "other_service_tab",
    "fieldtype": "Tab Break",
-   "label": "Other Service"
+   "label": "Procedure Request"
   },
   {
    "fieldname": "section_break_svbuh",
@@ -542,7 +545,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2025-10-21 11:45:23.878701",
+ "modified": "2026-01-03 15:06:03.874261",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Emergency",
@@ -600,6 +603,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "title",
+ "title_field": "patient_name",
  "track_changes": 1
 }

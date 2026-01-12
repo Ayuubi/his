@@ -199,6 +199,267 @@ class LabResult(Document):
                 
         # frappe.errprint(test)					
         return test
+
+
+    # def get_lab_tests_for_all(self):
+        test = {}
+        processed = set()  # prevent grouped duplication
+
+        for item in (self.normal_test_items or []):
+            template = {}
+
+            # Get template doc from item.test, otherwise from item.lab_test_name
+            template_name = (item.test or "").strip()
+            if not template_name:
+                template_name = (item.lab_test_name or "").strip()
+
+            if template_name and frappe.db.exists("Lab Test Template", template_name):
+                template = frappe.get_doc("Lab Test Template", template_name)
+            else:
+                continue
+
+            if not template.department:
+                continue
+
+            key = f"{template.department}"
+
+            # -----------------------------
+            # FIRST TIME for this department
+            # -----------------------------
+            if key not in test:
+                # Header row (template name row) -> NO UNIT / NO RANGE
+                test[key] = [{
+                    "test": item.test,
+                    "lab_event": "",
+                    "lab_test_name": item.lab_test_name,
+                    "result_value": "",
+                    "lab_test_uom": "",
+                    "normal_range": ""
+                }]
+
+                # ✅ FIX: add the actual first test row for Single-type tests
+                if template.lab_test_template_type not in ("Compound", "Grouped") and item.result_value:
+                    test[key].append({
+                        "test": item.lab_test_name,
+                        "lab_event": "",
+                        "lab_test_name": "",
+                        "result_value": item.result_value,
+                        "lab_test_uom": (getattr(item, "lab_test_uom", "") or ""),
+                        "normal_range": (item.normal_range or "")
+                    })
+
+                # -------- Compound ----------
+                if template.lab_test_template_type == "Compound":
+                    events = frappe.db.get_list(
+                        "Normal Test Result",
+                        filters={"template": template.name, "parent": self.name},
+                        fields=["lab_test_name", "result_value", "normal_range", "lab_test_uom"],
+                        order_by="idx asc",
+                        ignore_permissions=True
+                    )
+
+                    for event in events:
+                        test[key].append({
+                            "lab_event": "",
+                            "lab_test_name": event.lab_test_name,
+                            "result_value": event.result_value,
+                            "lab_test_uom": (event.lab_test_uom or ""),
+                            "normal_range": (event.normal_range or "")
+                        })
+
+                # -------- Grouped ----------
+                if template.lab_test_template_type == "Grouped":
+                    events = frappe.db.get_list(
+                        "Normal Test Result",
+                        filters={"template": template.name, "parent": self.name},
+                        fields=["lab_test_name", "result_value", "normal_range", "lab_test_uom"],
+                        order_by="idx asc",
+                        ignore_permissions=True
+                    )
+
+                    for event in events:
+                        test[key].append({
+                            "test": "",
+                            "lab_event": "",
+                            "lab_test_name": event.lab_test_name,
+                            "result_value": event.result_value,
+                            "lab_test_uom": (event.lab_test_uom or ""),
+                            "normal_range": (event.normal_range or "")
+                        })
+
+                        lab_events = frappe.db.get_list(
+                            "Normal Test Result",
+                            filters={"template": event.lab_test_name, "parent": self.name},
+                            fields=["lab_test_event", "result_value", "normal_range", "lab_test_uom"],
+                            order_by="idx asc",
+                            ignore_permissions=True
+                        )
+
+                        for eve in lab_events:
+                            test[key].append({
+                                "lab_test_name": "",
+                                "lab_event": eve.lab_test_event,
+                                "result_value": eve.result_value,
+                                "lab_test_uom": (eve.lab_test_uom or ""),
+                                "normal_range": (eve.normal_range or "")
+                            })
+
+                processed.add(item.test)  # keep as-is
+
+            # -----------------------------
+            # department already exists
+            # -----------------------------
+            else:
+                if template.lab_test_template_type == "Grouped" and item.test in processed:
+                    continue
+
+                test[key].append({
+                    "test": item.lab_test_name,
+                    "lab_event": "",
+                    "lab_test_name": "",
+                    "result_value": item.result_value,
+                    "lab_test_uom": (getattr(item, "lab_test_uom", "") or ""),
+                    "normal_range": (item.normal_range or "")
+                })
+
+        return test
+
+    def get_lab_tests_for_all(self):
+        import frappe
+
+        out = {}
+        processed_grouped = set()   # header once per grouped parent template (Electrolytes)
+        processed_compound = set()  # build compound section once per compound template
+
+        def add_row(dept, rowdict):
+            out.setdefault(dept, []).append(rowdict)
+
+        def get_template(name: str):
+            name = (name or "").strip()
+            if not name:
+                return None
+            if not frappe.db.exists("Lab Test Template", name):
+                return None
+            return frappe.get_cached_doc("Lab Test Template", name)
+
+        # Helper: resolve a template for this row
+        # Priority: item.test (Grouped parent like Electrolytes) -> item.template -> item.lab_test_name
+        def resolve_template_for_row(r):
+            for cand in [(r.test or "").strip(),
+                        (getattr(r, "template", "") or "").strip(),
+                        (r.lab_test_name or "").strip()]:
+                t = get_template(cand)
+                if t:
+                    return t
+            return None
+
+        rows = list(self.normal_test_items or [])
+
+        for r in rows:
+            tpl = resolve_template_for_row(r)
+
+            # If we can't resolve template, still print it under "Lab"
+            if not tpl:
+                dept = "Lab"
+                add_row(dept, {
+                    "test": "",
+                    "lab_event": getattr(r, "lab_test_event", "") or "",
+                    "lab_test_name": r.lab_test_name or "",
+                    "result_value": r.result_value,
+                    "lab_test_uom": getattr(r, "lab_test_uom", "") or "",
+                    "normal_range": r.normal_range or "",
+                })
+                continue
+
+            dept = (tpl.department or "Lab").strip()
+            tpl_type = (tpl.lab_test_template_type or "").strip()
+
+            # -------------------------
+            # GROUPED (Electrolytes)
+            # -------------------------
+            if tpl_type == "Grouped":
+                # In your new creation:
+                # r.test = parent grouped template (e.g. Electrolytes)
+                parent_group_name = (r.test or tpl.name or "").strip() or tpl.name
+
+                # header once per grouped parent
+                if parent_group_name not in processed_grouped:
+                    add_row(dept, {
+                        "test": parent_group_name,
+                        "lab_event": "",
+                        "lab_test_name": parent_group_name,
+                        "result_value": "",
+                        "lab_test_uom": "",
+                        "normal_range": "",
+                    })
+                    processed_grouped.add(parent_group_name)
+
+                # actual sub-test row (Sodium/Potassium/...)
+                add_row(dept, {
+                    "test": "",
+                    "lab_event": getattr(r, "lab_test_event", "") or "",
+                    "lab_test_name": r.lab_test_name or "",
+                    "result_value": r.result_value,
+                    "lab_test_uom": getattr(r, "lab_test_uom", "") or "",
+                    "normal_range": r.normal_range or "",
+                })
+                continue
+
+            # -------------------------
+            # COMPOUND (LFT etc.)
+            # -------------------------
+            if tpl_type == "Compound":
+                # Build the whole compound block ONCE, using the rows already on this Lab Result doc
+                # Your compound creation sets: row.template = tpl.name
+                if tpl.name in processed_compound:
+                    continue
+
+                # Header row (won't print because result_value is empty, but keeps structure)
+                add_row(dept, {
+                    "test": tpl.name,
+                    "lab_event": "",
+                    "lab_test_name": tpl.lab_test_name or tpl.name,
+                    "result_value": "",
+                    "lab_test_uom": "",
+                    "normal_range": "",
+                })
+
+                compound_rows = [
+                    x for x in rows
+                    if (getattr(x, "template", "") or "").strip() == tpl.name
+                ]
+
+                # If somehow template field is missing, fallback to "test == tpl.name"
+                if not compound_rows:
+                    compound_rows = [x for x in rows if (x.test or "").strip() == tpl.name]
+
+                for x in compound_rows:
+                    add_row(dept, {
+                        "test": "",
+                        "lab_event": getattr(x, "lab_test_event", "") or "",
+                        "lab_test_name": x.lab_test_name or getattr(x, "lab_test_event", "") or "",
+                        "result_value": x.result_value,
+                        "lab_test_uom": getattr(x, "lab_test_uom", "") or "",
+                        "normal_range": x.normal_range or "",
+                    })
+
+                processed_compound.add(tpl.name)
+                continue
+
+            # -------------------------
+            # SINGLE / Others (Blood)
+            # -------------------------
+            add_row(dept, {
+                "test": "",
+                "lab_event": getattr(r, "lab_test_event", "") or "",
+                "lab_test_name": r.lab_test_name or (tpl.lab_test_name or tpl.name),
+                "result_value": r.result_value,
+                "lab_test_uom": getattr(r, "lab_test_uom", "") or (tpl.lab_test_uom or ""),
+                "normal_range": r.normal_range or (getattr(tpl, "lab_test_normal_range", "") or ""),
+            })
+
+        return out
+
         
 
     # def after_insert(self):

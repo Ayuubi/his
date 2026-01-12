@@ -25,6 +25,7 @@
   "column_break_7",
   "transaction_date",
   "refund",
+  "custom_refund",
   "column_break1",
   "po_no",
   "po_date",
@@ -1598,6 +1599,7 @@
    "default": "0",
    "fieldname": "refund",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Refund"
   },
   {
@@ -1634,13 +1636,19 @@
   {
    "fieldname": "section_break_q1jpp",
    "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "custom_refund",
+   "fieldtype": "Check",
+   "label": "Refund"
   }
  ],
  "icon": "fa fa-file-text",
  "idx": 105,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-22 10:28:01.027836",
+ "modified": "2026-01-10 13:05:39.670782",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Sales Return",

@@ -1,0 +1,746 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-01-09 22:02:24.548263",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "patient",
+  "patient_name",
+  "sex",
+  "age",
+  "mobile",
+  "district",
+  "column_break_ad4dp",
+  "passport",
+  "emergency_mobile",
+  "contact_person",
+  "ref_practitioner",
+  "posting_date",
+  "vital_signs_section",
+  "vital_sign",
+  "medical_history_section",
+  "known_ch",
+  "current_medications",
+  "height",
+  "weight",
+  "blood_pressure",
+  "pulse_rate",
+  "respiratory_rate",
+  "temperature",
+  "oxygen_saturation",
+  "general_examination_findings",
+  "section_break_rtwmv",
+  "q1",
+  "column_break_fgbw1",
+  "yes1",
+  "no1",
+  "section_break_1ed8x",
+  "q2",
+  "column_break_qfi7l",
+  "yes2",
+  "no2",
+  "section_break_x4qvj",
+  "q3",
+  "column_break_lmzzr",
+  "yes3",
+  "no3",
+  "section_break_9q4ha",
+  "q4",
+  "section_break_gv8fj",
+  "q5",
+  "yes5",
+  "no5",
+  "column_break_p36y5",
+  "q6",
+  "yes6",
+  "no6",
+  "column_break_dqob1",
+  "q7",
+  "yes7",
+  "no7",
+  "column_break_eplaw",
+  "q8",
+  "yes8",
+  "no8",
+  "section_break_hwkra",
+  "q9",
+  "yes9",
+  "no9",
+  "column_break_qdf8b",
+  "q10",
+  "yes10",
+  "no10",
+  "column_break_xp9hy",
+  "q11",
+  "yes11",
+  "no11",
+  "column_break_hgmvm",
+  "q12",
+  "yes12",
+  "no12",
+  "column_break_j6vyp",
+  "q13",
+  "yes13",
+  "no13",
+  "section_break_1wqds",
+  "q14",
+  "yes14",
+  "no14",
+  "if_yes",
+  "column_break_wuzur",
+  "txt",
+  "section_break_ul0lf",
+  "items",
+  "ref_invoice",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Series",
+   "options": "HAJ-SCR-"
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.first_name",
+   "fieldname": "patient_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Patient Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "sex",
+   "fieldtype": "Link",
+   "label": "Sex",
+   "options": "Gender",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.p_age",
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Age",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.mobile_no",
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Mobile",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "patient.territory",
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "District",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_ad4dp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "passport",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Passport No."
+  },
+  {
+   "fieldname": "emergency_mobile",
+   "fieldtype": "Data",
+   "label": "Emergency Mobile"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "ref_practitioner",
+   "fieldtype": "Link",
+   "label": "Healthcare Practitioner",
+   "options": "Healthcare Practitioner"
+  },
+  {
+   "fieldname": "section_break_rtwmv",
+   "fieldtype": "Section Break",
+   "label": "Self-Declaration To Be Filled By The Hajj Applicant"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "q1",
+   "fieldtype": "HTML",
+   "label": "Question 1",
+   "options": "1. Do you suffer from epilepsy or from sudden attacks of loss of consciousness or giddiness from any cause?"
+  },
+  {
+   "fieldname": "column_break_fgbw1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes1",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no1",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "section_break_1ed8x",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "q2",
+   "fieldtype": "HTML",
+   "label": "Question 2",
+   "options": "2. Are you suffering from stroke or paralysis?"
+  },
+  {
+   "fieldname": "column_break_qfi7l",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes2",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no2",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "section_break_x4qvj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "q3",
+   "fieldtype": "HTML",
+   "label": "Question 3",
+   "options": "3. Are you suffering any mental disease or take medication ?"
+  },
+  {
+   "fieldname": "column_break_lmzzr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes3",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no3",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "section_break_9q4ha",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "q4",
+   "fieldtype": "HTML",
+   "label": "Question 4",
+   "options": "4.\tHave you ever been diagnosed with?"
+  },
+  {
+   "fieldname": "column_break_p36y5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_gv8fj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "q5",
+   "fieldtype": "HTML",
+   "label": "Question 5",
+   "options": "Tuberculosis (TB)"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes5",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no5",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "q6",
+   "fieldtype": "HTML",
+   "label": "Question 6",
+   "options": "Hypertension (BP)"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes6",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no6",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "column_break_dqob1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "q7",
+   "fieldtype": "HTML",
+   "label": "Question 7",
+   "options": "Diabetes Mellitus"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes7",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no7",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "column_break_eplaw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "q8",
+   "fieldtype": "HTML",
+   "label": "Question 8",
+   "options": "COPD (Asthma/Bronchitis/Emphysema etc.)"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes8",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no8",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "section_break_hwkra",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "q9",
+   "fieldtype": "HTML",
+   "label": "Question 9",
+   "options": "Heart related illness"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes9",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no9",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "column_break_qdf8b",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "q10",
+   "fieldtype": "HTML",
+   "label": "Question 10",
+   "options": "Liver disease"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes10",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no10",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "column_break_xp9hy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "q11",
+   "fieldtype": "HTML",
+   "label": "Question 11",
+   "options": "Kidney disease"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes11",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no11",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "column_break_hgmvm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "q12",
+   "fieldtype": "HTML",
+   "label": "Question 12",
+   "options": "Cancer"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes12",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no12",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "column_break_j6vyp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "q13",
+   "fieldtype": "HTML",
+   "label": "Question 13",
+   "options": "Bleeding Disorder"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes13",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no13",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "fieldname": "section_break_1wqds",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "q14",
+   "fieldtype": "HTML",
+   "label": "Question 14",
+   "options": "Pregnant"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "yes14",
+   "fieldtype": "Check",
+   "label": "Yes"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "no14",
+   "fieldtype": "Check",
+   "label": "No"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "if_yes",
+   "fieldtype": "Data",
+   "label": "If Yes, How Many Weeks?"
+  },
+  {
+   "fieldname": "column_break_wuzur",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "txt",
+   "fieldtype": "Small Text",
+   "label": "Any Other (Specify)"
+  },
+  {
+   "fieldname": "section_break_ul0lf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Investigation",
+   "options": "Hajj Screening Items"
+  },
+  {
+   "fieldname": "ref_invoice",
+   "fieldtype": "Link",
+   "label": "Ref Invoice",
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Hajj Screening",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "vital_signs_section",
+   "fieldtype": "Section Break",
+   "label": "Vital Signs"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "vital_sign",
+   "fieldtype": "Table",
+   "label": "Vital Sign",
+   "options": "VITAL SIGN"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Height",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Weight",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "blood_pressure",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Blood Pressure",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "pulse_rate",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Pulse Rate",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "respiratory_rate",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Respiratory Rate",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "temperature",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Temperature",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "oxygen_saturation",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Oxygen Saturation",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "general_examination_findings",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "General Examination Findings",
+   "print_hide": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Posting Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "medical_history_section",
+   "fieldtype": "Section Break",
+   "label": "MEDICAL HISTORY"
+  },
+  {
+   "fieldname": "current_medications",
+   "fieldtype": "Data",
+   "label": "Current Medications"
+  },
+  {
+   "fieldname": "known_ch",
+   "fieldtype": "Data",
+   "label": "Known Chronic Diseases "
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-11 15:05:16.370252",
+ "modified_by": "Administrator",
+ "module": "HIS",
+ "name": "Hajj Screening",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Doctor",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cashier",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Nurse",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Nursing User",
+   "select": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

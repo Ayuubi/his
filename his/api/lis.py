@@ -160,6 +160,7 @@ def print_barcodes_pdf(sample: str):
         from reportlab.graphics.barcode import code128
         from reportlab.lib.pagesizes import A4
         from reportlab.lib.units import mm
+        #  from reportlab.lib.units import mm
     except Exception:
         frappe.throw("ReportLab is required. Run: bench pip install reportlab")
 
@@ -170,8 +171,11 @@ def print_barcodes_pdf(sample: str):
 
     # Label size (adjust if your physical label differs)
     margin  = 12 * mm
-    label_w = 80 * mm
-    label_h = 42 * mm
+    # margin  = 12 * mm
+    # label_w = 80 * mm
+    label_w = 50 * mm
+    # label_h = 42 * mm
+    label_h = 43 * mm
     gap_y   = 6 * mm
 
     x = margin

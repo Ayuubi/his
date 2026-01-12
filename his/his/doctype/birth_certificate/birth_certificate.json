@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "JSH-COB/.####.-.YYYY.-.MM.-.DD",
+ "autoname": "SH-COB/.####.-.YYYY.-.MM.-.DD",
  "creation": "2023-06-19 14:45:36.237276",
  "default_view": "List",
  "doctype": "DocType",
@@ -105,7 +105,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-26 15:12:48.604711",
+ "modified": "2026-01-08 10:10:26.758345",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Birth Certificate",

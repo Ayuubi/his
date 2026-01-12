@@ -1,0 +1,598 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "E-P-.####",
+ "creation": "2024-09-19 10:14:20.436216",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "patient",
+  "patient_name",
+  "column_break_efg01",
+  "age",
+  "date",
+  "sex",
+  "section_break_qhfqd",
+  "column_break_0umm4",
+  "lenes_material",
+  "column_break_e9r30",
+  "user",
+  "doctor",
+  "lenses_advised_section",
+  "distance",
+  "column_break_0e6gm",
+  "near",
+  "column_break_j1wxe",
+  "bifocal",
+  "column_break_fjtci",
+  "progressive",
+  "column_break_ajao4",
+  "sunglass",
+  "column_break_qpimc",
+  "contac_lenses",
+  "section_break_ico9d",
+  "amended_from",
+  "photo_solar",
+  "column_break_z1t8x",
+  "balance",
+  "column_break_eugw1",
+  "seperate",
+  "column_break_u03fv",
+  "ar",
+  "column_break_1kuuj",
+  "hc_coating",
+  "column_break_uttuo",
+  "hmc_coating",
+  "column_break_ex27c",
+  "polorized_white",
+  "section_break_l097m",
+  "white",
+  "section_break_jwyf2",
+  "tnted",
+  "column_break_cvqgo",
+  "diameter",
+  "right_eye_section",
+  "right_eye",
+  "column_break_xmcl9",
+  "left_eye",
+  "section_break_xzoww",
+  "rucva",
+  "column_break_egpul",
+  "sph",
+  "column_break_vcrx1",
+  "cyl",
+  "column_break_kcsmj",
+  "axis",
+  "prisma",
+  "column_break_usqpz",
+  "add",
+  "column_break_v2gun",
+  "cva",
+  "left_eye_section",
+  "lucva",
+  "column_break_mhhk6",
+  "sph1",
+  "column_break_ck5hz",
+  "cyl1",
+  "column_break_d8ko6",
+  "axis1",
+  "prisma1",
+  "column_break_qfkap",
+  "add1",
+  "column_break_z2o9h",
+  "lucva1",
+  "section_break_hjee6",
+  "distance_pd",
+  "column_break_eamrf",
+  "near_pd",
+  "column_break_8shor",
+  "refractive_error",
+  "column_break_6dvep",
+  "eye_deviation_strabismus",
+  "company",
+  "source_va_examination"
+ ],
+ "fields": [
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Patient ",
+   "options": "Patient",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "patient.first_name",
+   "fieldname": "patient_name",
+   "fieldtype": "Data",
+   "label": "Patient Name"
+  },
+  {
+   "fieldname": "column_break_efg01",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "patient.p_age",
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "in_standard_filter": 1,
+   "label": "Age"
+  },
+  {
+   "fieldname": "section_break_qhfqd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Date"
+  },
+  {
+   "fieldname": "column_break_0umm4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lenes_material",
+   "fieldtype": "Select",
+   "label": "Lenes Material",
+   "options": "PLASTIC\nTEST"
+  },
+  {
+   "fieldname": "lenses_advised_section",
+   "fieldtype": "Section Break",
+   "label": "Lenses Advised"
+  },
+  {
+   "default": "0",
+   "fieldname": "distance",
+   "fieldtype": "Check",
+   "label": "Distance"
+  },
+  {
+   "default": "0",
+   "fieldname": "near",
+   "fieldtype": "Check",
+   "label": "Near"
+  },
+  {
+   "default": "0",
+   "fieldname": "bifocal",
+   "fieldtype": "Check",
+   "label": "Bifocal"
+  },
+  {
+   "default": "0",
+   "fieldname": "progressive",
+   "fieldtype": "Check",
+   "label": "Progressive"
+  },
+  {
+   "default": "0",
+   "fieldname": "sunglass",
+   "fieldtype": "Check",
+   "label": "Sunglass"
+  },
+  {
+   "fieldname": "column_break_0e6gm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "contac_lenses",
+   "fieldtype": "Check",
+   "label": "Contac lenses"
+  },
+  {
+   "fieldname": "section_break_ico9d",
+   "fieldtype": "Section Break",
+   "label": "Specification"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "EyeGlass Prescription",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "photo_solar",
+   "fieldtype": "Check",
+   "label": "Photo Solar"
+  },
+  {
+   "fieldname": "column_break_z1t8x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "balance",
+   "fieldtype": "Check",
+   "label": "Balance"
+  },
+  {
+   "fieldname": "column_break_eugw1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "seperate",
+   "fieldtype": "Check",
+   "label": "Seperate"
+  },
+  {
+   "fieldname": "column_break_u03fv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "ar",
+   "fieldtype": "Check",
+   "label": "AR( Blue Cut)"
+  },
+  {
+   "fieldname": "column_break_1kuuj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "hc_coating",
+   "fieldtype": "Check",
+   "label": "HC Coating"
+  },
+  {
+   "fieldname": "column_break_uttuo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "hmc_coating",
+   "fieldtype": "Check",
+   "label": "HMC Coating"
+  },
+  {
+   "fieldname": "column_break_ex27c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "polorized_white",
+   "fieldtype": "Check",
+   "label": "Polorized White"
+  },
+  {
+   "fieldname": "section_break_l097m",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "tnted",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "TINTED %"
+  },
+  {
+   "fieldname": "column_break_cvqgo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "diameter",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "DIAMETER %"
+  },
+  {
+   "fieldname": "right_eye_section",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "rucva",
+   "fieldtype": "Select",
+   "options": "Rucva"
+  },
+  {
+   "default": "0",
+   "fieldname": "sph",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "SPH"
+  },
+  {
+   "fieldname": "column_break_vcrx1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "cyl",
+   "fieldtype": "Data",
+   "label": "CYL"
+  },
+  {
+   "default": "0",
+   "fieldname": "axis",
+   "fieldtype": "Data",
+   "label": "AXIS"
+  },
+  {
+   "default": "0",
+   "fieldname": "add",
+   "fieldtype": "Data",
+   "label": "ADD"
+  },
+  {
+   "fieldname": "prisma",
+   "fieldtype": "Data",
+   "label": "PRISMA"
+  },
+  {
+   "fieldname": "cva",
+   "fieldtype": "Select",
+   "label": "CVA",
+   "options": "CVA"
+  },
+  {
+   "fieldname": "column_break_kcsmj",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_usqpz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_v2gun",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "white",
+   "fieldtype": "Check",
+   "label": "White"
+  },
+  {
+   "fieldname": "section_break_jwyf2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "left_eye_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "LEFT EYE"
+  },
+  {
+   "fieldname": "lucva",
+   "fieldtype": "Select",
+   "options": "Lucva"
+  },
+  {
+   "fieldname": "sph1",
+   "fieldtype": "Data",
+   "label": "SPH"
+  },
+  {
+   "fieldname": "column_break_ck5hz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cyl1",
+   "fieldtype": "Data",
+   "label": "CYL"
+  },
+  {
+   "fieldname": "column_break_d8ko6",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fieldname": "axis1",
+   "fieldtype": "Data",
+   "label": "AXIS"
+  },
+  {
+   "fieldname": "prisma1",
+   "fieldtype": "Data",
+   "label": "PRISMA"
+  },
+  {
+   "fieldname": "column_break_qfkap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "add1",
+   "fieldtype": "Data",
+   "label": "ADD"
+  },
+  {
+   "fieldname": "column_break_z2o9h",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lucva1",
+   "fieldtype": "Select",
+   "options": "LCVA"
+  },
+  {
+   "fieldname": "column_break_mhhk6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_hjee6",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "distance_pd",
+   "fieldtype": "Data",
+   "label": "Distance P.D",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "column_break_eamrf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "near_pd",
+   "fieldtype": "Data",
+   "label": "NEAR P.D"
+  },
+  {
+   "fieldname": "column_break_8shor",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_j1wxe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_fjtci",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ajao4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_qpimc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "right_eye",
+   "fieldtype": "Table",
+   "label": "Right Eye",
+   "options": "Righteye"
+  },
+  {
+   "fieldname": "column_break_xmcl9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "left_eye",
+   "fieldtype": "Table",
+   "label": "Left Eye",
+   "options": "Lefteye"
+  },
+  {
+   "fieldname": "section_break_xzoww",
+   "fieldtype": "Section Break",
+   "hidden": 1
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "sex",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Sex"
+  },
+  {
+   "fieldname": "column_break_egpul",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1
+  },
+  {
+   "default": "User",
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "User",
+   "options": "User"
+  },
+  {
+   "fetch_from": "user.full_name",
+   "fieldname": "doctor",
+   "fieldtype": "Data",
+   "label": "Doctor",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_e9r30",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "source_va_examination",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Source VA Examination",
+   "options": "VA Examination",
+   "read_only": 1
+  },
+  {
+   "fieldname": "eye_deviation_strabismus",
+   "fieldtype": "Select",
+   "label": "Eye deviation (Strabismus)",
+   "options": "Normal\nEsotropia\nExotropia\nHypertropia\nHypotropia"
+  },
+  {
+   "fieldname": "column_break_6dvep",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "refractive_error",
+   "fieldtype": "Select",
+   "label": "Refractive Error",
+   "options": "Normal Vision (Emmetropia)\nMyopia\nHypermetropia\nAstigmatism\nPresbyopia\nAphakia\nPseudophakia",
+   "print_hide": 1
+  }
+ ],
+ "hide_toolbar": 1,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-01-10 10:17:02.963697",
+ "modified_by": "Administrator",
+ "module": "HIS",
+ "name": "EyeGlass Prescription",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "patient_name"
+}
