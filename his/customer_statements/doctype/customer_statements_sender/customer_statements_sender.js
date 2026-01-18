@@ -104,6 +104,27 @@ frappe.ui.form.on('Customer Statements Sender', {
     }
   },
 
+  summary_statement: function (frm) {
+    if (frm.doc.customer) {
+      frappe.call({
+        method: "his.api.api.get_summary_statement",
+        args: {
+          company: frm.doc.company,
+          customer: frm.doc.customer, // ✅ make sure this is passed
+          from_date: frm.doc.from_date,
+          to_date: frm.doc.to_date,
+          account: frm.doc.recieable_account
+        },
+        callback: function (r) {
+          const x = window.open();
+          x.document.open().write(r.message);
+        }
+      });
+    } else {
+      frappe.msgprint('Please select a customer');
+    }
+  },
+
   download_excel: function (frm) {
     if (frm.doc.customer) {
       frappe.call({

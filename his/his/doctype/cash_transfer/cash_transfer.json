@@ -94,6 +94,7 @@
    "allow_on_submit": 1,
    "fieldname": "journal_entry",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Journal Entry",
    "options": "Journal Entry",
    "read_only": 1
@@ -109,7 +110,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-02 10:20:36.791857",
+ "modified": "2026-01-12 18:51:47.036073",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Cash Transfer",

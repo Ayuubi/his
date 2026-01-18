@@ -1,0 +1,152 @@
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f8;
+            color: #2c3e50;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .report-container {
+            max-width: 960px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto 20px auto;
+            width: 100%;
+            height: auto;
+            max-height: none;
+            max-width: 900px;
+            object-fit: contain;
+        }
+
+        .report-title {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .report-date-range {
+            font-size: 15px;
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        table.table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        table thead {
+            background-color: #ecf0f1;
+        }
+
+        table th, table td {
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            color: #2c3e50;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .summary-note {
+            font-style: italic;
+            text-align: center;
+            color: #95a5a6;
+            margin-top: 40px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .report-container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="report-container">
+        <img src="/files/Shaafi Hospital - CBC Report Header logo.jpg" alt="Company Logo" class="logo" />
+        <div class="report-title">{{ title }}</div>
+        <h3 class="text-center">Customer: {{ customer_name }}</h3>
+        <div class="report-date-range">
+            From: {{ frappe.format(filters.from_date, {'fieldtype': 'Date'}) }}
+            &nbsp; to &nbsp;
+            {{ frappe.format(filters.to_date, {'fieldtype': 'Date'}) }}
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    {% for col in columns %}
+                        <th {% if col.fieldtype in ['Currency', 'Int', 'Float'] %}class="text-right"{% endif %}>
+                            {{ "Type" if col.fieldname == "account" else col.label }}
+                        </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                    {# Skip rows where all financial values are zero (especially Payment Entry Discount Made) #}
+                    {% set is_zero_row = (row.debit == 0 and row.credit == 0 and row.balance == 0 and row.discount_made == 0) %}
+                    {% if row.item_groups != "Payment Entry Discount Made" or not is_zero_row %}
+                        <tr>
+                            {% for col in columns %}
+                                <td {% if col.fieldtype in ['Currency', 'Int', 'Float'] %}class="text-right"{% endif %}>
+                                    {%- set value = row[col.fieldname] -%}
+                                    {%- if col.fieldname == 'account' and value -%}
+                                        {{ value.replace("'", "") }}
+                                    {%- elif col.fieldtype == 'Currency' -%}
+                                        {{ frappe.utils.fmt_money(value or 0) }}
+                                    {%- else -%}
+                                        {{ value }}
+                                    {%- endif -%}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="summary-note">
+            This is a summary statement generated on {{ now }}.
+        </div>
+    </div>
+</body>

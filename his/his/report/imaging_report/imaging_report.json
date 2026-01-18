@@ -22,18 +22,26 @@
    "label": "To Date",
    "mandatory": 1,
    "wildcard_filter": 0
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "label": "Doctor",
+   "mandatory": 1,
+   "options": "Healthcare Practitioner",
+   "wildcard_filter": 0
   }
  ],
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "logo",
- "modified": "2025-07-10 09:54:56.917568",
+ "modified": "2026-01-17 10:05:25.974341",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Imaging Report",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "SELECT \n    r.patient AS \"Patient:Data:150\",\n    r.patient_name AS \"Patient Name:Data:200\", \n    r.date AS \"Date:Data:100\", \n    COALESCE(S.oustside, r.practitioner) AS \"Doctor:Data:300\", \n    \n    r.section AS \"Section:Data:200\", \n    r.eximination AS \"Examination:Data:200\", \n    r.source_order AS \"Source order:Data:120\",\n    u.full_name AS \"Cashier Name:Data:200\"\nFROM \n    `tabRadiology` r\nJOIN \n    `tabUser` u ON r.owner = u.name \nLEFT JOIN \n        `tabSales Invoice` S ON r.reff_invoice = S.name\n\nWHERE\n    r.date BETWEEN %(from)s AND %(to)s \n    AND r.docstatus = 1;\n\n\n\n",
+ "query": "SELECT \n    r.patient AS \"Patient:Data:150\",\n    r.patient_name AS \"Patient Name:Data:200\", \n    r.date AS \"Date:Data:100\", \n\n    COALESCE(S.oustside, r.practitioner)\n        AS \"Doctor:Link/Healthcare Practitioner:300\", \n    r.section AS \"Section:Data:200\", \n    r.eximination AS \"Examination:Data:200\",\n    CASE r.docstatus\n        WHEN 0 THEN 'Open'\n        WHEN 1 THEN 'Completed'\n    END AS \"Status:Data:100\",\n    r.name AS \"Radiology:Link/Radiology:200\"\n\n    \n\nFROM \n    `tabRadiology` r\n\nJOIN \n    `tabUser` u ON r.owner = u.name \n\nLEFT JOIN \n    `tabSales Invoice` S ON r.reff_invoice = S.name\n\nWHERE\n    r.date BETWEEN %(from)s AND %(to)s\n    AND r.docstatus != 2\n    AND (\n        %(doctor)s IS NULL\n        OR %(doctor)s = ''\n        OR r.practitioner = %(doctor)s\n    );\n",
  "ref_doctype": "Radiology",
  "reference_report": "",
  "report_name": "Imaging Report",

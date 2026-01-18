@@ -20,6 +20,13 @@ def create_anaesthesia_sales_order(doc):
     so.ref_practitioner = doc.practitioner
     so.anaesthetist = doc.anaesthetist  # your custom field
 
+    # ✅ FIX: set patient fields on Sales Order
+    so.patient = doc.patient
+    # patient_name usually exists; set if field exists to avoid errors
+    patient_name = frappe.db.get_value("Patient", doc.patient, "patient_name")
+    if hasattr(so, "patient_name"):
+        so.patient_name = patient_name
+
     customer = frappe.db.get_value("Patient", doc.patient, "customer")
     if not customer:
         frappe.throw("Please set a Customer linked to the Patient")
@@ -35,12 +42,12 @@ def create_anaesthesia_sales_order(doc):
     so.items = [r for r in so.get("items", []) if r.reference_dn in so.__updated_items]
 
     # Write summary/remarks
-    summary_text = "; ".join(package_summaries)
+    # summary_text = "; ".join(package_summaries)
     # Use your custom field if you have it; otherwise use standard customer_remarks
-    if hasattr(so, "comment"):
-        so.comment = summary_text
-    else:
-        so.customer_remarks = summary_text
+    # if hasattr(so, "comment"):
+    #     so.comment = summary_text
+    # else:
+    #     so.customer_remarks = summary_text
 
     if not so.items and not so.name:
         return
@@ -88,7 +95,7 @@ def add_anaesthesia_package_items_expanded(so, doc, package_summaries):
             ref = line.name
 
             so_item = find_or_create_so_item(so, ref)
-            so_item.reference_dt = row.doctype
+            so_item.reference_dt = line.doctype
             so_item.reference_dn = ref
 
             so_item.item_code = line.item

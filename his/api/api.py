@@ -105,6 +105,48 @@ def send_statements(company=None, manual=None):
         publish_progress(percent=100, title=progress_title)
         frappe.msgprint("Emails queued for sending")
 
+@frappe.whitelist()
+def get_summary_statement(company, customer, from_date, to_date):
+    # Normalize customer into a list if needed
+    if isinstance(customer, str):
+        try:
+            customer = frappe.parse_json(customer)
+        except Exception:
+            customer = [customer]  # Wrap in list if it's just a string
+
+    filters = {
+        "company": company,
+        "party": customer,
+        "from_date": from_date,
+        "to_date": to_date
+    }
+
+    # customer_name = frappe.db.get_value("Customer", customer[0], "customer_name","patient")
+    customer_name, patient_id = frappe.db.get_value("Customer", customer[0], ["customer_name", "patient"])
+    currency = frappe.db.get_value("Company", company, "default_currency")
+    date_time = frappe.utils.format_datetime(frappe.utils.now_datetime())
+
+    report_doc = frappe.get_doc("Report", "Customer Statement Summary")
+    columns, data = report_doc.get_data(
+        limit=1000, user="Administrator", filters=filters, as_dict=True
+    )
+
+    html = frappe.render_template("his/templates/report/customer_statement_summary_template.html", {
+        "title": "Customer Statement Summary",
+        "columns": columns,
+        "data": data,
+        "filters": filters,
+        "now": date_time,
+        "currency": currency,
+        "customer_name": customer_name,
+        "patient": patient_id,
+        "from": from_date,
+        "to": to_date,
+    })
+
+    return html
+
+
 
 def enqueue():
     """Add method `send_statements` to the queue."""

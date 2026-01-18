@@ -130,7 +130,7 @@
   }
  ],
  "links": [],
- "modified": "2026-01-09 23:41:44.023957",
+ "modified": "2026-01-13 16:22:36.122210",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Package Template",
@@ -172,7 +172,6 @@
   },
   {
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
@@ -185,13 +184,22 @@
   },
   {
    "create": 1,
-   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "OT",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts User",
    "share": 1,
    "write": 1
   }

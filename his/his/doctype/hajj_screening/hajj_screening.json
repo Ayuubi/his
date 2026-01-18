@@ -125,6 +125,7 @@
    "in_standard_filter": 1,
    "label": "Patient",
    "options": "Patient",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -743,7 +744,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-12 14:51:31.871129",
+ "modified": "2026-01-14 14:51:56.151305",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Hajj Screening",

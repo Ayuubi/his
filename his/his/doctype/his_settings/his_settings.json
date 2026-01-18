@@ -30,6 +30,9 @@
   "default_customer_group",
   "discount_levels_section",
   "discount_account",
+  "column_break_jvunk",
+  "add_si",
+  "section_break_zb6e0",
   "payment_entry_discount_level"
  ],
  "fields": [
@@ -182,12 +185,26 @@
    "fieldname": "credit_limit",
    "fieldtype": "Check",
    "label": "Credit Limit"
+  },
+  {
+   "fieldname": "column_break_jvunk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "add_si",
+   "fieldtype": "Check",
+   "label": "Add SI"
+  },
+  {
+   "fieldname": "section_break_zb6e0",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-02 18:36:01.840200",
+ "modified": "2026-01-17 10:52:44.651793",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HIS Settings",

@@ -1152,7 +1152,7 @@ let transfer_patient_dialog = function(frm) {
 				title: 'Transfer Patient',
 				width: 100,
 				fields: [
-					{fieldtype: 'Link', label: 'Inpatient Type', fieldname: 'inpatient_type', default: ip.type, options: 'Inpatient Type', reqd: 1, read_only:0},
+					{fieldtype: 'Link', label: 'Inpatient Type', fieldname: 'inpatient_type', /*default: ip.type,*/ options: 'Inpatient Type', reqd: 1, read_only:0},
 					{fieldtype: 'Link', label: 'Leave From', fieldname: 'leave_from', options: 'Healthcare Service Unit', reqd: 1, read_only:1},
 					{fieldtype: 'Link', label: 'Service Unit Type', fieldname: 'service_unit_type', options: 'Healthcare Service Unit Type'},
 					{fieldtype: 'Link', label: 'Transfer To', fieldname: 'service_unit', options: 'Healthcare Service Unit', reqd: 1},

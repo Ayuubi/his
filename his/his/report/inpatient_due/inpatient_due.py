@@ -119,6 +119,7 @@ class AccountReceivableSummary(ReceivablePayableReport):
 			row.room = ip.room
 			row.bed = ip.bed
 			row.patient = ip.patient
+			row.patient_name = ip.patient_name
 
 			# credit & contact (best-effort)
 			row.credit_limit = credit_map.get(party)
@@ -196,10 +197,12 @@ class AccountReceivableSummary(ReceivablePayableReport):
 			options=self.party_type,
 			width=180,
 		)
-		if self.party_naming_by == "Naming Series":
-			self.add_column(_("{0} Name").format(self.party_type), fieldname="party_name", width=200, fieldtype="Data")
+		
 
 		self.add_column(_("Patient"), fieldname="patient", width=100, fieldtype="Data")
+		self.add_column(_("Patient Name"), fieldname="patient_name", width=300, fieldtype="Data")
+		if self.party_naming_by == "Naming Series":
+			self.add_column(_("{0} Name").format(self.party_type), fieldname="party_name", width=200, fieldtype="Data")
 		self.add_column(_("Room"), fieldname="room", width=200, fieldtype="Data")
 		self.add_column(_("Bed"), fieldname="bed", width=200, fieldtype="Data")
 		# self.add_column(_("Mobile No"), fieldname="mobile_no", fieldtype="Data")

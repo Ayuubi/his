@@ -24,7 +24,7 @@ def get_data(filters):
         SUM(if(que_type = 'New Patient', 1, 0)) AS new,         
         SUM(if(que_type = 'Follow Up', 1, 0)) AS 'followup',
         SUM(if(que_type = 'Refer', 1, 0)) AS 'refer',         
-        SUM(if(que_type = 'Revisit', 1, 0)) AS 'revisit',          
+        --  SUM(if(que_type = 'Revisit', 1, 0)) AS 'revisit',          
         SUM(if(que_type = 'New Patient', 1, 0)+if(que_type = 'Follow Up', 1, 0)+if(que_type = 'Refer', 1, 0)+if(que_type = 'Revisit', 1, 0)) as total,         
         SUM(if(status = 'Open', 1, 0)) AS 'open',         
         SUM(if(status = 'Closed', 1, 0)) AS 'closed' 
@@ -46,12 +46,12 @@ def get_columns():
    return [
         
         
-        "Practitioner:Data:200",
+        "Practitioner:Link/Healthcare Practitioner:350",
         "department:Data:100",
         "new:Data:100",
         "followup:Data:100",
         "refer:Data:100",
-        "revisit:Data:100",
+        # "revisit:Data:100",
         "total:Data:100",
         
         "closed:Data:110",

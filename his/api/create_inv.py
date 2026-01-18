@@ -19,6 +19,7 @@ def create_inv(doc_name ,dt , is_sales_return = False ,  is_credit = False):
     customer = cash_sales.customer
     items = []
     empty_items = ""
+    cost_center = cash_sales.cost_center
     for item in cash_sales.items:
 
         qty = item.qty
@@ -31,6 +32,7 @@ def create_inv(doc_name ,dt , is_sales_return = False ,  is_credit = False):
             "uom" : item.uom,
             # "warehouse": item.warehouse
             # "batch_no" : item.batch_no
+            "cost_center" : cost_center
         })
     payments = []
     paid_amount = 0

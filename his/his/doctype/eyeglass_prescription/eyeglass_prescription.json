@@ -92,7 +92,9 @@
   "column_break_6dvep",
   "eye_deviation_strabismus",
   "company",
-  "source_va_examination"
+  "source_va_examination",
+  "section_break_1z7kv",
+  "order"
  ],
  "fields": [
   {
@@ -545,13 +547,23 @@
    "label": "Refractive Error",
    "options": "Normal Vision (Emmetropia)\nMyopia\nHypermetropia\nAstigmatism\nPresbyopia\nAphakia\nPseudophakia",
    "print_hide": 1
+  },
+  {
+   "fieldname": "order",
+   "fieldtype": "Table",
+   "label": "Order",
+   "options": "Glass Prescription Order"
+  },
+  {
+   "fieldname": "section_break_1z7kv",
+   "fieldtype": "Section Break"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-10 10:17:02.963697",
+ "modified": "2026-01-14 12:06:23.535386",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "EyeGlass Prescription",

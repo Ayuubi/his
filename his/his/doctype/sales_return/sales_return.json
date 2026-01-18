@@ -1484,14 +1484,14 @@
    "collapsible": 1,
    "fieldname": "accounting_dimensions_section",
    "fieldtype": "Section Break",
-   "hidden": 1,
    "label": "Accounting Dimensions"
   },
   {
    "fieldname": "cost_center",
    "fieldtype": "Link",
    "label": "Cost Center",
-   "options": "Cost Center"
+   "options": "Cost Center",
+   "reqd": 1
   },
   {
    "fieldname": "dimension_col_break",
@@ -1648,7 +1648,7 @@
  "idx": 105,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-10 13:05:39.670782",
+ "modified": "2026-01-14 17:42:21.691897",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Sales Return",
