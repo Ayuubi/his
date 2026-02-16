@@ -21,6 +21,24 @@ def schedule_inpatient(args):
     ):
         frappe.throw(_("Missing required details, did not create Inpatient Record"))
 
+
+    existing_inpatient_record = frappe.get_all(
+        "Inpatient Record",
+        filters={
+            "patient": admission_order["patient"],
+            "status": ["in", ["Discharge Scheduled", "Admission Scheduled", "Admitted"]]
+        },
+        fields=["name", "status"]
+    )
+    
+    # If an inpatient record with the specified status exists, show a message
+    if existing_inpatient_record:
+        # You can use the status of the first record, or just show one message
+        current_status = existing_inpatient_record[0].status
+        frappe.throw(
+            _("This patient already has a record with the status: {0}.").format(current_status)
+        )
+
     inpatient_record = frappe.new_doc("Inpatient Record")
 
     # Admission order details

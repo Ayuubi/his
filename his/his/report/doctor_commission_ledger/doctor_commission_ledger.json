@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2025-12-10 23:44:33.343837",
  "disable_prepared_report": 0,
@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "logo",
- "modified": "2026-01-10 17:25:54.374493",
+ "modified": "2026-02-13 13:59:12.729613",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Doctor Commission Ledger",

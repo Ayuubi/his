@@ -12,7 +12,8 @@
   "rate",
   "description",
   "item_group",
-  "medical_department"
+  "medical_department",
+  "disabled"
  ],
  "fields": [
   {
@@ -35,7 +36,6 @@
   {
    "fieldname": "description",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Description"
   },
   {
@@ -60,12 +60,19 @@
    "fieldtype": "Link",
    "label": "Medical Department",
    "options": "Medical Department"
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Disabled"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-09 17:09:26.698317",
+ "modified": "2026-02-01 09:18:03.064081",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Package prescription",

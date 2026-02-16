@@ -26,6 +26,7 @@
   "type",
   "date",
   "time_of_discharge",
+  "operator",
   "section_break_vg6cv",
   "diagnosis_at_discharge",
   "column_break_0rhmv",
@@ -410,12 +411,18 @@
    "fieldtype": "Data",
    "label": "Type",
    "read_only": 1
+  },
+  {
+   "fieldname": "operator",
+   "fieldtype": "Link",
+   "label": "Operator",
+   "options": "Healthcare Practitioner"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-14 10:40:08.832900",
+ "modified": "2026-02-10 16:03:55.259660",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Discharge Summery",

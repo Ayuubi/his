@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "MEM-REG-.#####",
+ "autoname": "SH-KD-.#####",
  "creation": "2025-01-11 11:42:42.819001",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -9,66 +9,94 @@
  "field_order": [
   "section_break_rtsyn",
   "personal_details_column",
+  "head_patient",
   "family_head_person",
   "contact_number",
-  "card_number",
+  "column_break_hwz4e",
+  "personal",
+  "age",
+  "age_type",
+  "sex",
+  "district",
+  "work_detailss",
   "work_details",
   "company",
   "title_in_company",
+  "section_break_l8r4t",
+  "registeration_date",
+  "card_number",
   "discount_level",
   "status",
-  "section_break_l8r4t",
-  "register_all",
+  "column_break_zjf3j",
+  "start_date",
+  "end_date",
   "section_break_eyact",
+  "register_all",
   "family_members",
-  "total"
+  "section_break_8ikgo",
+  "total",
+  "membership_summary_html",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "section_break_rtsyn",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "personal_details_column",
-   "fieldtype": "Column Break",
+   "fieldtype": "Section Break",
    "label": "Personal Details"
   },
   {
+   "fieldname": "personal_details_column",
+   "fieldtype": "HTML",
+   "options": "<strong>Personal Details</strong>"
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "head_patient.first_name",
+   "fetch_if_empty": 1,
    "fieldname": "family_head_person",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Family Head Person"
+   "label": "Family Head Person",
+   "reqd": 1
   },
   {
+   "allow_on_submit": 1,
+   "fetch_from": "head_patient.mobile_no",
+   "fetch_if_empty": 1,
    "fieldname": "contact_number",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Contact Number"
+   "label": "Contact Number",
+   "reqd": 1
   },
   {
    "fieldname": "card_number",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Card Number"
+   "label": "Card Number",
+   "read_only": 1
   },
   {
    "fieldname": "work_details",
-   "fieldtype": "Column Break",
-   "label": "Work Details"
+   "fieldtype": "HTML",
+   "options": "<strong>Work Details</strong>"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "company",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Company"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "title_in_company",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Title in Company"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "discount_level",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -77,6 +105,7 @@
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -84,8 +113,10 @@
    "options": "Active\nInactive"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "section_break_l8r4t",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Membership Details"
   },
   {
    "fieldname": "register_all",
@@ -97,22 +128,126 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "family_members",
    "fieldtype": "Table",
    "label": "Family Members",
-   "options": "Family Members",
-   "reqd": 1
+   "options": "Family Members"
   },
   {
    "fieldname": "total",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Total"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "head_patient",
+   "fieldtype": "Link",
+   "label": "Patient",
+   "options": "Patient"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Today",
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "Today",
+   "fieldname": "registeration_date",
+   "fieldtype": "Date",
+   "label": "Registeration Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "work_detailss",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "head_patient.sex",
+   "fetch_if_empty": 1,
+   "fieldname": "sex",
+   "fieldtype": "Link",
+   "label": "Sex",
+   "options": "Gender",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "head_patient.territory",
+   "fetch_if_empty": 1,
+   "fieldname": "district",
+   "fieldtype": "Link",
+   "label": "District",
+   "options": "Territory",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "head_patient.p_age",
+   "fetch_if_empty": 1,
+   "fieldname": "age",
+   "fieldtype": "Int",
+   "label": "Age",
+   "reqd": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fetch_from": "head_patient.age_type",
+   "fetch_if_empty": 1,
+   "fieldname": "age_type",
+   "fieldtype": "Select",
+   "label": "Age Type",
+   "options": "Year\nMonth\nDay",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_8ikgo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_hwz4e",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "personal",
+   "fieldtype": "HTML",
+   "label": "Personal",
+   "options": "<strong>Personal Details</strong>"
+  },
+  {
+   "fieldname": "column_break_zjf3j",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "membership_summary_html",
+   "fieldtype": "HTML",
+   "label": "membership_summary_html"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Membership Registration",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2025-10-19 09:16:46.596701",
+ "modified": "2026-02-14 13:32:29.541707",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Membership Registration",
@@ -147,5 +282,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

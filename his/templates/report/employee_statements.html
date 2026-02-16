@@ -9,7 +9,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Employee Statement</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
 	
 	<meta name="generator" content="frappe">
 	<link type="text/css" rel="stylesheet" href="/assets/css/printview.css">
@@ -176,6 +176,26 @@
 		     border-bottom: 0px !important;
 		}
 		/* modern format: for-test */
+		/* ---------- Offline helpers (no CDN) ---------- */
+		.text-center { text-align: center !important; }
+		.text-right  { text-align: right !important; }
+		.text-left   { text-align: left !important; }
+
+		hr { border: 0; border-top: 1px solid #ddd; margin: 10px 0; }
+
+		/* simple bootstrap-like table */
+		.table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+		.table th, .table td { padding: 6px !important; vertical-align: top !important; }
+		.table-bordered th, .table-bordered td { border: 1px solid #333; }
+		.table thead th { background: #eee !important; }
+
+		/* optional: force center your statement headings */
+		.print-format h2,
+		.print-format h4,
+		.print-format h5 {
+		text-align: center !important;
+		}
+
 
 	</style>
 </head>
@@ -184,7 +204,9 @@
 
 <body>
 <div class="print-format-gutter">
-		<div class="print-format" class="hidden-pdf">
+		<!-- <div class="print-format" class="hidden-pdf"> -->
+			<div class="print-format hidden-pdf">
+
 
 			<div id="header-html">
 				{% if letter_head %}

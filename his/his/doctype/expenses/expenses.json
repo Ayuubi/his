@@ -7,57 +7,63 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "company",
   "expense_type",
-  "account",
-  "amount",
+  "column_break_oedkm",
+  "posting_date",
+  "section_break_4kyno",
   "paid_from",
+  "accounts_section",
+  "expense_lines",
+  "section_break_myicb",
+  "amount",
+  "column_break_hkrp8",
+  "total_amount",
+  "section_break_14rtw",
   "remark",
-  "date",
-  "source_order",
   "cost_center",
-  "amended_from",
-  "journal_entry"
+  "journal_entry",
+  "source_order",
+  "account",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "expense_type",
    "fieldtype": "Link",
-   "in_list_view": 1,
+   "hidden": 1,
    "label": "Expense Type",
-   "options": "Expense Type",
-   "reqd": 1
+   "options": "Expense Type"
   },
   {
    "fieldname": "amount",
    "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Amount",
-   "reqd": 1
+   "hidden": 1,
+   "label": "Amount"
   },
   {
+   "depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
    "fieldname": "paid_from",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Paid From",
+   "mandatory_depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
    "options": "Account",
    "reqd": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "remark",
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Remark",
+   "print_hide": 1,
    "reqd": 1
-  },
-  {
-   "default": "Today",
-   "fieldname": "date",
-   "fieldtype": "Date",
-   "label": "Date"
   },
   {
    "fieldname": "amended_from",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Amended From",
    "no_copy": 1,
    "options": "Expenses",
@@ -68,6 +74,7 @@
    "fetch_from": "expense_type.account",
    "fieldname": "account",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Account",
    "options": "Account"
   },
@@ -76,16 +83,17 @@
    "fieldname": "journal_entry",
    "fieldtype": "Link",
    "label": "Journal Entry",
-   "options": "Journal Entry",
-   "read_only": 1
+   "options": "Journal Entry"
   },
   {
    "fieldname": "source_order",
    "fieldtype": "Link",
+   "hidden": 1,
    "label": "Source Order",
    "options": "Source Order"
   },
   {
+   "default": "Main - SH",
    "fieldname": "cost_center",
    "fieldtype": "Link",
    "label": "Cost Center",
@@ -94,14 +102,68 @@
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Series",
    "options": "ACC-EXP-.YYYY.-"
+  },
+  {
+   "default": "Shaafi Hospital",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_oedkm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_4kyno",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "accounts_section",
+   "fieldtype": "Section Break",
+   "label": "Accounts"
+  },
+  {
+   "fieldname": "section_break_myicb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_14rtw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_hkrp8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "expense_lines",
+   "fieldtype": "Table",
+   "label": "Expense Line",
+   "options": "Expense Line"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-09-21 09:38:58.615958",
+ "modified": "2026-02-12 11:14:06.722878",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Expenses",

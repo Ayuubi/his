@@ -21,7 +21,9 @@
   "representors",
   "marqaatiyal",
   "amended_from",
-  "surgery_preparation"
+  "surgery_preparation",
+  "reference_dt",
+  "reference_name"
  ],
  "fields": [
   {
@@ -117,12 +119,24 @@
    "in_standard_filter": 1,
    "label": "Item Group",
    "options": "Item Group"
+  },
+  {
+   "fieldname": "reference_dt",
+   "fieldtype": "Link",
+   "label": "Reference Doctype",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Reference Name",
+   "options": "reference_dt"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-10 12:06:56.719033",
+ "modified": "2026-02-02 12:02:47.369520",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Consent Surgery Form",

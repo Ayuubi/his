@@ -13,6 +13,16 @@ frappe.ui.form.on('Inpatient Order', {
                 
             };
         })
+
+        frm.set_query('service', 'services_prescription', function() {
+            return {
+                // query: "his.api.dp_drug_pr_link_query.my_custom_query",
+                filters: {
+                    "item_group": ['!=', 'drug']
+                }
+                
+            };
+        })
     },
     select_lab_tests: function(frm){
         select_lab_tests(frm)

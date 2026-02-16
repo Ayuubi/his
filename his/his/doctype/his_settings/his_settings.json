@@ -33,7 +33,10 @@
   "column_break_jvunk",
   "add_si",
   "section_break_zb6e0",
-  "payment_entry_discount_level"
+  "payment_entry_discount_level",
+  "encounter_sales_order_engine_section",
+  "use_new_encounter_so_engine",
+  "encounter_so_rules"
  ],
  "fields": [
   {
@@ -199,12 +202,29 @@
   {
    "fieldname": "section_break_zb6e0",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "encounter_sales_order_engine_section",
+   "fieldtype": "Section Break",
+   "label": "Encounter Sales Order Engine"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_new_encounter_so_engine",
+   "fieldtype": "Check",
+   "label": "Use New Encounter Sales Order Engine"
+  },
+  {
+   "fieldname": "encounter_so_rules",
+   "fieldtype": "Table",
+   "label": "Encounter SO Rule",
+   "options": "Encounter SO Rule"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-17 10:52:44.651793",
+ "modified": "2026-01-29 12:29:55.921008",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HIS Settings",

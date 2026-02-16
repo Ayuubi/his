@@ -268,6 +268,8 @@ margin-left: 370px; */
 /* ............................... responsitive mobile  */
 </style>
   <body>
+    {% set customer_id = (filters.get("party") and filters.get("party")[0]) or "" %}
+    {% set p = frappe.db.get_value("Patient", {"customer": customer_id}, ["name","patient_name"], as_dict=1) %}
     <section class="print-format-gutter">
       <div class="print-format" class="hidden-pdf">
 
@@ -297,9 +299,16 @@ margin-left: 370px; */
         <div style="width: 100%;">
           <table style="width: 100%;" class="table table-bordered">
             <tr>
+              <th style="text-align: left;">Patient</th>
+              <td>
+                {% if p %} {{ p.name }}{% endif %}
+              </td>
+            </tr>
+            <!-- <tr>
               <th style="text-align: left;">ID</th>
               <td>{{ filters['party'][0] }}</td>
-            </tr>
+            </tr> -->
+            
 
             <tr>
               <th style="text-align: left;">Name</th>

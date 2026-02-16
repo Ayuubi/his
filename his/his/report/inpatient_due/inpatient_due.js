@@ -157,6 +157,19 @@ frappe.query_reports["Inpatient Due"] = {
 			"fieldtype": "Check",
 			"hidden": 1
 		},
+		{
+			"fieldname": "inpatient_status",
+			"label": __("Inpatient Status"),
+			"fieldtype": "MultiSelectList",
+			"options": [
+				"Admitted",
+				"Discharge Scheduled",
+				"Discharged"
+			],
+			"default": ["Admitted", "Discharge Scheduled"],
+			"hidden": 1
+		},
+
 	],
 
 	// onload: function(report) {

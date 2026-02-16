@@ -21,7 +21,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-19 09:32:39.435857",
+ "modified": "2026-02-12 12:13:23.434744",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Member Type",
@@ -37,6 +37,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Marketing",
    "share": 1,
    "write": 1
   }

@@ -68,7 +68,10 @@
   "blood_transfusion_tab",
   "blood_transfusion",
   "reference",
-  "sales_invoice_item"
+  "sales_invoice_item",
+  "net_amount",
+  "consent_form",
+  "clinical_procedure"
  ],
  "fields": [
   {
@@ -488,10 +491,29 @@
    "fieldtype": "Data",
    "label": "Mobile",
    "read_only": 1
+  },
+  {
+   "fieldname": "consent_form",
+   "fieldtype": "Link",
+   "label": "Consent Form",
+   "options": "Consent Surgery Form"
+  },
+  {
+   "fieldname": "clinical_procedure",
+   "fieldtype": "Link",
+   "label": "Clinical Procedure",
+   "options": "Clinical Procedure"
+  },
+  {
+   "fetch_from": "sales_invoice_item.net_amount",
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "Net Amount"
   }
  ],
+ "in_create": 1,
  "links": [],
- "modified": "2026-01-06 14:56:20.939338",
+ "modified": "2026-02-12 09:27:10.516102",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "OT Schedule",

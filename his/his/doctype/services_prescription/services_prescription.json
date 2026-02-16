@@ -10,6 +10,7 @@
  "engine": "InnoDB",
  "field_order": [
   "service",
+  "qty",
   "invoiced",
   "column_break_4",
   "lab_test_comment",
@@ -19,6 +20,7 @@
  ],
  "fields": [
   {
+   "columns": 2,
    "fieldname": "service",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
@@ -70,18 +72,24 @@
    "fieldtype": "Currency",
    "hidden": 1,
    "label": "Rate"
+  },
+  {
+   "columns": 2,
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Qty"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2025-09-07 12:28:50.526440",
+ "modified": "2026-02-12 15:28:47.853199",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Services prescription",
  "owner": "Administrator",
  "permissions": [],
  "restrict_to_domain": "Healthcare",
- "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

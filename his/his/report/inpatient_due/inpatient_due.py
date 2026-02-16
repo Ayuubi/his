@@ -52,17 +52,45 @@ class AccountReceivableSummary(ReceivablePayableReport):
 		)
 		customer_name_map = {r.name: r.customer_name for r in customer_rows}
 
+		# # 2) inpatient info for only those customer_names we care about
+		# customer_names = list({cn for cn in customer_name_map.values() if cn})
+		# inpatient_rows = []
+		# if customer_names:
+		# 	inpatient_rows = frappe.db.get_all(
+		# 		"Inpatient Record",
+		# 		filters={"patient_name": ("in", customer_names), "status": ["in", ["Discharge Scheduled", "Admitted", "Discharged"]],},
+		# 		fields=["patient_name", "room", "bed", "patient"],
+		# 	)
+		# # map: patient_name -> inpatient record fields
+		# inpatient_map = {r.patient_name: r for r in inpatient_rows}
+
 		# 2) inpatient info for only those customer_names we care about
 		customer_names = list({cn for cn in customer_name_map.values() if cn})
+
+		# Status filter (supports MultiSelectList -> list OR comma-separated string)
+		default_statuses = ["Discharge Scheduled", "Admitted" ] #, "Discharged"]
+		statuses = self.filters.get("inpatient_status") or default_statuses
+
+		# if someone passes "Admitted,Discharged" as string
+		if isinstance(statuses, str):
+			statuses = [s.strip() for s in statuses.split(",") if s.strip()]
+
 		inpatient_rows = []
 		if customer_names:
 			inpatient_rows = frappe.db.get_all(
 				"Inpatient Record",
-				filters={"patient_name": ("in", customer_names), "status": ["in", ["Discharge Scheduled", "Admitted"]],},
-				fields=["patient_name", "room", "bed", "patient"],
+				filters={
+					"patient_name": ("in", customer_names),
+					"status": ("in", statuses),
+				},
+				fields=["patient_name", "room", "bed", "patient", "status"],
 			)
+
 		# map: patient_name -> inpatient record fields
+		# NOTE: if there can be multiple inpatient records per patient_name,
+		# you may want "latest" logic. For now this keeps the last row returned.
 		inpatient_map = {r.patient_name: r for r in inpatient_rows}
+
 
 		# 3) credit limits in bulk
 		credit_rows = frappe.db.get_all(
@@ -94,7 +122,9 @@ class AccountReceivableSummary(ReceivablePayableReport):
 		# build rows
 		for party, party_dict in iteritems(self.party_total):
 			# skip zero outstanding
-			if flt(party_dict.outstanding) == 0:
+			# if flt(party_dict.outstanding) == 0:
+			# 	continue
+			if abs(flt(party_dict.outstanding, 2)) == 0:
 				continue
 
 			# only include if this party's customer_name is an inpatient
@@ -120,6 +150,8 @@ class AccountReceivableSummary(ReceivablePayableReport):
 			row.bed = ip.bed
 			row.patient = ip.patient
 			row.patient_name = ip.patient_name
+			row.inpatient_status = ip.status
+
 
 			# credit & contact (best-effort)
 			row.credit_limit = credit_map.get(party)
@@ -205,6 +237,7 @@ class AccountReceivableSummary(ReceivablePayableReport):
 			self.add_column(_("{0} Name").format(self.party_type), fieldname="party_name", width=200, fieldtype="Data")
 		self.add_column(_("Room"), fieldname="room", width=200, fieldtype="Data")
 		self.add_column(_("Bed"), fieldname="bed", width=200, fieldtype="Data")
+		self.add_column(_("IP Status"), fieldname="inpatient_status", width=140, fieldtype="Data")
 		# self.add_column(_("Mobile No"), fieldname="mobile_no", fieldtype="Data")
 
 		credit_debit_label = "Return" if self.party_type == "Customer" else "Debit Note"

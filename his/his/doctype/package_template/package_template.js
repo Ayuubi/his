@@ -19,6 +19,7 @@
 function recalc_package_total(frm) {
   let total = 0;
   (frm.doc.package_prescription || []).forEach(row => {
+    if (cint(row.disabled)) return;
     total += flt(row.rate) * flt(row.qty);
   });
   frm.set_value("rate", total);
@@ -34,7 +35,7 @@ frappe.ui.form.on("Package Template", {
 });
 
 // IMPORTANT: replace "Package Prescription" with your actual CHILD TABLE doctype name
-frappe.ui.form.on("Package Prescription", {
+frappe.ui.form.on("Package prescription", {
   qty(frm, cdt, cdn) {
     recalc_package_total(frm);
   },
@@ -43,5 +44,8 @@ frappe.ui.form.on("Package Prescription", {
   },
   package_prescription_remove(frm) {
     recalc_package_total(frm);
-  }
+  },
+  disabled(frm) {   // ✅ recalc when toggling disabled
+    recalc_package_total(frm);
+  },
 });

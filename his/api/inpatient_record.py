@@ -1,4 +1,5 @@
 import frappe
+from frappe import _
 from frappe.utils import now_datetime
 import json
 @frappe.whitelist()
@@ -46,3 +47,19 @@ def check_out_inpatient(inpatient_record):
 		inpatient_record.status = "Discharged"
 		inpatient_record.discharge_datetime = frappe.utils.now()
 		inpatient_record.save()
+
+@frappe.whitelist()
+def inpatient_validate(inpatient_record):
+	existing_inp_record = frappe.get_all(
+		"Inpatient Record",
+		filters = {
+			"patient": inpatient_record.patient,
+			"status": ["in", ["Discharge Scheduled", "Admission Scheduled", "Admitted"]]
+		},
+		fields = ["name", "status"]
+	)
+	if existing_inp_record:
+		current_status = existing_inp_record[0].status
+		frappe.throw(
+			_("This patient already has a record with the status: {0}.").format(current_status)
+		)

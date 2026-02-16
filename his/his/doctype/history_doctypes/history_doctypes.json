@@ -12,7 +12,9 @@
   "child_document",
   "child_document_fields",
   "datefield",
-  "condition"
+  "condition",
+  "require_submitted",
+  "hidden"
  ],
  "fields": [
   {
@@ -63,12 +65,24 @@
    "fieldname": "condition",
    "fieldtype": "Data",
    "label": "Condition"
+  },
+  {
+   "default": "0",
+   "fieldname": "require_submitted",
+   "fieldtype": "Check",
+   "label": "Require Submitted"
+  },
+  {
+   "default": "0",
+   "fieldname": "hidden",
+   "fieldtype": "Check",
+   "label": "Hidden"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-03 11:08:26.580798",
+ "modified": "2026-01-26 13:03:51.373846",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "History Doctypes",

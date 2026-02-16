@@ -438,13 +438,13 @@ function cancel_admision(inpatient_record, patient){
 
 }
 
-function admit(inpatient_record, patient, practitioner, type){
+function admit(inpatient_record, patient, practitioner){
 	// alert(patient)
 
 	let d = new frappe.ui.Dialog({
 		title: 'Enter details',
 		fields: [
-			{fieldtype: 'Link', label: 'Type', fieldname: 'type', options: 'Inpatient Type',reqd: 1 , default: type},
+			{fieldtype: 'Link', label: 'Type', fieldname: 'type', options: 'Inpatient Type',reqd: 1 , default: "IPD"},
 			{fieldtype: 'Link', label: 'Room', fieldname: 'room', options: 'Healthcare Service Unit Type',reqd: 1},
 			{fieldtype: 'Link', label: 'Bed', fieldname: 'bed', options: 'Healthcare Service Unit', reqd: 1},
 			{fieldtype: 'Link', label: 'Additional Bed', fieldname: 'bed2', options: 'Healthcare Service Unit', reqd: 0, "hidden": 1},
@@ -466,7 +466,7 @@ function admit(inpatient_record, patient, practitioner, type){
 		return {
 			filters: {
 				'inpatient_occupancy': 1,
-				'Type':"IPD"
+				'Type':d.get_value('type'),
 			}
 		};
 	};

@@ -16,7 +16,7 @@ def create_anaesthesia_sales_order(doc):
 
     # Header
     so.delivery_date = getdate()
-    so.so_type = "Cashiers"
+    so.so_type = "Pharmacy"
     so.ref_practitioner = doc.practitioner
     so.anaesthetist = doc.anaesthetist  # your custom field
 
@@ -34,9 +34,8 @@ def create_anaesthesia_sales_order(doc):
 
     # Rebuild items from packages
     so.__updated_items = []
-    package_summaries = []
 
-    add_anaesthesia_package_items_expanded(so, doc, package_summaries)
+    add_anaesthesia_package_items_expanded(so, doc)
 
     # Keep only rebuilt rows (prevents duplicates on re-run)
     so.items = [r for r in so.get("items", []) if r.reference_dn in so.__updated_items]
@@ -67,7 +66,7 @@ def create_anaesthesia_sales_order(doc):
         doc.db_set("sales_order", so.name, update_modified=False)
 
 
-def add_anaesthesia_package_items_expanded(so, doc, package_summaries):
+def add_anaesthesia_package_items_expanded(so, doc):
     """
     Expands Package Template components into SO items.
 
@@ -88,6 +87,10 @@ def add_anaesthesia_package_items_expanded(so, doc, package_summaries):
         item_bits = []
 
         for line in pkg.get("package_prescription") or []:
+            # ✅ SKIP if disabled
+            if getattr(line, "disabled", 0):
+                continue
+
             if not line.item:
                 continue
 
@@ -106,10 +109,6 @@ def add_anaesthesia_package_items_expanded(so, doc, package_summaries):
 
             so.__updated_items.append(ref)
             item_bits.append(f"{line.item} x{so_item.qty}")
-
-        # Package summary line: "Lapchol: ItemA x1, ItemB x1"
-        if item_bits:
-            package_summaries.append(f"{pkg.name}: " + ", ".join(item_bits))
 
 
 def find_or_create_so_item(so, reference_dn):

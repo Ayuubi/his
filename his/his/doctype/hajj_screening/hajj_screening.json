@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2026-01-09 22:02:24.548263",
  "default_view": "List",
@@ -194,6 +193,8 @@
   {
    "fieldname": "ref_practitioner",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Healthcare Practitioner",
    "options": "Healthcare Practitioner"
   },
@@ -744,7 +745,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-14 14:51:56.151305",
+ "modified": "2026-01-20 12:09:45.828640",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Hajj Screening",
@@ -828,5 +829,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "patient_name",
  "track_changes": 1
 }

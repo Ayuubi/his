@@ -78,8 +78,21 @@ frappe.ui.form.on('OT Schedule', {
 		})
 		// -------------------------------------------------------------------------------------------------
 		 var btn_operation=frm.add_custom_button(__("Operation"), function(){
-			
-			frappe.new_doc("Clinical Procedure", {"procedure_template": frm.doc.procedure_template, "patient": frm.doc.patient, "practitioner": frm.doc.practitioner, "ot_schedule": frm.doc.name })
+
+			if(frm.doc.clinical_procedure){
+					// frappe.set_route("Consent Surgery Form" , )
+					frappe.set_route('Form', 'Clinical Procedure', frm.doc.clinical_procedure);
+				}
+			else {
+			frappe.new_doc("Clinical Procedure", 
+				{
+					"procedure_template": frm.doc.procedure_template, 
+					"patient": frm.doc.patient, 
+					"practitioner": frm.doc.practitioner, 
+					"ot_schedule": frm.doc.name 
+				}
+			)
+		}
 
 		
 		})
@@ -306,7 +319,16 @@ frappe.ui.form.on('OT Schedule', {
 					frappe.set_route('Form', 'Consent Surgery Form', frm.doc.consent_form);
 				}
 				else{
-					frappe.new_doc("Consent Surgery Form" , {"patient" : frm.doc.patient , "surgery_type" : frm.doc.procedure_template , "surgery_preparation" : frm.doc.name, "practitioner": frm.doc.practitioner})
+					frappe.new_doc("Consent Surgery Form" , 
+						{
+							"patient" : frm.doc.patient , 
+							"surgery_type" : frm.doc.procedure_template , 
+							"surgery_preparation" : frm.doc.name, 
+							"practitioner": frm.doc.practitioner,
+							"reference_dt": frm.doc.doctype,
+							"reference_name": frm.doc.name
+						}
+					)
 		
 				}
 			

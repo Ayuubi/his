@@ -213,6 +213,7 @@
    "default": "0",
    "fieldname": "detail",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Detail"
   },
   {
@@ -228,7 +229,6 @@
    "options": "Cost Center"
   },
   {
-   "depends_on": "eval: frappe.session.user === \"Administrator\"\r\n",
    "fieldname": "summary_statement",
    "fieldtype": "Button",
    "label": "Summary Statement"
@@ -236,7 +236,7 @@
  ],
  "issingle": 1,
  "links": [],
- "modified": "2026-01-17 10:57:33.971676",
+ "modified": "2026-01-22 12:32:13.398068",
  "modified_by": "Administrator",
  "module": "Customer Statements",
  "name": "Customer Statements Sender",

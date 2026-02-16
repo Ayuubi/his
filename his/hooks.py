@@ -165,6 +165,9 @@ doc_events = {
             "his.commission.work_handlers.on_cancel_radiology"
             ]
     },
+    # "Inpatient Record": {
+    #     "validate": "his.api.inpatient_record.inpatient_validate",
+    # },
     
     
 

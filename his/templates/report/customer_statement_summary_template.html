@@ -101,9 +101,12 @@
 </head>
 
 <body>
+    {% set customer_id = (filters.get("party") and filters.get("party")[0]) or "" %}
+    {% set p = frappe.db.get_value("Patient", {"customer": customer_id}, ["name","patient_name"], as_dict=1) %}
     <div class="report-container">
         <img src="/files/Shaafi Hospital - CBC Report Header logo.jpg" alt="Company Logo" class="logo" />
         <div class="report-title">{{ title }}</div>
+        <h3 class="text-center">Patient ID: {% if p %} {{ p.name }}{% endif %}</h3>
         <h3 class="text-center">Customer: {{ customer_name }}</h3>
         <div class="report-date-range">
             From: {{ frappe.format(filters.from_date, {'fieldtype': 'Date'}) }}
@@ -112,37 +115,72 @@
         </div>
 
         <table class="table table-bordered table-striped">
+            {# ---------------------------------------------------------------------- #}
+            {# Put this RIGHT BEFORE <thead> (still inside the <table> tag)            #}
+            {# Reorder columns so "Discount Made" comes before "Debit"                 #}
+            {# ---------------------------------------------------------------------- #}
+            {% set preferred_order = ["account", "item_groups", "income_accounts", "discount_made", "debit", "credit", "balance"] %}
+
+            {% set cols = [] %}
+
+            {# 1) add columns in preferred order (if they exist) #}
+            {% for fn in preferred_order %}
+            {% for c in columns %}
+                {% if c.fieldname == fn %}
+                {% set _ = cols.append(c) %}
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+            {# 2) add any remaining columns (not listed) #}
+            {% for c in columns %}
+            {% if c.fieldname not in preferred_order %}
+                {% set _ = cols.append(c) %}
+            {% endif %}
+            {% endfor %}
+
+            {# ---------------------------- THEAD ----------------------------------- #}
             <thead>
+            <tr>
+                {% for col in cols %}
+                {# --- HIDE Income Accounts column --- #}
+                {% if col.label != "Income Accounts" and col.fieldname not in ["income_account", "income_accounts", "income_accounts"] %}
+                    <th {% if col.fieldtype in ['Currency', 'Int', 'Float'] %}class="text-right"{% endif %}>
+                    {{ "Type" if col.fieldname == "account" else col.label }}
+                    </th>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            </thead>
+
+            {# ---------------------------- TBODY ----------------------------------- #}
+            <tbody>
+            {% for row in data %}
+                {# Skip rows where all financial values are zero (especially Payment Entry Discount Made) #}
+                {% set is_zero_row = (row.debit == 0 and row.credit == 0 and row.balance == 0 and row.discount_made == 0) %}
+                {% if row.item_groups != "Payment Entry Discount Made" or not is_zero_row %}
                 <tr>
-                    {% for col in columns %}
-                        <th {% if col.fieldtype in ['Currency', 'Int', 'Float'] %}class="text-right"{% endif %}>
-                            {{ "Type" if col.fieldname == "account" else col.label }}
-                        </th>
+                    {% for col in cols %}
+                    {# --- HIDE Income Accounts column --- #}
+                    {% if col.label != "Income Accounts" and col.fieldname not in ["income_account", "income_accounts", "income_accounts"] %}
+                        <td {% if col.fieldtype in ['Currency', 'Int', 'Float'] %}class="text-right"{% endif %}>
+                        {%- set value = row[col.fieldname] -%}
+                        {%- if col.fieldname == 'account' and value -%}
+                            {{ value.replace("'", "") }}
+                        {%- elif col.fieldtype == 'Currency' -%}
+                            {{ frappe.utils.fmt_money(value or 0) }}
+                        {%- else -%}
+                            {{ value }}
+                        {%- endif -%}
+                        </td>
+                    {% endif %}
                     {% endfor %}
                 </tr>
-            </thead>
-            <tbody>
-                {% for row in data %}
-                    {# Skip rows where all financial values are zero (especially Payment Entry Discount Made) #}
-                    {% set is_zero_row = (row.debit == 0 and row.credit == 0 and row.balance == 0 and row.discount_made == 0) %}
-                    {% if row.item_groups != "Payment Entry Discount Made" or not is_zero_row %}
-                        <tr>
-                            {% for col in columns %}
-                                <td {% if col.fieldtype in ['Currency', 'Int', 'Float'] %}class="text-right"{% endif %}>
-                                    {%- set value = row[col.fieldname] -%}
-                                    {%- if col.fieldname == 'account' and value -%}
-                                        {{ value.replace("'", "") }}
-                                    {%- elif col.fieldtype == 'Currency' -%}
-                                        {{ frappe.utils.fmt_money(value or 0) }}
-                                    {%- else -%}
-                                        {{ value }}
-                                    {%- endif -%}
-                                </td>
-                            {% endfor %}
-                        </tr>
-                    {% endif %}
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             </tbody>
+
+
         </table>
         
         <div class="summary-note">

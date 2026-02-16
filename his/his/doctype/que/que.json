@@ -65,7 +65,8 @@
   "diagnosis",
   "remarks",
   "request",
-  "medical_department"
+  "medical_department",
+  "comment"
  ],
  "fields": [
   {
@@ -139,7 +140,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Que Type",
-   "options": "New Patient\nFollow Up\nRevisit\nRenew\nRefer"
+   "options": "New Patient\nExisting Patient\nFollow Up\nRevisit\nRenew\nRefer"
   },
   {
    "fetch_from": "doctor.op_consulting_charge_item",
@@ -497,6 +498,12 @@
    "fieldtype": "Data",
    "label": "Legacy Patient Number",
    "read_only": 1
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Data",
+   "label": "Comment",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -507,7 +514,7 @@
    "link_fieldname": "patient"
   }
  ],
- "modified": "2026-01-08 14:15:41.029986",
+ "modified": "2026-02-10 16:13:49.228161",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Que",

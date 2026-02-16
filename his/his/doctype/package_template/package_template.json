@@ -117,20 +117,19 @@
    "fieldname": "medical_department",
    "fieldtype": "Link",
    "label": "Medical Department",
-   "options": "Medical Department",
-   "set_only_once": 1
+   "options": "Medical Department"
   },
   {
    "fieldname": "package_type",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Package Type",
-   "options": "\nAnesthesia\nHajj"
+   "options": "Package Type"
   }
  ],
  "links": [],
- "modified": "2026-01-13 16:22:36.122210",
+ "modified": "2026-01-21 10:41:53.888693",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Package Template",

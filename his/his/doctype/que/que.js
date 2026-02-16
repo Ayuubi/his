@@ -172,7 +172,14 @@ frappe.ui.form.on('Que', {
                                         label: 'Paid Amount',
                                         fieldname: 'paid_amount',
                                         fieldtype: 'Currency'
-                                    }
+                                    },
+                                    {
+                                        label: 'Comment',
+                                        fieldname: 'comment',
+                                        fieldtype: 'Small Text',
+                                        reqd:1
+                                    },
+
                                 ],
                                 size: 'small',
                                 primary_action_label: 'Submit',
@@ -228,6 +235,7 @@ frappe.ui.form.on('Que', {
                                             "sales_invoice": frm.doc.sales_invoice,
                                             "sakes_order": frm.doc.sales_order,
                                             "fee": frm.doc.fee_validity,
+                                            "comment": values.comment,
                                         },
                                         callback: function (r) {
                                             frappe.utils.play_sound("submit");

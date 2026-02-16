@@ -423,6 +423,7 @@
   {
    "fieldname": "practitioner",
    "fieldtype": "Link",
+   "ignore_user_permissions": 1,
    "label": "Practitioner",
    "options": "Healthcare Practitioner"
   },
@@ -472,7 +473,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-13 15:40:03.976709",
+ "modified": "2026-02-01 09:37:18.468444",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Anesthesia",

@@ -17,17 +17,37 @@ class Emergency(Document):
 
 @frappe.whitelist()
 def transfer(**args):
-	# frappe.db.set_value("Healthcare Service Unit", service_unit, "occupancy_status", "Vacant")
-	# name.service_unit=service_unit
-	inp = frappe.get_doc({
-		'doctype': 'Inpatient Record',
-		'patient': args.get('patient'),
-		'diagnose': args.get('diagnose'),
-		"admission_practitioner": args.get('practitioner'),
-		"status":"Admission Scheduled"
-		})
-	inp.insert(ignore_permissions = True)
-	frappe.db.set_value("Emergency", args.get('name'), "status", "Transferred")
+    # Check if patient already exists in Inpatient Record
+    existing_inpatient_record = frappe.get_all(
+        "Inpatient Record",
+        filters={
+            "patient": args.get("patient"),
+            "status": ["in", ["Discharge Scheduled", "Admitted"]]
+        },
+        fields=["name", "status"]
+    )
+
+   # If an inpatient record with the specified status exists, show a message
+    if existing_inpatient_record:
+        # You can use the status of the first record, or just show one message
+        current_status = existing_inpatient_record[0].status
+        frappe.throw(
+            ("This patient already has a record with the status: {0}.").format(current_status)
+        )
+
+    # If status is "Discharge Scheduled", proceed with transfer
+    inp = frappe.get_doc({
+        'doctype': 'Inpatient Record',
+        'patient': args.get('patient'),
+        'diagnose': args.get('diagnose'),
+        "admission_practitioner": args.get('practitioner'),
+        "status": "Admission Scheduled"
+    })
+    inp.insert(ignore_permissions=True)
+
+    # Update the status of the Emergency record
+    frappe.db.set_value("Emergency", args.get('name'), "status", "Transferred")
+
 	
 @frappe.whitelist() 
 def make_ot_schedule(docname, procedure, method=None):

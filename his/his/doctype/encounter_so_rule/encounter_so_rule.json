@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-01-29 12:25:55.103147",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "encounter_field",
+  "so_type",
+  "source_order",
+  "builder_method",
+  "priority"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Enabled"
+  },
+  {
+   "columns": 1,
+   "fieldname": "priority",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Priority"
+  },
+  {
+   "columns": 2,
+   "fieldname": "encounter_field",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Encounter Field"
+  },
+  {
+   "columns": 2,
+   "fieldname": "so_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "SO Type",
+   "options": "Sales Type"
+  },
+  {
+   "columns": 1,
+   "fieldname": "source_order",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Source Order",
+   "options": "Source Order"
+  },
+  {
+   "columns": 3,
+   "fieldname": "builder_method",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Builder Method"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-01-29 12:29:05.852331",
+ "modified_by": "Administrator",
+ "module": "HIS",
+ "name": "Encounter SO Rule",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
