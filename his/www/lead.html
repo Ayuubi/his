@@ -1,0 +1,60 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<style>
+    body { background-color: #f0ebf8; }
+    .form-card {
+        background: white; border-radius: 8px; padding: 24px;
+        margin-bottom: 16px; border: 1px solid #dadce0;
+    }
+    .form-header { border-top: 10px solid #673ab7; }
+    .radio-label { margin-left: 8px; font-weight: normal; }
+    .btn-submit {
+        background-color: #673ab7; color: white; padding: 10px 24px;
+        border: none; border-radius: 4px;
+    }
+</style>
+
+<div class="container" style="max-width: 640px; margin-top: 40px;">
+    <div id="form-message"></div>
+
+    <form id="lead-form">
+        <div class="form-card form-header">
+            <h1>Shaafi Hospital</h1>
+            <p>Fadlan buuxi macluumaadka hoos ku qoran.</p>
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-3">Full Name<span class="text-danger">*</span></h5>
+            <input type="text" class="form-control border-0 border-bottom mb-4" id="full_name" required>
+            
+           
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-3">Numbarka Telefoonka <span class="text-danger">*</span></h5>
+            <input type="text" class="form-control border-0 border-bottom mb-4" id="mobile_number" required>
+            
+            <h5 class="mb-3">Degmada (District) <span class="text-danger">*</span></h5>
+            <input type="text" class="form-control border-0 border-bottom" id="district" required>
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-3">Jinsiga (Sex) <span class="text-danger">*</span></h5>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sex" id="sex_m" value="Male" required>
+                <label class="form-check-label radio-label" for="sex_m">Lab (Male)</label>
+            </div>
+            <div class="form-check mb-4">
+                <input class="form-check-input" type="radio" name="sex" id="sex_f" value="Female">
+                <label class="form-check-label radio-label" for="sex_f">Dhedig (Female)</label>
+            </div>
+
+            <!-- <h5 class="mb-3">Da'da (Age)</h5>
+            <input type="number" class="form-control border-0 border-bottom" id="age" placeholder="Tusaale: 25"> -->
+        </div>
+
+        <button type="submit" class="btn btn-submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

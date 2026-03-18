@@ -388,7 +388,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Lab Ref"
+   "label": "Lab Ref",
+   "read_only": 1
   },
   {
    "fieldname": "template",
@@ -470,11 +471,11 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "sales_invoice_item",
    "fieldtype": "Link",
    "label": "Sales Invoice Item",
-   "options": "Sales Invoice Item",
-   "read_only": 1
+   "options": "Sales Invoice Item"
   },
   {
    "fieldname": "journal_entry",
@@ -497,12 +498,12 @@
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fetch_from": "reff_collection.reff_invoice",
    "fieldname": "sales_invoice",
    "fieldtype": "Link",
    "label": "Sales Invoice",
-   "options": "Sales Invoice",
-   "read_only": 1
+   "options": "Sales Invoice"
   },
   {
    "allow_on_submit": 1,
@@ -522,7 +523,7 @@
  "in_create": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-28 08:49:45.999654",
+ "modified": "2026-03-04 10:25:14.262423",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Lab Result",

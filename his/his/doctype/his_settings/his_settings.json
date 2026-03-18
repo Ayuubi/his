@@ -195,6 +195,7 @@
   },
   {
    "default": "0",
+   "description": "If Checked the Customer Statement will show discounts made in Sales Invoice",
    "fieldname": "add_si",
    "fieldtype": "Check",
    "label": "Add SI"
@@ -224,7 +225,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-29 12:29:55.921008",
+ "modified": "2026-03-02 13:18:15.986585",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HIS Settings",

@@ -1,0 +1,55 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2026-02-17 11:52:59.385102",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "logo",
+ "modified": "2026-02-22 13:53:09.596729",
+ "modified_by": "Administrator",
+ "module": "HIS",
+ "name": "balance",
+ "owner": "awais@rasiintech.com",
+ "prepared_report": 0,
+ "query": "SELECT \r\n    other.item_code,\r\n    other.warehouse AS available_in_store,\r\n    other.actual_qty AS available_qty\r\nFROM \r\n    `tabBin` other\r\nLEFT JOIN \r\n    `tabBin` ph \r\n        ON other.item_code = ph.item_code\r\n        AND ph.warehouse = 'PHARMCY - SH'\r\nWHERE \r\n    other.warehouse != 'PHARMCY - SH'\r\n    AND other.actual_qty > 0\r\n    AND IFNULL(ph.actual_qty, 0) = 0\r\nORDER BY \r\n    other.item_code;\r\n",
+ "ref_doctype": "Item",
+ "report_name": "balance",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "All"
+  },
+  {
+   "role": "Item Manager"
+  },
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Manufacturing User"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Purchase User"
+  },
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Maintenance User"
+  },
+  {
+   "role": "Restuarent"
+  }
+ ]
+}

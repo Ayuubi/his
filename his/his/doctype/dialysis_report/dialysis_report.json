@@ -11,8 +11,11 @@
   "patient",
   "patient_name",
   "sex",
+  "age",
   "date",
   "entry_weight",
+  "height",
+  "bmi",
   "target_weight",
   "uf_rate",
   "exit_weight",
@@ -26,15 +29,33 @@
   "dialysate",
   "vascular_access_type",
   "dialysor",
+  "vascular_access_condition",
+  "urine_output",
   "practitioner",
-  "section_break_hnnf3",
+  "prepost_dialysis_note",
+  "dialysis_order_section",
+  "duration",
+  "blood_flow",
+  "dialysate_flow",
+  "column_break_u7eot",
+  "membrane_type",
+  "ultrafiltration",
+  "dialsate_electrolytes",
+  "anticoagulant",
   "blood_pressure_tab",
   "section_break_mvrpk",
   "blood_pressure",
-  "dialysors_tab",
+  "amended_from",
+  "medication_tab",
+  "section_break_6oixv",
+  "medication",
+  "patient_condition_tab",
+  "section_break_9xr2o",
+  "dialysis_access_condition",
+  "patient_clinical_status",
+  "flow_up_tab",
   "section_break_tvfuo",
-  "dialysor_prescription",
-  "amended_from"
+  "flowdate"
  ],
  "fields": [
   {
@@ -51,14 +72,16 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Patient Name"
+   "label": "Patient Name",
+   "read_only": 1
   },
   {
    "fetch_from": "patient.sex",
    "fieldname": "sex",
    "fieldtype": "Link",
    "label": "Sex",
-   "options": "Gender"
+   "options": "Gender",
+   "read_only": 1
   },
   {
    "default": "Today",
@@ -129,11 +152,7 @@
   {
    "fieldname": "dialysor",
    "fieldtype": "Data",
-   "label": "Dialysor "
-  },
-  {
-   "fieldname": "section_break_hnnf3",
-   "fieldtype": "Section Break"
+   "label": "Dialyzer type "
   },
   {
    "fieldname": "nursing",
@@ -149,7 +168,7 @@
   {
    "fieldname": "blood_pressure_tab",
    "fieldtype": "Tab Break",
-   "label": "Blood Pressure"
+   "label": "Vital Signs"
   },
   {
    "fieldname": "section_break_mvrpk",
@@ -158,23 +177,12 @@
   {
    "fieldname": "blood_pressure",
    "fieldtype": "Table",
-   "label": "Blood Pressure",
+   "label": "Vital Signs",
    "options": "Blood Pressure"
-  },
-  {
-   "fieldname": "dialysors_tab",
-   "fieldtype": "Tab Break",
-   "label": "Dialysors"
   },
   {
    "fieldname": "section_break_tvfuo",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "dialysor_prescription",
-   "fieldtype": "Table",
-   "label": "Dialysor Prescription",
-   "options": "Dialysor Prescription"
   },
   {
    "fieldname": "amended_from",
@@ -184,12 +192,132 @@
    "options": "DIALYSIS REPORT",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "flow_up_tab",
+   "fieldtype": "Tab Break",
+   "label": "Flow Up"
+  },
+  {
+   "fieldname": "flowdate",
+   "fieldtype": "Date",
+   "label": "Flow Up days"
+  },
+  {
+   "fetch_from": "patient.p_age",
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "Age",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vascular_access_condition",
+   "fieldtype": "Data",
+   "label": "Vascular access condition"
+  },
+  {
+   "fieldname": "dialysis_order_section",
+   "fieldtype": "Section Break",
+   "label": "Dialysis order"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration"
+  },
+  {
+   "fieldname": "blood_flow",
+   "fieldtype": "Data",
+   "label": "Blood flow"
+  },
+  {
+   "fieldname": "dialysate_flow",
+   "fieldtype": "Data",
+   "label": "Dialysate flow"
+  },
+  {
+   "fieldname": "membrane_type",
+   "fieldtype": "Data",
+   "label": "membrane type"
+  },
+  {
+   "fieldname": "anticoagulant",
+   "fieldtype": "Data",
+   "label": "Anticoagulant"
+  },
+  {
+   "fieldname": "ultrafiltration",
+   "fieldtype": "Data",
+   "label": "Ultrafiltration"
+  },
+  {
+   "fieldname": "dialsate_electrolytes",
+   "fieldtype": "Data",
+   "label": "Dialsate electrolytes"
+  },
+  {
+   "fieldname": "column_break_u7eot",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Data",
+   "label": "Height"
+  },
+  {
+   "fieldname": "bmi",
+   "fieldtype": "Data",
+   "label": "BMI"
+  },
+  {
+   "fieldname": "prepost_dialysis_note",
+   "fieldtype": "Small Text",
+   "label": "Pre/Post dialysis Note"
+  },
+  {
+   "fieldname": "medication_tab",
+   "fieldtype": "Tab Break",
+   "label": "Medication"
+  },
+  {
+   "fieldname": "section_break_6oixv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "medication",
+   "fieldtype": "Table",
+   "label": "Medication",
+   "options": "Treatment Sheet"
+  },
+  {
+   "fieldname": "patient_condition_tab",
+   "fieldtype": "Tab Break",
+   "label": "Complications"
+  },
+  {
+   "fieldname": "section_break_9xr2o",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "dialysis_access_condition",
+   "fieldtype": "Data",
+   "label": "Dialysis access condition"
+  },
+  {
+   "fieldname": "patient_clinical_status",
+   "fieldtype": "Data",
+   "label": "Patient Clinical status"
+  },
+  {
+   "fieldname": "urine_output",
+   "fieldtype": "Data",
+   "label": "Urine output"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-04-29 09:32:06.336312",
+ "modified": "2026-03-08 13:06:07.415904",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "DIALYSIS REPORT",
@@ -235,5 +363,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "patient_name"
 }

@@ -103,8 +103,8 @@ class AccountsReceivableSummary(ReceivablePayableReport):
 
 		# 🔄 Batch fetch mobile numbers
 		patient_info_map = frappe._dict({
-			r.customer: {"mobile_no": r.mobile_no, "name": r.name}
-			for r in frappe.get_all("Patient", fields=["customer", "mobile_no", "name"])
+			r.customer: {"mobile_no": r.mobile_no, "name": r.name,"inpatient_record": r.inpatient_record, "inpatient_status": r.inpatient_status,}
+			for r in frappe.get_all("Patient", fields=["customer", "mobile_no", "name", "inpatient_record", "inpatient_status"])
 		})
 
 		# 🔄 Batch fetch status from Inpatient Record using patient names
@@ -144,7 +144,14 @@ class AccountsReceivableSummary(ReceivablePayableReport):
 			# row.mobile_no = patient_info_map.get(party)
 			row.mobile_no = patient_info_map.get(party, {}).get("mobile_no")
 			row.patient = patient_info_map.get(party, {}).get("name")
+			row.inpatient_record = patient_info_map.get(party, {}).get("inpatient_record")
+			row.inpatient_status = patient_info_map.get(party, {}).get("inpatient_status")
 			# row.status = status_map.get(row.patient)
+
+			# Filter by inpatient status (coming from Patient.inpatient_status)
+			status_filter = (self.filters.get("inpatient_status") or "").strip()
+			if status_filter and row.inpatient_status != status_filter:
+				continue
 
 			# Inline buttons
 			row.receipt	  =f"""<button style='padding: 3px; margin:-5px' class= 'btn btn-primary' onClick='receipt("{party}" , "{party_dict.outstanding}" , "{party_dict.outstanding * 1.05}")'>Receipt</button>"""
@@ -210,15 +217,17 @@ class AccountsReceivableSummary(ReceivablePayableReport):
 			fieldname="party",
 			fieldtype="Link",
 			options=self.party_type,
-			width=180,
+			width=300,
 		)
 		
 		if self.party_naming_by == "Naming Series":
 			self.add_column(_("{0} Name").format(self.party_type),
 				   width=300,
 				    fieldname="party_name", fieldtype="Data")
-		self.add_column(_("Patient ID"), fieldname="patient", fieldtype="Data")
+		self.add_column(_("Patient ID"), fieldname="patient", fieldtype="Link", options="Patient")
 		self.add_column(_("Mobile No"), fieldname="mobile_no", fieldtype="Data")
+		self.add_column(_("Inpatient Record"), fieldname="inpatient_record", fieldtype="Link", options="Inpatient Record", width=200,)
+		self.add_column(_("Inpatient Status"), fieldname="inpatient_status", fieldtype="Data")
 		# self.add_column(_("Status"), fieldname="status", fieldtype="Data")
 		self.add_column(_("Responsible"), fieldname="resonsible", fieldtype="Data")
 		

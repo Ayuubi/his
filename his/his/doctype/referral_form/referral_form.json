@@ -57,15 +57,14 @@
    "ignore_user_permissions": 1,
    "in_list_view": 1,
    "label": "From Consultant",
-   "options": "Healthcare Practitioner",
-   "reqd": 1
+   "options": "Healthcare Practitioner"
   },
   {
    "fieldname": "to_consultant",
    "fieldtype": "Data",
    "ignore_user_permissions": 1,
-   "label": "To Consultant",
-   "reqd": 1
+   "in_list_view": 1,
+   "label": "To Consultant"
   },
   {
    "fieldname": "section_break_einhh",
@@ -86,7 +85,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-26 10:31:37.004010",
+ "modified": "2026-02-16 09:56:27.454622",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Referral Form",

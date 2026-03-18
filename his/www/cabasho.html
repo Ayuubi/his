@@ -1,0 +1,92 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<style>
+    body { background-color: #f0ebf8; }
+    .form-card {
+        background: white;
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 16px;
+        border: 1px solid #dadce0;
+    }
+    .form-header {
+        border-top: 10px solid #673ab7;
+    }
+    .radio-label { margin-left: 8px; font-weight: normal; }
+    .btn-submit {
+        background-color: #673ab7;
+        color: white;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 4px;
+    }
+    .btn-submit:hover { background-color: #5e35b1; color: white; }
+    .btn-clear { color: #673ab7; background: none; border: none; float: right; margin-top: 10px; }
+</style>
+
+<div class="container" style="max-width: 640px; margin-top: 40px; margin-bottom: 40px;">
+    
+    <div id="form-message"></div>
+
+    <form id="cabasho-form">
+        <div class="form-card form-header">
+            <h1 style="font-size: 2.2rem; margin-bottom: 16px;">Cabasho & Talo</h1>
+            <p>Ra'yigaaga waa muhiim. Fadlan nala wadaag cabashadaada, taladaada ama mahadcelintaada.</p>
+            <p>Macluumaadkaaga si qarsoodi ah ayaa loo ilaalinayaa.</p>
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-4">Nooca Fariintaada</h5>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="message_type" id="type_cabasho" value="Cabasho" required>
+                <label class="form-check-label radio-label" for="type_cabasho">Cabasho</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="message_type" id="type_talo" value="Talo">
+                <label class="form-check-label radio-label" for="type_talo">Talo</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="message_type" id="type_soojeedin" value="Soo jeedin">
+                <label class="form-check-label radio-label" for="type_soojeedin">Soo jeedin</label>
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="message_type" id="type_mahadcelin" value="Mahadcelin">
+                <label class="form-check-label radio-label" for="type_mahadcelin">Mahadcelin</label>
+            </div>
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-4">Qeybta Aad ka cabaneyso</h5>
+            
+            {% set departments = [
+                'Reception / Soo dhoweyn', 'Nadaafad', 'Dhakhtar', 'Shaybaar', 
+                'Farmashiye', 'Qaliin', 'Qaybta Haweenka & Umuliso', 
+                'Maamulka', 'Bukaan Jiif', 'Qeyba Kale'
+            ] %}
+            
+            {% for dept in departments %}
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="radio" name="department" id="dept_{{ loop.index }}" value="{{ dept }}" required>
+                <label class="form-check-label radio-label" for="dept_{{ loop.index }}">{{ dept }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-4">Faahfaahinta Cabashada / Talo</h5>
+            <textarea class="form-control border-0 border-bottom" id="details" name="details" rows="2" placeholder="Your answer" required style="border-radius: 0; box-shadow: none;"></textarea>
+        </div>
+
+        <div class="form-card">
+            <h5 class="mb-4">Hadii aad Rabto in si gaar ah laguuguso jawaabo fadlan lambarkaaga Noo reeb</h5>
+            <input type="text" class="form-control border-0 border-bottom" id="phone_number" name="phone_number" placeholder="Your answer" style="border-radius: 0; box-shadow: none;">
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-submit">Submit</button>
+            <button type="button" class="btn-clear" onclick="document.getElementById('cabasho-form').reset();">Clear form</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

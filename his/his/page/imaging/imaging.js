@@ -37,7 +37,7 @@ xray = Class.extend(
 let imaging = `
 
 <iframe
-src="http://217.217.217.241:8042/ui/app/index.html#/"
+src="http://192.168.7.112:8042/ui/app/index.html#/"
 width="100%" height="800px" style="border:1px solid black;"
 name="targetframe"
 allowTransparency="true"

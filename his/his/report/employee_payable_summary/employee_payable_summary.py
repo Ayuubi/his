@@ -66,6 +66,7 @@ class AccountReceivableSummary(ReceivablePayableReport):
 					self.party_type, party, scrub(self.party_type) + "_name"
 				)
 			row.employee_name = frappe.get_value(self.party_type,party,"employee_name")
+			row.department = frappe.get_value("Employee",party,"department")
 			row.mobile_no = frappe.get_value("Employee",party,"cell_number")
 			row.statement =f"""<button class= 'btn btn-primary' onClick='statementemployee("{party}")'>Statements</button>"""
 			row.update(party_dict)
@@ -142,6 +143,7 @@ class AccountReceivableSummary(ReceivablePayableReport):
 		if self.party_naming_by == "Naming Series":
 			self.add_column(_("{0} Name").format(self.party_type), fieldname="party_name", fieldtype="Data")
 		self.add_column(_("Empoyee Name"), fieldname="employee_name", width=400, fieldtype="Data")
+		self.add_column(_("Department"), fieldname="department", width=400, fieldtype="Link", options="Department")
 		self.add_column(_("Mobile No"), fieldname="mobile_no", fieldtype="Data")
 		# credit_debit_label = "Credit Note" if self.party_type == "Customer" else "Debit Note"
 

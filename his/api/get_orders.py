@@ -46,6 +46,35 @@ def get_opd_orders(currdate):
        
         )
 
+@frappe.whitelist()
+def get_dialysis(flowdate=None, date=None):
+    filters = []
+
+    # Check which date to filter by
+    if flowdate:
+        filters.append(f"flowdate = '{flowdate}'")
+    if date:
+        filters.append(f"date = '{date}'")  # Replace with the actual column name for work date
+
+    # Create the WHERE clause
+    filter_query = " AND ".join(filters) if filters else "1=1"  # Fallback to get all if no filters
+
+    return frappe.db.sql(f"""
+        SELECT name,
+            patient,
+            patient_name,
+            date AS lastDate,
+            flowdate AS Today,
+            age,
+            entry_weight,
+            target_weight,
+            exit_weight,
+            practitioner
+        FROM `tabDIALYSIS REPORT`
+        WHERE {filter_query}
+        ORDER BY modified DESC
+    """, as_dict=True)
+
     
 @frappe.whitelist()
 def get_canteen_orders(currdate):

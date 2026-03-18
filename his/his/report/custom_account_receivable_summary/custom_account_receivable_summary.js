@@ -160,6 +160,17 @@ frappe.query_reports["Custom Account Receivable Summary"] = {
 			"fieldtype": "Check",
 			"hidden": 1
 		},
+		{
+			fieldname: "inpatient_status",
+			label: __("Status"),
+			fieldtype: "Select",
+			options: [
+				"",
+				"Admission Scheduled",
+				"Admitted",
+			],
+			default: ""
+		}
 	],
 
 	// onload: function(report) {

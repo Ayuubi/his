@@ -53,6 +53,7 @@ class CustomClinicalProcedure(ClinicalProcedure):
                     "is_pos" : 0,
                     "ref_practitioner" :self.practitioner,
                     "so_type" : "Pharmacy",
+                    "skip_rate_validation": 1,
                     "items" : pro_items,
                     })
                 sales_doc.insert(ignore_permissions = True)

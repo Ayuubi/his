@@ -114,6 +114,7 @@
    "depends_on": "eval:!doc.bill_to_insurance && !doc.bill_to_employee",
    "fieldname": "is_free",
    "fieldtype": "Check",
+   "hidden": 1,
    "label": "Is Free"
   },
   {
@@ -514,7 +515,7 @@
    "link_fieldname": "patient"
   }
  ],
- "modified": "2026-02-10 16:13:49.228161",
+ "modified": "2026-03-01 08:37:01.264115",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Que",
