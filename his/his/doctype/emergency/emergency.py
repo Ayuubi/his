@@ -7,13 +7,13 @@ from his.api.emergency import set_so_values_from_db
 from his.api.emergency import enqueue_sales_orders
 
 class Emergency(Document):
-	def before_validate(self):
-		set_so_values_from_db(self)
-	
-	def on_update(self):
-		enqueue_sales_orders(self)
-	def on_update_after_submit(self):
-		enqueue_sales_orders(self)
+    def before_validate(self):
+        set_so_values_from_db(self)
+    
+    def on_update(self):
+        enqueue_sales_orders(self)
+    def on_update_after_submit(self):
+        enqueue_sales_orders(self)
 
 @frappe.whitelist()
 def transfer(**args):
@@ -48,9 +48,10 @@ def transfer(**args):
     # Update the status of the Emergency record
     frappe.db.set_value("Emergency", args.get('name'), "status", "Transferred")
 
-	
+    
 @frappe.whitelist() 
 def make_ot_schedule(docname, procedure, method=None):
+    return
     current_datetime = datetime.datetime.now()
     doc = frappe.get_doc("Emergency", docname)
     ot_schedule = frappe.get_doc({

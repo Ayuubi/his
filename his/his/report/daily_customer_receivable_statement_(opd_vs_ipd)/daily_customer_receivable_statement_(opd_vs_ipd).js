@@ -1,0 +1,66 @@
+// Copyright (c) 2026, Rasiin Tech and contributors
+// For license information, please see license.txt
+/* eslint-disable */
+
+frappe.query_reports["Daily Customer Receivable Statement (OPD vs IPD)"] = {
+	filters: [
+		{
+			fieldname: "company",
+			label: __("Company"),
+			fieldtype: "Link",
+			options: "Company",
+			default: frappe.defaults.get_user_default("Company")
+		},
+		{
+			fieldname: "from_date",
+			label: __("From Date"),
+			fieldtype: "Date",
+			default: frappe.datetime.get_today(),
+			reqd: 1
+		},
+		{
+			fieldname: "to_date",
+			label: __("To Date"),
+			fieldtype: "Date",
+			default: frappe.datetime.get_today(),
+			reqd: 1
+		},
+		{
+			fieldname: "customer",
+			label: __("Customer"),
+			fieldtype: "Link",
+			options: "Customer"
+		},
+		{
+			fieldname: "customer_group",
+			label: __("Customer Group"),
+			fieldtype: "Link",
+			options: "Customer Group"
+		},
+		{
+			fieldname: "territory",
+			label: __("Territory"),
+			fieldtype: "Link",
+			options: "Territory"
+		},
+		{
+			fieldname: "receivable_type",
+			label: __("Receivable Type"),
+			fieldtype: "Select",
+			options: "All\nOPD\nIPD",
+			default: "All"
+		},
+		{
+			fieldname: "only_with_balance",
+			label: __("Only With Balance"),
+			fieldtype: "Check",
+			default: 1
+		},
+		{
+			fieldname: "only_with_unallocated_credit",
+			label: __("Only With Unallocated Credit"),
+			fieldtype: "Check",
+			default: 0
+		}
+	]
+};

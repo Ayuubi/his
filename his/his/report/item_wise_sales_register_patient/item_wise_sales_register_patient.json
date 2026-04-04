@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2026-03-03 11:32:24.475723",
  "disable_prepared_report": 0,
@@ -11,7 +11,7 @@
  "is_standard": "Yes",
  "json": "{}",
  "letter_head": "logo",
- "modified": "2026-03-03 11:32:46.601306",
+ "modified": "2026-04-02 09:16:46.931185",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Item Wise Sales Register Patient",

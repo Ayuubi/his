@@ -8,7 +8,8 @@ frappe.query_reports["GL-based Patient Receivable Summary Report"] = {
 			fieldname: "company",
 			label: __("Company"),
 			fieldtype: "Link",
-			options: "Company"
+			options: "Company",
+			default: "Shaafi Hospital"
 		},
 		{
 			fieldname: "to_date",

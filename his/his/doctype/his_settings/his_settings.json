@@ -36,7 +36,13 @@
   "payment_entry_discount_level",
   "encounter_sales_order_engine_section",
   "use_new_encounter_so_engine",
-  "encounter_so_rules"
+  "encounter_so_rules",
+  "section_break_03kmv",
+  "pharmacy_safety_stock_percent",
+  "pharmacy_reorder_level_percent",
+  "column_break_z6npe",
+  "pharmacy_min_stock_percent",
+  "pharmacy_max_stock_percent"
  ],
  "fields": [
   {
@@ -220,12 +226,41 @@
    "fieldtype": "Table",
    "label": "Encounter SO Rule",
    "options": "Encounter SO Rule"
+  },
+  {
+   "fieldname": "section_break_03kmv",
+   "fieldtype": "Section Break",
+   "label": "Pharmacy Stock Safety"
+  },
+  {
+   "fieldname": "pharmacy_safety_stock_percent",
+   "fieldtype": "Percent",
+   "label": "Safety Stock %"
+  },
+  {
+   "fieldname": "pharmacy_reorder_level_percent",
+   "fieldtype": "Percent",
+   "label": "Reorder Level %"
+  },
+  {
+   "fieldname": "column_break_z6npe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pharmacy_min_stock_percent",
+   "fieldtype": "Percent",
+   "label": "Minimum Level %"
+  },
+  {
+   "fieldname": "pharmacy_max_stock_percent",
+   "fieldtype": "Percent",
+   "label": "Maximum Level %"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-03-02 13:18:15.986585",
+ "modified": "2026-03-22 13:06:43.356989",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HIS Settings",

@@ -200,8 +200,8 @@ doc_events = {
             # "his.api.create_lab_test.create_lab_tests",
             ],
         "on_submit": [
-            # "his.api.create_lab_test.create_lab_tests",
-            "his.api.create_lab_test.create_lab_result_doc",
+            "his.api.create_lab_test.create_lab_tests",
+            # "his.api.create_lab_test.create_lab_result_doc",
             "his.commission.work_handlers.on_submit_sample_collection"
             ],
         "on_cancel": [

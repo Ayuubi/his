@@ -8,6 +8,7 @@ from frappe.utils import flt
 
 class Expenses(Document):
     def validate(self):
+        return
         self._validate_header()
         self._validate_lines()
         self._recalc_total()
@@ -17,8 +18,8 @@ class Expenses(Document):
             frappe.throw("Company is required")
         if not self.posting_date:
             frappe.throw("Posting Date is required")
-        if not self.paid_from:
-            frappe.throw("Paid From is required")
+        # if not self.paid_from:
+        #     frappe.throw("Paid From is required")
 
         # Paid From must be leaf + Bank/Cash + same company
         pf = frappe.get_cached_value(

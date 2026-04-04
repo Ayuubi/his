@@ -16,53 +16,53 @@ frappe.ui.form.on('Emergency', {
                 consoleerp_hi(frm.doc.patient , frm.doc.patient_name )
               }, 'History');
 
-              frm.add_custom_button('Transfer To OT', () => {
+            //   frm.add_custom_button('Transfer To OT', () => {
          
-                let d = new frappe.ui.Dialog({
-                    title: 'Select Procedure Name',
-                    fields: [
-                        {
-                            label: 'Procedure',
-                            fieldname: 'pro',
-                            fieldtype: 'Link',
-                            options: 'Clinical Procedure Template',
-                            reqd : 1
+            //     let d = new frappe.ui.Dialog({
+            //         title: 'Select Procedure Name',
+            //         fields: [
+            //             {
+            //                 label: 'Procedure',
+            //                 fieldname: 'pro',
+            //                 fieldtype: 'Link',
+            //                 options: 'Clinical Procedure Template',
+            //                 reqd : 1
                           
-                        }
+            //             }
                      
-                    ],
-                    primary_action_label: 'Submit',
-                    primary_action(values) {
-                          let procedure = d.get_value("pro")
-                        //   alert(procedure)
-                     frappe.call({
-                            method: "his.his.doctype.emergency.emergency.make_ot_schedule", //dotted path to server method
-                            args: {
-                                "docname": frm.doc.name,
-                                "procedure" : procedure
-                            },
-                            callback: function(r) {
+            //         ],
+            //         primary_action_label: 'Submit',
+            //         primary_action(values) {
+            //               let procedure = d.get_value("pro")
+            //             //   alert(procedure)
+            //          frappe.call({
+            //                 method: "his.his.doctype.emergency.emergency.make_ot_schedule", //dotted path to server method
+            //                 args: {
+            //                     "docname": frm.doc.name,
+            //                     "procedure" : procedure
+            //                 },
+            //                 callback: function(r) {
                                 
-                            frappe.utils.play_sound("submit")
+            //                 frappe.utils.play_sound("submit")
 
-                                frappe.show_alert({
-                            message:__('You have Succesfully Transfared OT '),
-                            indicator:'green',
+            //                     frappe.show_alert({
+            //                 message:__('You have Succesfully Transfared OT '),
+            //                 indicator:'green',
                             
-                        }, 5);
-                        // cur_frm.print_doc()
-                            }
-                     });
+            //             }, 5);
+            //             // cur_frm.print_doc()
+            //                 }
+            //          });
                         
-                     d.hide();
-                    }
+            //          d.hide();
+            //         }
                     
-                });
+            //     });
                 
-                d.show();
+            //     d.show();
 
 	
-              }),
+            //   }),
 			frm.add_custom_button('Transfer To OPD', () => {
 	     		    
 	     		    

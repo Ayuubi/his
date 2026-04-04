@@ -25,7 +25,12 @@
   "journal_entry",
   "source_order",
   "account",
-  "amended_from"
+  "amended_from",
+  "users_section",
+  "prepared_by_user",
+  "expense_approver_user",
+  "finance_user",
+  "director_user"
  ],
  "fields": [
   {
@@ -48,17 +53,17 @@
    "in_list_view": 1,
    "label": "Paid From",
    "mandatory_depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
-   "options": "Account",
-   "reqd": 1
+   "options": "Account"
   },
   {
    "allow_on_submit": 1,
+   "depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
    "fieldname": "remark",
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Remark",
-   "print_hide": 1,
-   "reqd": 1
+   "mandatory_depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
+   "print_hide": 1
   },
   {
    "fieldname": "amended_from",
@@ -83,7 +88,8 @@
    "fieldname": "journal_entry",
    "fieldtype": "Link",
    "label": "Journal Entry",
-   "options": "Journal Entry"
+   "options": "Journal Entry",
+   "read_only": 1
   },
   {
    "fieldname": "source_order",
@@ -94,6 +100,7 @@
   },
   {
    "default": "Main - SH",
+   "depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
    "fieldname": "cost_center",
    "fieldtype": "Link",
    "label": "Cost Center",
@@ -158,12 +165,45 @@
    "fieldtype": "Table",
    "label": "Expense Line",
    "options": "Expense Line"
+  },
+  {
+   "fieldname": "users_section",
+   "fieldtype": "Section Break",
+   "label": "Users "
+  },
+  {
+   "fieldname": "prepared_by_user",
+   "fieldtype": "Link",
+   "label": "Prepared by User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expense_approver_user",
+   "fieldtype": "Link",
+   "label": "Expense Approver User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finance_user",
+   "fieldtype": "Link",
+   "label": "Finance User",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "director_user",
+   "fieldtype": "Link",
+   "label": "Director User",
+   "options": "User",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-12 11:14:06.722878",
+ "modified": "2026-04-02 15:24:20.891863",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Expenses",

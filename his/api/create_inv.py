@@ -20,6 +20,7 @@ def create_inv(doc_name ,dt , is_sales_return = False ,  is_credit = False):
     items = []
     empty_items = ""
     cost_center = cash_sales.cost_center
+    source_order = cash_sales.source_order
     for item in cash_sales.items:
 
         qty = item.qty
@@ -75,6 +76,7 @@ def create_inv(doc_name ,dt , is_sales_return = False ,  is_credit = False):
         "is_return" : is_return,
         "posting_date" : cash_sales.transaction_date,
         "customer": customer,
+        "source_order": source_order,
         "patient" : cash_sales.patient,
         "is_pos" : 0,
         "discount_amount" : cash_sales.discount_amount,

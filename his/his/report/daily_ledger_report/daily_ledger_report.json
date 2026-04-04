@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2022-09-11 14:10:53.797024",
  "disable_prepared_report": 0,
@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2025-10-18 10:39:15.036987",
+ "modified": "2026-04-01 20:11:53.385109",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Daily Ledger Report",

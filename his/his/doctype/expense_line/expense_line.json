@@ -18,12 +18,13 @@
  ],
  "fields": [
   {
+   "depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
    "fieldname": "expense_account",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Expense Account",
-   "options": "Account",
-   "reqd": 1
+   "mandatory_depends_on": "eval: frappe.user.has_role(\"Expense Approver\")",
+   "options": "Account"
   },
   {
    "fieldname": "amount",
@@ -76,18 +77,18 @@
    "options": "reference_type"
   },
   {
+   "depends_on": "eval: frappe.user.has_role",
    "fieldname": "expense_type",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Expense Type",
-   "options": "Expense Type",
-   "reqd": 1
+   "options": "Expense Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-01-26 15:10:57.232979",
+ "modified": "2026-03-31 20:47:15.333291",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Expense Line",

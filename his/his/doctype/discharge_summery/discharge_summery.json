@@ -111,6 +111,7 @@
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Discharge Date",
    "reqd": 1
   },
@@ -203,6 +204,8 @@
   {
    "fieldname": "discharged_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Discharged Type",
    "options": "Recovered\nReferd\nDeath\nSelf Discharged",
    "reqd": 1
@@ -422,7 +425,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-10 16:03:55.259660",
+ "modified": "2026-03-25 14:27:34.093354",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Discharge Summery",
