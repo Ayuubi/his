@@ -7,25 +7,37 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "name1",
-  "att"
+  "full_name",
+  "news_letter",
+  "look_at_this_section",
+  "last_name"
  ],
  "fields": [
   {
-   "fieldname": "name1",
+   "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "name"
+   "label": "Full Name"
   },
   {
-   "fieldname": "att",
+   "fieldname": "news_letter",
    "fieldtype": "Table",
-   "label": "att",
+   "label": "News Letter",
    "options": "Newsletter Attachment"
+  },
+  {
+   "fieldname": "look_at_this_section",
+   "fieldtype": "Section Break",
+   "label": "Look at this"
+  },
+  {
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "label": "Last Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-12-27 19:12:31.453229",
+ "modified": "2026-04-12 22:41:21.566962",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "test",
