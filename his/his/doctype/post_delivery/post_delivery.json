@@ -50,7 +50,8 @@
   "section_break_glckv",
   "procedure_prescription",
   "services_so",
-  "medication_so"
+  "medication_so",
+  "amended_from"
  ],
  "fields": [
   {
@@ -134,8 +135,7 @@
    "fieldname": "procedure_prescription",
    "fieldtype": "Table",
    "label": "Procedure Prescription",
-   "options": "Procedure Prescription",
-   "reqd": 1
+   "options": "Procedure Prescription"
   },
   {
    "fieldname": "services_so",
@@ -292,12 +292,20 @@
    "fieldtype": "Data",
    "label": "Midwife",
    "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Post Delivery",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
- "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-05 14:24:19.676134",
+ "modified": "2026-04-12 13:42:46.878067",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Post Delivery",
