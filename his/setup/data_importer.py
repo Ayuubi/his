@@ -28,12 +28,14 @@ def create_rooms():
 				value = str(value).strip()
 				if value == "D":
 					shift = "Day Shift"
+				if value == "sh12":
+					shift = "shift lawo iyo tobanka"
 				if value == "N":
 					shift = "Night Shift"
 				if value == "DN":
 					shift = "Day and Night Shift"
 				if value=="ND":
-					shift= "Night Day Shift"
+					shift= "shift lawo iyo tobanka"
 				if value=="CANTEEN":
 					shift ="CANTEEN"
 				if value=="EN":

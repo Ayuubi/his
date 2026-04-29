@@ -147,7 +147,8 @@
    "in_global_search": 1,
    "in_list_view": 1,
    "label": "Referring Practitioner",
-   "options": "Healthcare Practitioner"
+   "options": "Healthcare Practitioner",
+   "reqd": 1
   },
   {
    "fieldname": "ipd_drug_prescription_tab",
@@ -181,7 +182,8 @@
    "in_list_view": 1,
    "label": "Room",
    "options": "Healthcare Service Unit Type",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "bold": 1,
@@ -295,7 +297,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-03 15:20:57.005971",
+ "modified": "2026-04-22 21:25:28.463143",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Doctor Plan",

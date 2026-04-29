@@ -27,14 +27,14 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "logo",
- "modified": "2026-03-31 09:59:48.798781",
+ "modified": "2026-04-20 16:32:51.445038",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Lab by Doctor",
  "owner": "Administrator",
  "prepared_report": 0,
  "query": "SELECT \n    S.ref_practitioner AS \"Doctor:Data:300\",\n    COUNT(DISTINCT S.patient_name) AS \"Number of Patients\",\n    ROUND(SUM(I.net_amount), 2) AS \"Total Amount:Currency:100\"\nFROM \n    `tabSales Invoice` S\nJOIN \n    `tabSales Invoice Item` I ON S.name = I.parent\nWHERE \n    S.docstatus = 1\n    AND S.posting_date BETWEEN %(Start_date)s AND %(End_date)s\n    AND I.Item_group IN (\"Laboratory\")\nGROUP BY \n    S.ref_practitioner\nORDER BY \n    \"Total Amount:Currency:100\" DESC;\n",
- "ref_doctype": "Sales Invoice",
+ "ref_doctype": "Sample Collection",
  "report_name": "Lab by Doctor",
  "report_type": "Query Report",
  "roles": [
@@ -49,6 +49,9 @@
   },
   {
    "role": "Doctor"
+  },
+  {
+   "role": "Lab"
   }
  ]
 }

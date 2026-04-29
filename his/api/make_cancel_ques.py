@@ -23,6 +23,7 @@ def make_cancel(**args):
 	fee_name = args.get("fee")
 	que = args.get("que")
 	comment = args.get("comment")
+	remark = args.get("remark")
 
 	# Cancel Sales Order
 	if so and frappe.db.exists("Sales Order", so):
@@ -33,6 +34,9 @@ def make_cancel(**args):
 	# Cancel Sales Invoice
 	if si and frappe.db.exists("Sales Invoice", si):
 		sales_invoice = frappe.get_doc("Sales Invoice", si)
+		sales_invoice.remarks = remark
+		frappe.msgprint(remark)
+		sales_invoice.save(ignore_permissions=True)
 		if sales_invoice.docstatus == 1:
 			sales_invoice.cancel()
 

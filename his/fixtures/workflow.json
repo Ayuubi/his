@@ -3,11 +3,11 @@
   "docstatus": 0,
   "doctype": "Workflow",
   "document_type": "Sales Invoice",
-  "is_active": 1,
-  "modified": "2025-12-20 14:20:28.622422",
+  "is_active": 0,
+  "modified": "2026-04-25 10:28:44.115024",
   "module": "HIS",
   "name": "Sales Invoice Discount Approval",
-  "override_status": 1,
+  "override_status": 0,
   "send_email_alert": 0,
   "states": [
    {
@@ -606,11 +606,11 @@
   "docstatus": 0,
   "doctype": "Workflow",
   "document_type": "Expenses",
-  "is_active": 1,
-  "modified": "2026-01-27 09:07:47.797952",
+  "is_active": 0,
+  "modified": "2026-04-02 15:09:06.464384",
   "module": "HIS",
   "name": "Expenses Workflow",
-  "override_status": 1,
+  "override_status": 0,
   "send_email_alert": 0,
   "states": [
    {
@@ -622,7 +622,7 @@
     "parent": "Expenses Workflow",
     "parentfield": "states",
     "parenttype": "Workflow",
-    "state": "Draft",
+    "state": "Request",
     "update_field": null,
     "update_value": null
    },
@@ -654,7 +654,7 @@
    },
    {
     "allow_edit": "Expense Approver",
-    "doc_status": "1",
+    "doc_status": "0",
     "is_optional_state": 0,
     "message": null,
     "next_action_email_template": null,
@@ -662,6 +662,19 @@
     "parentfield": "states",
     "parenttype": "Workflow",
     "state": "Approved",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Expense Approver",
+    "doc_status": "1",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Submitted",
     "update_field": null,
     "update_value": null
    }
@@ -676,7 +689,7 @@
     "parent": "Expenses Workflow",
     "parentfield": "transitions",
     "parenttype": "Workflow",
-    "state": "Draft"
+    "state": "Request"
    },
    {
     "action": "Approve",
@@ -710,6 +723,17 @@
     "parentfield": "transitions",
     "parenttype": "Workflow",
     "state": "Rejected"
+   },
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "Finance",
+    "condition": null,
+    "next_state": "Submitted",
+    "parent": "Expenses Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved"
    }
   ],
   "workflow_name": "Expenses Workflow",
@@ -719,8 +743,8 @@
   "docstatus": 0,
   "doctype": "Workflow",
   "document_type": "Purchase Order",
-  "is_active": 0,
-  "modified": "2026-03-18 11:04:15.403678",
+  "is_active": 1,
+  "modified": "2026-04-25 13:25:27.613781",
   "module": "HIS",
   "name": "PO",
   "override_status": 0,
@@ -762,6 +786,19 @@
     "parentfield": "states",
     "parenttype": "Workflow",
     "state": "Approved",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Director",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "PO",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Rejected",
     "update_field": null,
     "update_value": null
    },
@@ -816,6 +853,17 @@
     "state": "Pending"
    },
    {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "Director",
+    "condition": null,
+    "next_state": "Rejected",
+    "parent": "PO",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Pending"
+   },
+   {
     "action": "Submit",
     "allow_self_approval": 1,
     "allowed": "All",
@@ -828,6 +876,293 @@
    }
   ],
   "workflow_name": "PO",
+  "workflow_state_field": "workflow_state"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow",
+  "document_type": "Request for Quotation",
+  "is_active": 0,
+  "modified": "2026-03-22 08:14:30.203044",
+  "module": "HIS",
+  "name": "RFQ Workflow",
+  "override_status": 0,
+  "send_email_alert": 0,
+  "states": [
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "RFQ Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Draft",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "RFQ Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Request",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Purchase Manager",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "RFQ Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "RFQ Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Pending",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "All",
+    "doc_status": "1",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "RFQ Workflow",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Submitted",
+    "update_field": null,
+    "update_value": null
+   }
+  ],
+  "transitions": [
+   {
+    "action": "Request Review",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": null,
+    "next_state": "Pending",
+    "parent": "RFQ Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Purchase Manager",
+    "condition": null,
+    "next_state": "Approved",
+    "parent": "RFQ Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Pending"
+   },
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": null,
+    "next_state": "Submitted",
+    "parent": "RFQ Workflow",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved"
+   }
+  ],
+  "workflow_name": "RFQ Workflow",
+  "workflow_state_field": "workflow_state"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow",
+  "document_type": "Expenses",
+  "is_active": 1,
+  "modified": "2026-04-02 15:17:09.764994",
+  "module": "HIS",
+  "name": "Expenses Workflow All",
+  "override_status": 0,
+  "send_email_alert": 0,
+  "states": [
+   {
+    "allow_edit": "All",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow All",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Draft",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Expense Approver",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow All",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Pending Approval",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Finance",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow All",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Finance Review",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Director",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow All",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Director Approval",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Finance",
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow All",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Approved",
+    "update_field": null,
+    "update_value": null
+   },
+   {
+    "allow_edit": "Finance",
+    "doc_status": "1",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Expenses Workflow All",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Submitted",
+    "update_field": null,
+    "update_value": null
+   }
+  ],
+  "transitions": [
+   {
+    "action": "Send for Approval",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": null,
+    "next_state": "Pending Approval",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Draft"
+   },
+   {
+    "action": "Approver Accept",
+    "allow_self_approval": 1,
+    "allowed": "Expense Approver",
+    "condition": null,
+    "next_state": "Finance Review",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Pending Approval"
+   },
+   {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "Expense Approver",
+    "condition": null,
+    "next_state": "Draft",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Pending Approval"
+   },
+   {
+    "action": "Send to Director",
+    "allow_self_approval": 1,
+    "allowed": "Finance",
+    "condition": null,
+    "next_state": "Director Approval",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Finance Review"
+   },
+   {
+    "action": "Approve",
+    "allow_self_approval": 1,
+    "allowed": "Director",
+    "condition": null,
+    "next_state": "Approved",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Director Approval"
+   },
+   {
+    "action": "Reject",
+    "allow_self_approval": 1,
+    "allowed": "Director",
+    "condition": null,
+    "next_state": "Finance Review",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Director Approval"
+   },
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "Finance",
+    "condition": null,
+    "next_state": "Submitted",
+    "parent": "Expenses Workflow All",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Approved"
+   }
+  ],
+  "workflow_name": "Expenses Workflow All",
   "workflow_state_field": "workflow_state"
  }
 ]

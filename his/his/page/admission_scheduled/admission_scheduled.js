@@ -234,6 +234,13 @@ this.table = new Tabulator("#ad_sche", {
 
 
 		make_grouping_btn:function(){
+			// Only Head Nurse can see this button
+			const allowed_roles = ["Head Nurse", "Cashier", "Doctor"];
+
+			if (!allowed_roles.some(role => frappe.user.has_role(role))) {
+				return;
+			}
+
 			let listitmes_ad_sc = ''
 			
 			

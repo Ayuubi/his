@@ -19,6 +19,7 @@ def execute(filters=None):
             cp.start_date AS posting_date,
             cp.name AS service_dn,
             cp.patient AS patient,
+            cp.patient_name AS patient_name,
 
             COALESCE(si.source_order, %(all_source_order)s) AS service_source_order,
 
@@ -103,6 +104,7 @@ def execute(filters=None):
         {"label": _("Date"), "fieldname": "posting_date", "fieldtype": "Datetime", "width": 140},
         {"label": _("Service"), "fieldname": "service_dn", "fieldtype": "Link", "options": "Clinical Procedure", "width": 180},
         {"label": _("Patient"), "fieldname": "patient", "fieldtype": "Link", "options": "Patient", "width": 140},
+        {"label": _("Patient Name"), "fieldname": "patient_name", "fieldtype": "Data", "width": 180},
         {"label": _("Source Order"), "fieldname": "service_source_order", "fieldtype": "Link", "options": "Source Order", "width": 110},
         {"label": _("Doctor"), "fieldname": "practitioner", "fieldtype": "Link", "options": "Healthcare Practitioner", "width": 170},
         {"label": _("Doctor Name"), "fieldname": "practitioner_name", "fieldtype": "Data", "width": 180},

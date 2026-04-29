@@ -72,7 +72,8 @@ frappe.ui.form.on('Patient History', {
 			// btn.addClass('btn-danger');
 		} 
 
-		if (frappe.user_roles.includes('Doctor') || frappe.user_roles.includes('Nurse')) {
+		// if (frappe.user_roles.includes('Doctor') || frappe.user_roles.includes('Nurse')) {
+		if (frappe.user_roles.includes('Doctor')) {
 			
 			var btn = frm.add_custom_button('Discharge', () => {
 				if (frm.doc.type !== "Day Care") {

@@ -281,7 +281,7 @@ frappe.ui.form.on('Que', {
                                 "sales_invoice" : frm.doc.sales_invoice,
                                 "sakes_order" : frm.doc.sales_order,
                                 "fee" : frm.doc.fee_validity,
-                                
+                                "remark": values.remark
                                 
                                 
                              

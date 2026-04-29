@@ -202,6 +202,7 @@
    "label": "Registration no"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "discharged_type",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -425,7 +426,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-25 14:27:34.093354",
+ "modified": "2026-04-15 10:07:20.025430",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Discharge Summery",

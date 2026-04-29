@@ -421,8 +421,8 @@
   "docstatus": 0,
   "doctype": "Client Script",
   "dt": "Sales Invoice",
-  "enabled": 1,
-  "modified": "2026-02-22 12:16:54.031213",
+  "enabled": 0,
+  "modified": "2026-04-01 13:45:35.513633",
   "module": "HIS",
   "name": "Membership Percentage Discount Check",
   "script": "frappe.ui.form.on('Sales Invoice', {\r\n    refresh(frm) {\r\n        if (frm.is_new()) {\r\n            apply_membership_discount(frm);\r\n        }\r\n    },\r\n\r\n    patient(frm) {\r\n        apply_membership_discount(frm);\r\n    },\r\n    so_type(frm) {\r\n        apply_membership_discount(frm);\r\n    }\r\n});\r\n\r\nfunction apply_membership_discount(frm) {\r\n    if (!frm.doc.patient || frm.doc.so_type !== \"Cashiers\") {\r\n        frm.set_value(\"additional_discount_percentage\", \"\");\r\n        return;\r\n    }\r\n    \r\n\r\n    // Fetch discount percentage and membership status from Patient\r\n    frappe.db.get_value(\"Patient\", frm.doc.patient, [\"percentage\", \"is_membership\"])\r\n        .then(r => {\r\n            if (!r.message) return;\r\n            const { percentage, is_membership } = r.message;\r\n            \r\n            if (is_membership === \"Membership\" && percentage > 0) {\r\n                frm.set_value(\"additional_discount_percentage\", percentage);\r\n            }\r\n        });\r\n}\r\n\r\n\r\n",
@@ -580,6 +580,17 @@
   "module": "HIS",
   "name": "PE Auto Discount Allocation",
   "script": "frappe.ui.form.on('Payment Entry', {\r\n    discount_amount: function(frm) {\r\n        calculate_and_update_discount(frm, 'amount');\r\n    },\r\n\r\n    additional_discount_percentage: function(frm) {\r\n        calculate_and_update_discount(frm, 'percentage');\r\n    },\r\n\r\n    paid_amount: function(frm) {\r\n        // re-run allocation when paid changes\r\n        auto_allocate_paid_plus_discount(frm);\r\n    },\r\n\r\n    references_add: function(frm) {\r\n        auto_allocate_paid_plus_discount(frm);\r\n    },\r\n\r\n    references_remove: function(frm) {\r\n        auto_allocate_paid_plus_discount(frm);\r\n    },\r\n});\r\n\r\nfunction calculate_and_update_discount(frm, type) {\r\n    let party_balance = frm.doc.party_balance || 0;\r\n    let discount_amount = 0;\r\n    let discount_percentage = 0;\r\n\r\n    if (type === 'amount') {\r\n        discount_amount = frm.doc.discount_amount || 0;\r\n        discount_percentage = party_balance ? (discount_amount / party_balance) * 100 : 0;\r\n    } else if (type === 'percentage') {\r\n        discount_percentage = frm.doc.additional_discount_percentage || 0;\r\n        discount_amount = (discount_percentage / 100) * party_balance;\r\n    }\r\n\r\n    frm.set_value('discount_amount', discount_amount);\r\n    frm.set_value('additional_discount_percentage', discount_percentage);\r\n    frm.set_value('percentage', discount_percentage);\r\n\r\n    // \u2705 Update / create deduction row (your existing function)\r\n    update_payment_entry_deduction(frm, discount_amount).then(() => {\r\n        // \u2705 Now auto allocate paid + discount\r\n        auto_allocate_paid_plus_discount(frm);\r\n    });\r\n}\r\n\r\nfunction auto_allocate_paid_plus_discount(frm) {\r\n    if (!frm.doc.references || !frm.doc.references.length) return;\r\n\r\n    const paid = flt(frm.doc.paid_amount || 0);\r\n    const discount = flt(frm.doc.discount_amount || 0);\r\n\r\n    // This is the key: allocate = paid + discount\r\n    let budget = paid + discount;\r\n\r\n    frm.doc.references.forEach(row => {\r\n        const outstanding = flt(row.outstanding_amount || 0);\r\n\r\n        if (budget <= 0 || outstanding <= 0) {\r\n            row.allocated_amount = 0;\r\n            return;\r\n        }\r\n\r\n        const alloc = Math.min(outstanding, budget);\r\n        row.allocated_amount = alloc;\r\n        budget -= alloc;\r\n    });\r\n\r\n    frm.refresh_field('references');\r\n}\r\n\r\nfunction flt(v) {\r\n    v = parseFloat(v);\r\n    return isNaN(v) ? 0 : v;\r\n}",
+  "view": "Form"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Lab Result",
+  "enabled": 0,
+  "modified": "2026-04-03 21:21:31.805263",
+  "module": "HIS",
+  "name": "Filter Select Result",
+  "script": "frappe.ui.form.on('Lab Result', {\n    setup(frm) {\n        frm.set_query(\"select_result\", \"normal_test_result\", function(doc, cdt, cdn) {\n            let row = locals[cdt][cdn];\n\n            if (!row.test_name) {\n                return {};\n            }\n\n            return {\n                query: \"get_select_result_query\",\n                filters: {\n                    test_name: row.test_name\n                }\n            };\n        });\n    }\n});",
   "view": "Form"
  }
 ]

@@ -47,6 +47,11 @@ def check_out_inpatient(inpatient_record):
 		inpatient_record.status = "Discharged"
 		inpatient_record.discharge_datetime = frappe.utils.now()
 		inpatient_record.save()
+		if inpatient_record.doctor_plan:
+			doctor_plan = frappe.get_doc("Doctor Plan", inpatient_record.doctor_plan)
+			if doctor_plan.docstatus == 0:
+				doctor_plan.save()
+				doctor_plan.submit()
 
 @frappe.whitelist()
 def inpatient_validate(inpatient_record):

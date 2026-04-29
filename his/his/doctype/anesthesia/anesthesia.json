@@ -69,14 +69,14 @@
   "anesthesia_package_tab",
   "section_break_evdem",
   "packages_prescription",
+  "reference_invoice",
   "sales_order",
   "patient_encounter",
   "billible_tab",
   "section_break_zoxv8",
   "drugs",
   "procedure_items",
-  "amended_from",
-  "reference_invoice"
+  "amended_from"
  ],
  "fields": [
   {
@@ -471,6 +471,7 @@
    "options": "Patient Encounter"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "reference_invoice",
    "fieldtype": "Link",
    "label": "Reference Invoice",
@@ -480,7 +481,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-23 08:07:17.890363",
+ "modified": "2026-04-16 16:20:02.490508",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Anesthesia",

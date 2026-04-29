@@ -33,13 +33,23 @@
   "repaired",
   "column_break_plvdu",
   "complication",
+  "comment",
   "column_break_qhny2",
   "head_size",
+  "section_break_cxfxr",
+  "childs_full_name",
+  "fathers_full_name",
+  "phone_number",
+  "column_break_cd43c",
+  "number_of_child",
+  "place_of_birth",
+  "parity",
+  "gravida",
   "section_break_fjafb",
   "user",
   "midwife",
+  "assistant_doctor",
   "column_break_2vwtz",
-  "suppervisor",
   "section_break_m40d1",
   "post_deliver_mother_condition",
   "delivery_date",
@@ -200,7 +210,7 @@
    "fieldname": "baby_sex",
    "fieldtype": "Select",
    "label": "Baby Sex",
-   "options": "Male\nFemale",
+   "options": "\nMale\nFemale",
    "reqd": 1
   },
   {
@@ -221,7 +231,7 @@
    "fieldname": "placenta_expressed",
    "fieldtype": "Select",
    "label": "Placenta Expressed",
-   "options": "Spontaneous\nCCT\nManual",
+   "options": "\nSpontaneous\nCCT\nManual",
    "reqd": 1
   },
   {
@@ -232,7 +242,7 @@
    "fieldname": "episiotomys",
    "fieldtype": "Select",
    "label": "Episiotomy",
-   "options": "Yes\nNo",
+   "options": "\nYes\nNo",
    "reqd": 1
   },
   {
@@ -243,7 +253,7 @@
    "fieldname": "repaired",
    "fieldtype": "Select",
    "label": "Repaired",
-   "options": "Yes\nNo",
+   "options": "\nYes\nNo",
    "reqd": 1
   },
   {
@@ -254,7 +264,7 @@
    "fieldname": "complication",
    "fieldtype": "Select",
    "label": "Complication",
-   "options": "Yes\nNo",
+   "options": "\nYes\nNo",
    "reqd": 1
   },
   {
@@ -282,11 +292,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "suppervisor",
-   "fieldtype": "Data",
-   "label": "Suppervisor"
-  },
-  {
    "fetch_from": "user.full_name",
    "fieldname": "midwife",
    "fieldtype": "Data",
@@ -301,11 +306,67 @@
    "options": "Post Delivery",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_cxfxr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "fathers_full_name",
+   "fieldtype": "Data",
+   "label": "Father's Full Name"
+  },
+  {
+   "fieldname": "phone_number",
+   "fieldtype": "Data",
+   "label": "Phone Number"
+  },
+  {
+   "fieldname": "column_break_cd43c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "number_of_child",
+   "fieldtype": "Data",
+   "label": "Number of Child"
+  },
+  {
+   "fieldname": "place_of_birth",
+   "fieldtype": "Link",
+   "label": "Place of Birth",
+   "options": "Territory"
+  },
+  {
+   "depends_on": "eval:doc.complication == \"Yes\"",
+   "fieldname": "comment",
+   "fieldtype": "Small Text",
+   "label": "Comment",
+   "mandatory_depends_on": "eval:doc.complication == \"Yes\""
+  },
+  {
+   "fieldname": "childs_full_name",
+   "fieldtype": "Data",
+   "label": "Child's Full Name"
+  },
+  {
+   "fieldname": "assistant_doctor",
+   "fieldtype": "Data",
+   "label": "Assistant Doctor"
+  },
+  {
+   "fieldname": "parity",
+   "fieldtype": "Data",
+   "label": "Parity"
+  },
+  {
+   "fieldname": "gravida",
+   "fieldtype": "Data",
+   "label": "Gravida"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-04-12 13:42:46.878067",
+ "modified": "2026-04-21 12:16:56.149907",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Post Delivery",
