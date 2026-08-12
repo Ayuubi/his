@@ -118,17 +118,60 @@ def add_drug_items(so, doc):
 
 
 
+# def add_service_items(so, doc):
+#     for child_table in ("lab_test_prescription" , "radiology_prescription","procedure_prescription","services_prescription"):
+#         for row in doc.get(child_table):
+#             item, is_billable = get_item_and_is_billable(row)
+#             if not item or not is_billable:
+#                 continue
+
+#             so_item = find_or_create_item(row, so, doc)
+#             so_item.item_code = item
+#             so_item.qty = 1
+#             so_item.medical_department = doc.medical_department
+
+
 def add_service_items(so, doc):
-    for child_table in ("lab_test_prescription" , "radiology_prescription","procedure_prescription","services_prescription"):
+    items=[]
+    for child_table in ("lab_test_prescription", "procedure_prescription" , "radiology_prescription","services_prescription","packages_prescription"):
         for row in doc.get(child_table):
             item, is_billable = get_item_and_is_billable(row)
             if not item or not is_billable:
                 continue
+            if child_table=="procedure_prescription":
+                child= frappe.get_doc('Clinical Procedure Template', item)
+                for i in child._aneasthesia_prescription:
+                    # so_item = find_or_create_item(i, so, doc , from_templae=True)
+                    item_name = i.aneasthesia
+                    so_item = find_or_create_item(i, so, doc, from_templae=True, item_name=item_name)
+                    so_item.item_code = i.aneasthesia
+                    so_item.rate=i.amount
+                    so_item.qty = 1
+                    so_item.medical_department = doc.medical_department or ""
 
-            so_item = find_or_create_item(row, so, doc)
-            so_item.item_code = item
-            so_item.qty = 1
-            so_item.medical_department = doc.medical_department
+                for i in child.lab_prescription:
+                    # so_item = find_or_create_item(i, so, doc , from_templae=True)
+                    item_name = i.lab_test_code
+                    so_item = find_or_create_item(i, so, doc, from_templae=True, item_name=item_name)
+                    so_item.item_code = i.lab_test_code
+                    so_item.qty = 1
+            if child_table=="packages_prescription":
+                child= frappe.get_doc('Package Template', item)
+                for i in child.package_prescription:
+                    item_name = i.item
+                    so_item = find_or_create_item(i, so, doc , from_templae=True, item_name=item_name)
+                    so_item.item_code = i.item
+                    so_item.rate = i.rate
+                    so_item.qty = i.qty or 1
+                    so_item.medical_department = doc.medical_department or ""
+                    
+            if child_table!="packages_prescription":
+                so_item = find_or_create_item(row, so, doc)
+                so_item.item_code = item
+                so_item.qty = 1
+                so_item.rate = row.custom_rate
+                so_item.comments= row.lab_test_comment
+                so_item.medical_department = doc.medical_department or ""
 
 
 def get_item_and_is_billable(row):
@@ -152,22 +195,45 @@ def get_item_and_is_billable(row):
         return frappe.get_cached_value(
             "Other Service", row.service, ("item", "is_billable")
         )
+    elif row.doctype == "Packages Prescription":
+        return frappe.get_cached_value(
+            "Package Template", row.package, ("item", "is_billable")
+        )
 
-def find_or_create_item(row, so, doc):
+# def find_or_create_item(row, so, doc):
+#     for item in so.get("items"):
+#         if item.reference_dn == row.name:
+#             break
+#     else:
+#         item = so.append("items")
+#         item.reference_dt = row.doctype
+#         item.reference_dn = row.name
+
+#     if doc.get("branch"):
+#         item.branch = doc.branch
+
+#     so.__updated_items.append(item.reference_dn)
+#     return item
+
+def find_or_create_item(row, so, doc , from_templae = False, item_name=None):
     for item in so.get("items"):
+        if item_name:
+            if item_name == item.item_code:
+                break
         if item.reference_dn == row.name:
             break
     else:
         item = so.append("items")
         item.reference_dt = row.doctype
         item.reference_dn = row.name
-
+    if from_templae:
+        item.reference_dt = ""
+        item.reference_dn = ""
     if doc.get("branch"):
         item.branch = doc.branch
 
     so.__updated_items.append(item.reference_dn)
     return item
-
 
 # @frappe.whitelist()
 # def drug_code(drug_code):

@@ -1,0 +1,60 @@
+{
+ "add_total_row": 1,
+ "columns": [],
+ "creation": "2026-06-18 12:46:55.216108",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "default": "Today",
+   "fieldname": "from",
+   "fieldtype": "Date",
+   "label": "From",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  },
+  {
+   "default": "Today",
+   "fieldname": "to",
+   "fieldtype": "Date",
+   "label": "To",
+   "mandatory": 1,
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "logo",
+ "modified": "2026-06-18 12:46:55.216108",
+ "modified_by": "Administrator",
+ "module": "HIS",
+ "name": "Insurance Report JE",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\r\n    je.posting_date AS \"Posting Date:Date:120\",\r\n\r\n    COALESCE(je.patient, p.name) AS \"PID:Link/Patient:120\",\r\n    COALESCE(je.patient_name, p.patient_name, jea_patient.party_name) AS \"Patient Name:Data:250\",\r\n\r\n    je.sales_invoice AS \"Sales Invoice:Link/Sales Invoice:170\",\r\n\r\n    jea_ins.party AS \"Insurance:Link/Customer:180\",\r\n    -- jea_patient.party AS \"Patient Customer:Link/Customer:180\",\r\n\r\n    CASE\r\n        WHEN jea_ins.debit > 0 THEN jea_patient.credit\r\n        ELSE 0\r\n    END AS \"Insurance Debit:Currency:140\",\r\n\r\n    CASE\r\n        WHEN jea_ins.credit > 0 THEN jea_patient.debit\r\n        ELSE 0\r\n    END AS \"Insurance Credit / Reversal:Currency:170\",\r\n\r\n    CASE\r\n        WHEN jea_ins.debit > 0 THEN jea_patient.credit\r\n        WHEN jea_ins.credit > 0 THEN -jea_patient.debit\r\n        ELSE 0\r\n    END AS \"Net Insurance Outstanding:Currency:180\",\r\n\r\n    CASE\r\n        WHEN jea_ins.debit > 0 THEN 'Transferred To Insurance'\r\n        WHEN jea_ins.credit > 0 THEN 'Reversed From Insurance'\r\n        ELSE ''\r\n    END AS \"Type:Data:170\",\r\n\r\n    je.name AS \"Journal Entry:Link/Journal Entry:170\",\r\n    je.user_remark AS \"Remark:Data:300\"\r\n\r\nFROM `tabJournal Entry` je\r\n\r\n/* insurance side */\r\nINNER JOIN `tabJournal Entry Account` jea_ins\r\n    ON jea_ins.parent = je.name\r\n\r\nINNER JOIN `tabCustomer` c_ins\r\n    ON c_ins.name = jea_ins.party\r\n    AND c_ins.customer_group = 'Insurance'\r\n\r\n/* patient/customer opposite side in same JE */\r\nINNER JOIN `tabJournal Entry Account` jea_patient\r\n    ON jea_patient.parent = je.name\r\n    AND jea_patient.name != jea_ins.name\r\n    AND jea_patient.party_type = 'Customer'\r\n    AND (\r\n        (jea_ins.debit > 0 AND jea_patient.credit > 0)\r\n        OR\r\n        (jea_ins.credit > 0 AND jea_patient.debit > 0)\r\n    )\r\n\r\nLEFT JOIN `tabCustomer` c_patient\r\n    ON c_patient.name = jea_patient.party\r\n\r\nLEFT JOIN `tabPatient` p\r\n    ON p.customer = jea_patient.party\r\n\r\nWHERE\r\n    je.docstatus = 1\r\n    AND je.posting_date BETWEEN %(from)s AND %(to)s\r\n\r\n    AND jea_ins.party_type = 'Customer'\r\n    AND (jea_ins.debit > 0 OR jea_ins.credit > 0)\r\n\r\n    /* avoid insurance-to-insurance opposite rows */\r\n    AND IFNULL(c_patient.customer_group, '') != 'Insurance'\r\n\r\nORDER BY\r\n    je.posting_date DESC,\r\n    je.name DESC,\r\n    jea_patient.idx ASC;",
+ "ref_doctype": "Journal Entry",
+ "report_name": "Insurance Report JE",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Auditor"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Employee Self Service"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Restuarent"
+  },
+  {
+   "role": "Read Only"
+  }
+ ]
+}

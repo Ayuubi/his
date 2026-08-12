@@ -24,5 +24,6 @@ def credit_limit(doc, method=None):
 
     doc.append("credit_limits", {
         "company": company,
-        "credit_limit": 0.01
+        "credit_limit": 0.01,
+        "bypass_credit_limit_check": 1
     })

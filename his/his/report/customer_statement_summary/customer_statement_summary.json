@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "logo",
- "modified": "2026-04-25 14:18:48.193260",
+ "modified": "2026-07-18 13:31:31.270219",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Customer Statement Summary",
@@ -28,6 +28,9 @@
   },
   {
    "role": "All"
+  },
+  {
+   "role": "Accounts Manager"
   }
  ]
 }

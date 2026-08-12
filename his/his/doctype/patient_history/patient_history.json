@@ -16,6 +16,7 @@
   "consultant",
   "medical_department",
   "diagnosis",
+  "discharge_type_details_like_death_recovered_or_self_discharge",
   "date_of_admission",
   "column_break_jguyf",
   "inpatient_record",
@@ -461,12 +462,19 @@
    "fieldtype": "Data",
    "label": "Age Type",
    "read_only": 1
+  },
+  {
+   "fieldname": "discharge_type_details_like_death_recovered_or_self_discharge",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Discharge Type Details (Like Death, Recovered or Self Discharge)"
   }
  ],
  "hide_toolbar": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-01-11 10:37:13.207823",
+ "modified": "2026-06-12 22:39:52.169504",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Patient History",

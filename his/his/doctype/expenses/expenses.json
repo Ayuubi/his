@@ -88,8 +88,7 @@
    "fieldname": "journal_entry",
    "fieldtype": "Link",
    "label": "Journal Entry",
-   "options": "Journal Entry",
-   "read_only": 1
+   "options": "Journal Entry"
   },
   {
    "fieldname": "source_order",
@@ -203,7 +202,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-02 15:24:20.891863",
+ "modified": "2026-05-06 16:46:12.940404",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Expenses",

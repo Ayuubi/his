@@ -16,6 +16,8 @@
   "allow_commission_on_sc",
   "allow_commission_on_si",
   "credit_limit",
+  "ignore_item_group",
+  "discount_ignore_item_groups",
   "section_break_ezhz1",
   "invoice_commission_item_groups",
   "section_break_bwptp",
@@ -90,7 +92,8 @@
   },
   {
    "fieldname": "section_break_ezhz1",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "hidden": 1
   },
   {
    "default": "0",
@@ -255,12 +258,23 @@
    "fieldname": "pharmacy_max_stock_percent",
    "fieldtype": "Percent",
    "label": "Maximum Level %"
+  },
+  {
+   "fieldname": "ignore_item_group",
+   "fieldtype": "Section Break",
+   "label": "Ignore Item Group"
+  },
+  {
+   "fieldname": "discount_ignore_item_groups",
+   "fieldtype": "Table",
+   "label": "Discount Ignore Item Groups",
+   "options": "Discount Ignore Item Groups"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-03-22 13:06:43.356989",
+ "modified": "2026-06-08 14:46:36.206818",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HIS Settings",

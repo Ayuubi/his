@@ -51,7 +51,10 @@
   "section_break_mrpdh",
   "medication_so",
   "services_so",
-  "amended_from"
+  "amended_from",
+  "package_tab",
+  "section_break_nqqbd",
+  "packages_prescription"
  ],
  "fields": [
   {
@@ -325,11 +328,26 @@
    "fieldname": "new_select_lab_test",
    "fieldtype": "Button",
    "label": "Select Lab Test"
+  },
+  {
+   "fieldname": "package_tab",
+   "fieldtype": "Tab Break",
+   "label": "Package"
+  },
+  {
+   "fieldname": "section_break_nqqbd",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "packages_prescription",
+   "fieldtype": "Table",
+   "label": "Packages Prescription",
+   "options": "Packages Prescription"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2026-01-12 13:50:22.357356",
+ "modified": "2026-07-04 19:57:27.000684",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Inpatient Order",

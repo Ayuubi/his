@@ -147,7 +147,7 @@ doc_events = {
     "Lab Result": {
         "on_submit": [
             "his.his.doctype.sales_invoice.sales_invoice_refund_control.update_lab_results_status",
-            "his.commission.work_handlers.on_submit_lab_result"
+            # "his.commission.work_handlers.on_submit_lab_result"
         ],
         "on_cancel": [
             "his.his.doctype.sales_invoice.sales_invoice_refund_control.handle_lab_result_cancellation",

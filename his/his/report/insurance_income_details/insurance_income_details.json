@@ -1,0 +1,72 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2026-07-16 11:47:48.450770",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "logo",
+ "modified": "2026-07-16 11:47:48.450770",
+ "modified_by": "Administrator",
+ "module": "HIS",
+ "name": "Insurance Income Details",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Sales Invoice",
+ "report_name": "Insurance Income Details",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Employee Self Service"
+  },
+  {
+   "role": "Laboratory User"
+  },
+  {
+   "role": "Main Cashier"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "OT"
+  },
+  {
+   "role": "IPD"
+  },
+  {
+   "role": "Restuarent"
+  },
+  {
+   "role": "Accounts User Doctors"
+  },
+  {
+   "role": "Doctor"
+  },
+  {
+   "role": "Commision"
+  },
+  {
+   "role": "Lab"
+  },
+  {
+   "role": "Auditor"
+  },
+  {
+   "role": "Read Only"
+  },
+  {
+   "role": "CRM"
+  }
+ ]
+}

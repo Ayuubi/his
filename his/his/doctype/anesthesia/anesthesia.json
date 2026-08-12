@@ -429,6 +429,7 @@
    "options": "Healthcare Practitioner"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "sales_order",
    "fieldtype": "Link",
    "label": "Sales Order",
@@ -450,7 +451,7 @@
    "fieldname": "anesthesia_type",
    "fieldtype": "Select",
    "label": "Anesthesia Type",
-   "options": "\nGA\nLocal\nSpinal\nEpidural\nPeripheral Nerve Block"
+   "options": "\nGA\nLocal\nSpinal\nEpidural\nPeripheral Nerve Block\nSedation"
   },
   {
    "fieldname": "consent_form",
@@ -481,7 +482,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-04-16 16:20:02.490508",
+ "modified": "2026-07-12 14:08:58.462777",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Anesthesia",

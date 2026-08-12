@@ -36,5 +36,5 @@ def check_out_inpatient(inpatient_record):
             if inpatient_occupancy.left != 1:
             
                 frappe.db.set_value(
-                    "Healthcare Service Unit", inpatient_occupancy.service_unit, "occupancy_status", "Discharge Ordered"
+                    "Healthcare Service Unit", inpatient_occupancy.service_unit, "occupancy_status", "Vacant"
                 )

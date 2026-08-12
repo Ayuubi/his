@@ -176,14 +176,18 @@ def add_service_items(so, doc):
             if child_table=="procedure_prescription":
                 child= frappe.get_doc('Clinical Procedure Template', item)
                 for i in child._aneasthesia_prescription:
-                    so_item = find_or_create_item(i, so, doc , from_templae=True)
+                    # so_item = find_or_create_item(i, so, doc , from_templae=True)
+                    item_name = i.aneasthesia
+                    so_item = find_or_create_item(i, so, doc, from_templae=True, item_name=item_name)
                     so_item.item_code = i.aneasthesia
                     so_item.rate=i.amount
                     so_item.qty = 1
                     so_item.medical_department = doc.medical_department or ""
 
                 for i in child.lab_prescription:
-                    so_item = find_or_create_item(i, so, doc , from_templae=True)
+                    # so_item = find_or_create_item(i, so, doc , from_templae=True)
+                    item_name = i.lab_test_code
+                    so_item = find_or_create_item(i, so, doc, from_templae=True, item_name=item_name)
                     so_item.item_code = i.lab_test_code
                     so_item.qty = 1
             if child_table=="packages_prescription":
@@ -193,7 +197,7 @@ def add_service_items(so, doc):
                     so_item = find_or_create_item(i, so, doc , from_templae=True, item_name=item_name)
                     so_item.item_code = i.item
                     so_item.rate = i.rate
-                    so_item.qty = row.qty or 1
+                    so_item.qty = i.qty or 1
                     so_item.medical_department = doc.medical_department or ""
                     
             if child_table!="packages_prescription":

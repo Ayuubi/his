@@ -79,6 +79,7 @@ def create_inv(doc_name ,dt , is_sales_return = False ,  is_credit = False):
         "source_order": source_order,
         "patient" : cash_sales.patient,
         "is_pos" : 0,
+        "update_stock": 1,
         "discount_amount" : cash_sales.discount_amount,
         "payments": payments,
         "cost_center": cash_sales.cost_center,

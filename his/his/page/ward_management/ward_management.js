@@ -97,7 +97,7 @@ WardManagement = Class.extend(
                 {
                     fields: ['name', 'patient'],
                     filters: {
-                        type: "IPD"
+                        type: ["in", ["IPD", "ICU", "NICU"]]
                     },
                     limit: 1000
                 }).then(records => {
@@ -305,7 +305,7 @@ WardManagement = Class.extend(
 function get_beds() {
     frappe.db.get_list('Healthcare Service Unit Type', {
         fields: ['name'],
-        filters: { type: "IPD" },
+        filters: { type: ["in", ["IPD", "ICU", "NICU"]] },
         limit: 1000
     }).then(rooms => {
         let roomsHTML = ``; // To store all room and bed HTML

@@ -384,12 +384,12 @@
    "label": "Date"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "lab_ref",
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Lab Ref",
-   "read_only": 1
+   "label": "Lab Ref"
   },
   {
    "fieldname": "template",
@@ -523,7 +523,7 @@
  "in_create": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-04 10:25:14.262423",
+ "modified": "2026-06-17 17:15:27.220762",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Lab Result",

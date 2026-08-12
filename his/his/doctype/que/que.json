@@ -80,8 +80,9 @@
    "allow_in_quick_entry": 1,
    "fetch_from": "patient.sex",
    "fieldname": "gender",
-   "fieldtype": "Data",
-   "label": "Gender"
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender"
   },
   {
    "fieldname": "age",
@@ -515,7 +516,7 @@
    "link_fieldname": "patient"
   }
  ],
- "modified": "2026-03-01 08:37:01.264115",
+ "modified": "2026-07-07 11:56:15.961049",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Que",

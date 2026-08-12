@@ -101,24 +101,88 @@ def get_canteen_orders(currdate):
        
         )
 
+# @frappe.whitelist()
+# def get_que_em(currdate):
+
+#     return frappe.db.sql(f""" Select name,
+#         patient, patient_name ,
+#         date,
+#         department,   
+#         district,
+#         mobile,
+#         age,
+
+#         modified as modified
+      
+#         from `tabQue`
+#         where department= "Emergency" and date='{currdate}' 
+#          ORDER BY modified DESC """, as_dict=True
+       
+#         )
+
 @frappe.whitelist()
 def get_que_em(currdate):
+    records = frappe.db.sql("""
+        SELECT
+            t.name,
+            t.patient,
+            t.patient_name,
+            t.encounter_date,
+            t.patient_age,
+            t.triage_level,
+            t.diagnosis,
+            t.patient_sex,
+            t.status,
+            t.modified
+        FROM (
+            SELECT
+                e.name,
+                e.patient,
+                e.patient_name,
+                e.encounter_date,
+                e.patient_age,
+                e.triage_level,
+                GROUP_CONCAT(d.diagnosis SEPARATOR ', ') AS diagnosis,
+                e.patient_sex,
+                COALESCE(NULLIF(e.status, ''), 'Admitted') AS status,
+                e.modified,
+                ROW_NUMBER() OVER (
+                    PARTITION BY e.patient
+                    ORDER BY e.modified DESC
+                ) AS rn
+            FROM `tabEmergency` e
+            LEFT JOIN `tabPatient Encounter Diagnosis` d
+                ON d.parent = e.name
+            WHERE e.encounter_date = %(currdate)s
+            GROUP BY
+                e.name,
+                e.patient,
+                e.patient_name,
+                e.encounter_date,
+                e.patient_age,
+                e.triage_level,
+                e.patient_sex,
+                e.status,
+                e.modified
+        ) t
+        WHERE t.rn = 1
+    """, {"currdate": currdate}, as_dict=True)
 
-    return frappe.db.sql(f""" Select name,
-        patient, patient_name ,
-        date,
-        department,   
-        district,
-        mobile,
-        age,
+    for r in records:
+        # Hel customer id ka Patient DocType
+        customer_id = frappe.db.get_value("Patient", r.patient, "customer")
+        if customer_id:
+            balance = frappe.db.sql("""
+                SELECT SUM(debit - credit)
+                FROM `tabGL Entry`
+                WHERE party_type='Customer'
+                  AND party=%s
+            """, customer_id)
+            r["balance"] = balance[0][0] or 0
+        else:
+            r["balance"] = 0
 
-        modified as modified
-      
-        from `tabQue`
-        where department= "Emergency" and date='{currdate}' 
-         ORDER BY modified DESC """, as_dict=True
-       
-        )
+    return records
 
 
 

@@ -42,7 +42,8 @@ def check_out_inpatient(inpatient_record):
 				if inpatient_occupancy.left != 1:
 					inpatient_occupancy.left = True
 					inpatient_occupancy.check_out = now_datetime()
-					frappe.db.set_value("Healthcare Service Unit", inpatient_occupancy.service_unit, "occupancy_status", "Vacant")
+					frappe.db.set_value(
+						"Healthcare Service Unit", inpatient_occupancy.service_unit, "occupancy_status", "Vacant")
 					frappe.db.set_value('Healthcare Service Unit', inpatient_occupancy.service_unit, 'patient',"")
 		inpatient_record.status = "Discharged"
 		inpatient_record.discharge_datetime = frappe.utils.now()

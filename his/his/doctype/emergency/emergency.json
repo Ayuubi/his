@@ -37,6 +37,14 @@
   "symptoms",
   "column_break_cycjp",
   "diagnosis",
+  "primary_survey_tab",
+  "section_break_egnwa",
+  "airway",
+  "breathing",
+  "circulation",
+  "column_break_hnxkk",
+  "disability",
+  "exposure",
   "histrory_tab",
   "section_break_iwlb2",
   "presentation",
@@ -87,6 +95,9 @@
   "other_service_tab",
   "section_break_svbuh",
   "services_prescription",
+  "package_tab",
+  "section_break_zv4hn",
+  "packages_prescription",
   "lab_result_tab",
   "section_break_gwzyt",
   "labs"
@@ -232,6 +243,7 @@
   {
    "fieldname": "emergency_impression_tab",
    "fieldtype": "Tab Break",
+   "hidden": 1,
    "label": "Symptoms & Diagnosis"
   },
   {
@@ -541,11 +553,64 @@
    "fieldtype": "HTML",
    "label": "Labs",
    "options": "<div id=\"labs\"></div>"
+  },
+  {
+   "fieldname": "package_tab",
+   "fieldtype": "Tab Break",
+   "label": "Package"
+  },
+  {
+   "fieldname": "section_break_zv4hn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "packages_prescription",
+   "fieldtype": "Table",
+   "label": "Packages Prescription",
+   "options": "Packages Prescription"
+  },
+  {
+   "fieldname": "primary_survey_tab",
+   "fieldtype": "Tab Break",
+   "label": "Primary Survey"
+  },
+  {
+   "fieldname": "section_break_egnwa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "airway",
+   "fieldtype": "Data",
+   "label": "Airway"
+  },
+  {
+   "fieldname": "breathing",
+   "fieldtype": "Data",
+   "label": "Breathing"
+  },
+  {
+   "fieldname": "circulation",
+   "fieldtype": "Data",
+   "label": "Circulation"
+  },
+  {
+   "fieldname": "column_break_hnxkk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "disability",
+   "fieldtype": "Data",
+   "label": "Disability"
+  },
+  {
+   "fieldname": "exposure",
+   "fieldtype": "Data",
+   "label": "Exposure"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-03 18:11:40.589214",
+ "modified": "2026-07-18 13:22:33.710648",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Emergency",

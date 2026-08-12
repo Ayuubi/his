@@ -2,10 +2,10 @@
 
 frappe.query_reports["Credit Control Report"] = {
   filters: [
-    { fieldname: "from_date", label: "From Date", fieldtype: "Date" },
-    { fieldname: "to_date", label: "To Date", fieldtype: "Date" },
+    { fieldname: "from_date", label: "From Date", fieldtype: "Date", default: frappe.datetime.get_today(), },
+    { fieldname: "to_date", label: "To Date", fieldtype: "Date", default: frappe.datetime.get_today(), },
 
-    { fieldname: "company", label: "Company", fieldtype: "Link", options: "Company" },
+    { fieldname: "company", label: "Company", fieldtype: "Link", options: "Company", default: "Shaafi Hospital", },
     { fieldname: "customer", label: "Customer", fieldtype: "Link", options: "Customer" },
 
     {

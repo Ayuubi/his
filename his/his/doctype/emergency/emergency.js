@@ -6,6 +6,21 @@ frappe.ui.form.on('Emergency', {
         // alert("ok")
         select_imaging(frm)
     },
+    onload: function(frm) {
+		if (frm.doc.patient) {
+			frappe.db.get_doc('Patient', frm.doc.patient)
+				.then(patient_doc => {
+					let age = calculate_age(patient_doc.dob);
+					frm.set_value('patient_age', age);
+				})
+				.catch(err => {
+					console.error("Failed to fetch patient document:", err);
+				});
+		}
+		// if (frm.doc.patient && frm.is_new()) {
+		// 	frm.save()
+		// }
+	},
 	refresh: function(frm) {
 
 		if(!frm.is_new()){
@@ -257,3 +272,27 @@ d.show();
     }
 	
 });
+let calculate_age = function(birth) {
+    let birthDate = new Date(birth);
+    let today = new Date();
+
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+
+    // Adjust for negative days
+    if (days < 0) {
+        months--;
+        // Get total days in previous month
+        let prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+        days += prevMonth.getDate();
+    }
+
+    // Adjust for negative months
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    return `${years} Year(s) ${months} Month(s) ${days} Day(s)`;
+};

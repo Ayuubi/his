@@ -127,6 +127,7 @@
    "options": "DocType"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "reference_name",
    "fieldtype": "Dynamic Link",
    "label": "Reference Name",
@@ -136,7 +137,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-02-02 12:02:47.369520",
+ "modified": "2026-06-01 14:03:41.551309",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Consent Surgery Form",

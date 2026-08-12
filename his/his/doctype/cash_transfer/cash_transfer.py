@@ -2,8 +2,38 @@
 # For license information, please see license.txt
 import frappe
 from frappe.model.document import Document
+from erpnext.accounts.utils import get_balance_on
+
 
 class CashTransfer(Document):	
+
+	def validate(self):
+		self.validate_transfer_amount()
+		self.validate_from_account_balance()
+
+	def validate_transfer_amount(self):
+		if not self.transferred_amount or self.transferred_amount <= 0:
+			frappe.throw("Transferred Amount must be greater than zero.")
+
+	def validate_from_account_balance(self):
+		if not self.from_account:
+			frappe.throw("From Account is required.")
+
+		if not self.date:
+			frappe.throw("Date is required.")
+
+		balance = get_balance_on(
+			account=self.from_account,
+			date=self.date
+		)
+
+		if self.transferred_amount > balance:
+			frappe.throw(
+				f"Cannot transfer {frappe.format_value(self.transferred_amount, {'fieldtype': 'Currency'})}. "
+				f"Available balance in account <b>{self.from_account}</b> is only "
+				f"{frappe.format_value(balance, {'fieldtype': 'Currency'})}."
+			)
+
 	def on_submit(self):
 
 		account = [

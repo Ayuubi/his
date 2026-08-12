@@ -10,7 +10,8 @@
  "field_order": [
   "title",
   "hod_approver",
-  "medical_department"
+  "medical_department",
+  "disabled"
  ],
  "fields": [
   {
@@ -38,11 +39,17 @@
    "label": "Department",
    "options": "Hospital Department",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Disabled"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-20 16:59:22.088082",
+ "modified": "2026-06-01 10:59:28.692818",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "HOD Approver",

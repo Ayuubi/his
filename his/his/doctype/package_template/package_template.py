@@ -14,10 +14,12 @@ class PackageTemplate(Document):
     def validate(self):
         # ✅ ALWAYS compute total rate first (server-side)
         old_rate = flt(self.get_db_value("rate")) if not self.is_new() else 0.0
+        old_package_type = self.get_db_value("package_type") if not self.is_new() else None
+
         self.set_total_rate_from_prescription()
 
         # ✅ If total changed, force updating Item + Item Price on save
-        if not self.is_new() and flt(self.rate) != old_rate:
+        if not self.is_new() and (flt(self.rate) != old_rate or self.package_type != old_package_type):
             self.change_in_item = 1
 
         if self.is_billable and (not self.rate or flt(self.rate) <= 0.0):
@@ -35,6 +37,9 @@ class PackageTemplate(Document):
         # Update Item + Item Price whenever change_in_item is set
         if self.change_in_item and self.is_billable and self.item:
             self.update_item()
+
+            # Update package type on Item
+            frappe.db.set_value("Item", self.item, "package_type", self.package_type)
 
             price_list_name = (
                 frappe.db.get_value("Selling Settings", None, "selling_price_list")
@@ -101,9 +106,10 @@ def create_item_from_template(doc):
         "doctype": "Item",
         "item_code": doc.template_code,
         "item_name": doc.template,
+        "package_type": doc.package_type,
         "item_group": doc.item_group,
         "description": doc.description,
-        "is_sales_item": 1,
+        "is_sales_item": 0,
         "is_service_item": 1,
         "is_purchase_item": 0,
         "is_stock_item": 0,

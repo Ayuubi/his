@@ -12,6 +12,7 @@ ALLOWED_ROLES_TO_SEE_INCOME_ACCOUNT = {
 ALLOWED_ROLES_TO_VIEW_ALL_DOCTORS = {
     "Accounts Manager",
     "System Manager",
+    "Auditor",
 }
 
 

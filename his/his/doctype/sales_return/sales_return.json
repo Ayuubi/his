@@ -1589,6 +1589,7 @@
    "options": "Sales Invoice"
   },
   {
+   "bold": 1,
    "fieldname": "patient",
    "fieldtype": "Link",
    "label": "Patient",
@@ -1647,7 +1648,7 @@
  "idx": 105,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-03-30 16:46:39.698425",
+ "modified": "2026-07-14 12:39:05.784499",
  "modified_by": "Administrator",
  "module": "HIS",
  "name": "Sales Return",
